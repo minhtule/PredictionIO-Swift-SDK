@@ -214,7 +214,7 @@ extension NSURLRequest: URLRequestConvertible {
 
     When finished with a manager, be sure to call either `session.finishTasksAndInvalidate()` or `session.invalidateAndCancel()` before deinitialization.
 */
-class Manager {
+public class Manager {
 
     /**
         A shared instance of `Manager`, used by top-level Alamofire request methods, and suitable for use directly for any ad hoc requests.
@@ -293,7 +293,7 @@ class Manager {
     /**
         :param: configuration The configuration used to construct the managed session.
     */
-    required init(configuration: NSURLSessionConfiguration? = nil) {
+    init(configuration: NSURLSessionConfiguration? = nil) {
         self.delegate = SessionDelegate()
         self.session = NSURLSession(configuration: configuration, delegate: delegate, delegateQueue: nil)
     }
