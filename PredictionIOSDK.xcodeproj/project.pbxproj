@@ -10,6 +10,8 @@
 		41B99C441A9B8341002090AC /* PredictionIOSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 41B99C431A9B8341002090AC /* PredictionIOSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		41B99C4A1A9B8341002090AC /* PredictionIOSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41B99C3E1A9B8341002090AC /* PredictionIOSDK.framework */; };
 		41B99C511A9B8341002090AC /* PredictionIOSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B99C501A9B8341002090AC /* PredictionIOSDKTests.swift */; };
+		41B99C6D1A9B9CEB002090AC /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B99C6C1A9B9CEB002090AC /* Alamofire.swift */; };
+		41B99C6E1A9B9CEB002090AC /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B99C6C1A9B9CEB002090AC /* Alamofire.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +31,7 @@
 		41B99C491A9B8341002090AC /* PredictionIOSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PredictionIOSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		41B99C4F1A9B8341002090AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		41B99C501A9B8341002090AC /* PredictionIOSDKTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredictionIOSDKTests.swift; sourceTree = "<group>"; };
+		41B99C6C1A9B9CEB002090AC /* Alamofire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alamofire.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +74,7 @@
 		41B99C401A9B8341002090AC /* PredictionIOSDK */ = {
 			isa = PBXGroup;
 			children = (
+				41B99C6C1A9B9CEB002090AC /* Alamofire.swift */,
 				41B99C431A9B8341002090AC /* PredictionIOSDK.h */,
 				41B99C411A9B8341002090AC /* Supporting Files */,
 			);
@@ -209,6 +213,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41B99C6D1A9B9CEB002090AC /* Alamofire.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,6 +221,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41B99C6E1A9B9CEB002090AC /* Alamofire.swift in Sources */,
 				41B99C511A9B8341002090AC /* PredictionIOSDKTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
