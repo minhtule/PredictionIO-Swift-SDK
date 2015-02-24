@@ -10,9 +10,16 @@ import Foundation
 
 // MARK: - Base Client
 
+/**
+    Base class to manage network activities.
+*/
 public class BaseClient : Manager {
     let baseURL: String
     
+    /**
+        :param: baseURL The base URL
+        :param: timeout The request timeout
+    */
     public init(baseURL: String, timeout: NSTimeInterval) {
         self.baseURL = baseURL
         
@@ -24,22 +31,72 @@ public class BaseClient : Manager {
 
 // MARK: - Event
 
+/**
+    An `Event` class that represents a PredictionIO's event JSON dictionary in
+    its REST API.
+*/
 public struct Event {
+    /// The event name e.g. "sign-up", "rate", "view".
+    ///
+    /// **Note:** All event names starting with "$" and "pio_" are reversed
+    /// and shouldn't be used as your custom event (e.g. "$set").
     public var event: String
+    
+    /// The entity type. It is the namespace of the `entityID` and analogous
+    /// to the table name of a relational database. The `entityID` must be
+    /// unique within the same `entityType`.
+    ///
+    /// **Note:** All entityType names starting with "$" and "pio_" are reversed
+    /// and shouldn't be used.
     public var entityType: String
+    
+    /// The entity ID. `entityType-entityID` becomes the unique identifier
+    /// of the entity.
     public var entityID: String
+    
+    /// The target entity type.
+    ///
+    /// **Note:** All targetEntityType names starting with "$" and "pio_" are reversed
+    /// and shouldn't be used.
     public var targetEntityType: String?
+    
+    /// The target entity ID.
     public var targetEntityID: String?
+    
+    /// The event properties.
+    ///
+    /// **Note:** All properties names starting with "$" and "pio_" are reversed
+    /// and shouldn't be used.
     public var properties: [String: AnyObject]?
+    
+    /// The time of the event.
     public var eventTime: NSDate
     
+    /// Reversed event name.
     public static let SetEvent = "$set"
+    
+    /// Reversed event name.
     public static let UnsetEvent = "$unset"
+    
+    /// Reversed event name.
     public static let DeleteEvent = "$delete"
+    
+    /// Predefined entity type.
     public static let UserEntityType = "user"
+    
+    /// Predefined entity type.
     public static let ItemEntityType = "item"
     
-    public init(event: String, entityType: String, entityID: String, eventTime: NSDate = NSDate(), targetEntityType: String? = nil, targetEntityID: String? = nil, properties: [String: AnyObject]? = nil) {
+    /**
+        :param: event The event name
+        :param: entityType The entity type
+        :param: entityID The entity ID
+        :param: targetEntityType The target entity type
+        :param: targetEntityID The target entity ID
+        :param: properties The event properties
+        :param: eventTime The event time
+    */
+    public init(event: String, entityType: String, entityID: String, targetEntityType: String? = nil, targetEntityID: String? = nil, properties: [String: AnyObject]? = nil, eventTime: NSDate = NSDate()) {
         self.event = event
         self.entityType = entityType
         self.entityID = entityID
@@ -49,7 +106,7 @@ public struct Event {
         self.eventTime = eventTime
     }
     
-    public func toDictionary() -> [String: AnyObject] {
+    func toDictionary() -> [String: AnyObject] {
         var dict: [String: AnyObject] = [
             "event": event,
             "entityType": entityType,
@@ -81,7 +138,11 @@ public struct Event {
 
 // MARK: - Event Client
 
+/**
+    Client for sending data to PredictionIO Event Server.
+*/
 public class EventClient : BaseClient {
+    /// The access key for your application
     let accessKey: String
     
     private var _createEventFullURL: String {
@@ -92,11 +153,22 @@ public class EventClient : BaseClient {
         return "\(baseURL)/events/\(eventID).json?accessKey=\(accessKey)"
     }
     
+    /**
+        :param: accessKey The access key for your application
+        :param: baseURL The base URL. Default to be http://localhost:7070.
+        :param: timeout The request timeout. Default to be 5s.
+    */
     public init(accessKey: String, baseURL: String = "http://localhost:7070", timeout: NSTimeInterval = 5) {
         self.accessKey = accessKey
         super.init(baseURL: baseURL, timeout: timeout)
     }
     
+    /**
+        Create an event in Event Server.
+    
+        :param: event An `Event` instance that captures the event.
+        :param: completionHandler The callback to be executed when the request has finished.
+    */
     public func createEvent(event: Event, completionHandler: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> Void) {
         if event.event == Event.UnsetEvent && event.properties?.isEmpty == true {
             // Properties cannot be empty for $unset event
@@ -111,6 +183,12 @@ public class EventClient : BaseClient {
     
     // MARK: For development and debugging purpose only.
     
+    /**
+        Get an event from Event Server.
+    
+        :param: eventID The event ID
+        :param: completionHandler The callback to be executed when the request has finished.
+    */
     public func getEvent(eventID: String, completionHandler: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> Void) {
         if let escapedEventID = eventID.stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding) {
             request(.GET, _getEventFullURL(escapedEventID))
@@ -120,6 +198,12 @@ public class EventClient : BaseClient {
         }
     }
     
+    /**
+        Delete an event from Event Server.
+    
+        :param: eventID The event ID
+        :param: completionHandler The callback to be executed when the request has finished.
+    */
     public func deleteEvent(eventID: String, completionHandler: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> Void) {
         if let escapedEventID = eventID.stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding) {
             request(.DELETE, _getEventFullURL(escapedEventID))
@@ -134,6 +218,14 @@ public class EventClient : BaseClient {
 
 extension EventClient {
     
+    /**
+        Sets properties of a user.
+    
+        :param: userID The user ID.
+        :param: properties The properties to be set.
+        :param: eventTime The event time.
+        :param: completionHandler The callback to be executed when the request has finished.
+    */
     public func setUser(userID: String, properties: [String: AnyObject], eventTime: NSDate = NSDate(), completionHandler: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> Void) {
         let userEvent = Event(
             event: Event.SetEvent,
@@ -148,6 +240,14 @@ extension EventClient {
         }
     }
     
+    /**
+        Unsets properties of a user.
+        
+        :param: userID The user ID.
+        :param: properties The properties to be unset.
+        :param: eventTime The event time.
+        :param: completionHandler The callback to be executed when the request has finished.
+    */
     public func unsetUser(userID: String, properties: [String: AnyObject], eventTime: NSDate = NSDate(), completionHandler: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> Void) {
         let userEvent = Event(
             event: Event.UnsetEvent,
@@ -162,6 +262,13 @@ extension EventClient {
         }
     }
     
+    /**
+        Deletes a user.
+        
+        :param: userID The user ID.
+        :param: eventTime The event time.
+        :param: completionHandler The callback to be executed when the request has finished.
+    */
     public func deleteUser(userID: String, eventTime: NSDate = NSDate(), completionHandler: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> Void) {
         let userEvent = Event(
             event: Event.DeleteEvent,
@@ -179,7 +286,15 @@ extension EventClient {
 // MARK: - Item
 
 extension EventClient {
-    
+
+    /**
+        Sets properties of an item.
+        
+        :param: itemID The item ID.
+        :param: properties The properties to be set.
+        :param: eventTime The event time.
+        :param: completionHandler The callback to be executed when the request has finished.
+    */
     public func setItem(itemID: String, properties: [String: AnyObject], eventTime: NSDate = NSDate(), completionHandler: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> Void) {
         let itemEvent = Event(
             event: Event.SetEvent,
@@ -194,6 +309,14 @@ extension EventClient {
         }
     }
     
+    /**
+        Unsets properties of an item.
+        
+        :param: itemID The item ID.
+        :param: properties The properties to be unset.
+        :param: eventTime The event time.
+        :param: completionHandler The callback to be executed when the request has finished.
+    */
     public func unsetItem(itemID: String, properties: [String: AnyObject], eventTime: NSDate = NSDate(), completionHandler: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> Void) {
         let itemEvent = Event(
             event: Event.UnsetEvent,
@@ -208,6 +331,13 @@ extension EventClient {
         }
     }
     
+    /**
+        Deletes an item.
+        
+        :param: itemID The item ID.
+        :param: eventTime The event time.
+        :param: completionHandler The callback to be executed when the request has finished.
+    */
     public func deleteItem(itemID: String, eventTime: NSDate = NSDate(), completionHandler: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> Void) {
         let itemEvent = Event(
             event: Event.DeleteEvent,
@@ -226,6 +356,16 @@ extension EventClient {
 
 extension EventClient {
     
+    /**
+        Creates a user-to-item action.
+        
+        :param: action The event name.
+        :param: userID The userID
+        :param: itemID The item ID.
+        :param: properties The properties of the event.
+        :param: eventTime The event time.
+        :param: completionHandler The callback to be executed when the request has finished.
+    */
     public func recordAction(action: String, byUserID userID: String, itemID: String, properties: [String: AnyObject] = [:], eventTime: NSDate = NSDate(), completionHandler: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> Void) {
         let event = Event(
             event: action,
@@ -245,16 +385,29 @@ extension EventClient {
 
 // MARK: - Engine Client
 
+/**
+    Client for retrieving prediction results from an PredictionIO Engine instance.
+*/
 public class EngineClient : BaseClient {
     
     private var _fullURL: String {
         return "\(baseURL)/queries.json"
     }
     
+    /**
+        :param: baseURL Base URL. Default to be http://localhost:8000.
+        :param: timeout Request timeout. Default to be 5s.
+    */
     public override init(baseURL: String = "http://localhost:8000", timeout: NSTimeInterval = 5) {
         super.init(baseURL: baseURL, timeout: timeout)
     }
     
+    /**
+        Sends a query to the prediction engine.
+    
+        :param: query The query dictionary.
+        :param: completionHandler The callback to be executed when the request has finished.
+    */
     public func sendQuery(query: [String: AnyObject], completionHandler: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> Void) {
         request(.POST, _fullURL, parameters: query, encoding: .JSON)
             .responseJSON { (request, response, JSON, error) -> Void in
