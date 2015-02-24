@@ -23,14 +23,14 @@
 import Foundation
 
 /// Alamofire errors
-public let AlamofireErrorDomain = "com.alamofire.error"
+let AlamofireErrorDomain = "com.alamofire.error"
 
 /**
     HTTP method definitions.
 
     See http://tools.ietf.org/html/rfc7231#section-4.3
 */
-public enum Method: String {
+enum Method: String {
     case OPTIONS = "OPTIONS"
     case GET = "GET"
     case HEAD = "HEAD"
@@ -45,7 +45,7 @@ public enum Method: String {
 /**
     Used to specify the way in which a set of parameters are applied to a URL request.
 */
-public enum ParameterEncoding {
+enum ParameterEncoding {
     /**
         A query string to be set as or appended to any existing URL query for `GET`, `HEAD`, and `DELETE` requests, or set as the body for requests with any other HTTP method. The `Content-Type` HTTP header field of an encoded request with HTTP body is set to `application/x-www-form-urlencoded`. Since there is no published specification for how to encode collection types, the convention of appending `[]` to the key for array values (`foo[]=1&foo[]=2`), and appending the key surrounded by square brackets for nested dictionary values (`foo[bar]=baz`).
     */
@@ -74,7 +74,7 @@ public enum ParameterEncoding {
 
         :returns: A tuple containing the constructed request and the error that occurred during parameter encoding, if any.
     */
-    public func encode(URLRequest: URLRequestConvertible, parameters: [String: AnyObject]?) -> (NSURLRequest, NSError?) {
+    func encode(URLRequest: URLRequestConvertible, parameters: [String: AnyObject]?) -> (NSURLRequest, NSError?) {
         if parameters == nil {
             return (URLRequest.URLRequest, nil)
         }
@@ -162,31 +162,31 @@ public enum ParameterEncoding {
 /**
     Types adopting the `URLStringConvertible` protocol can be used to construct URL strings, which are then used to construct URL requests.
 */
-public protocol URLStringConvertible {
+protocol URLStringConvertible {
     /// The URL string.
     var URLString: String { get }
 }
 
 extension String: URLStringConvertible {
-    public var URLString: String {
+    var URLString: String {
         return self
     }
 }
 
 extension NSURL: URLStringConvertible {
-    public var URLString: String {
+    var URLString: String {
         return absoluteString!
     }
 }
 
 extension NSURLComponents: URLStringConvertible {
-    public var URLString: String {
+    var URLString: String {
         return URL!.URLString
     }
 }
 
 extension NSURLRequest: URLStringConvertible {
-    public var URLString: String {
+    var URLString: String {
         return URL.URLString
     }
 }
@@ -196,13 +196,13 @@ extension NSURLRequest: URLStringConvertible {
 /**
     Types adopting the `URLRequestConvertible` protocol can be used to construct URL requests.
 */
-public protocol URLRequestConvertible {
+protocol URLRequestConvertible {
     /// The URL request.
     var URLRequest: NSURLRequest { get }
 }
 
 extension NSURLRequest: URLRequestConvertible {
-    public var URLRequest: NSURLRequest {
+    var URLRequest: NSURLRequest {
         return self
     }
 }
@@ -214,12 +214,12 @@ extension NSURLRequest: URLRequestConvertible {
 
     When finished with a manager, be sure to call either `session.finishTasksAndInvalidate()` or `session.invalidateAndCancel()` before deinitialization.
 */
-public class Manager {
+class Manager {
 
     /**
         A shared instance of `Manager`, used by top-level Alamofire request methods, and suitable for use directly for any ad hoc requests.
     */
-    public class var sharedInstance: Manager {
+    class var sharedInstance: Manager {
         struct Singleton {
             static var configuration: NSURLSessionConfiguration = {
                 var configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
@@ -239,7 +239,7 @@ public class Manager {
 
         :returns: The default header values.
     */
-    public class func defaultHTTPHeaders() -> [String: String] {
+    class func defaultHTTPHeaders() -> [String: String] {
 
         // Accept-Encoding HTTP Header; see http://tools.ietf.org/html/rfc7230#section-4.2.3
         let acceptEncoding: String = "gzip;q=1.0,compress;q=0.5"
@@ -285,15 +285,15 @@ public class Manager {
     private let queue = dispatch_queue_create(nil, DISPATCH_QUEUE_SERIAL)
 
     /// The underlying session.
-    public let session: NSURLSession
+    let session: NSURLSession
 
     /// Whether to start requests immediately after being constructed. `true` by default.
-    public var startRequestsImmediately: Bool = true
+    var startRequestsImmediately: Bool = true
 
     /**
         :param: configuration The configuration used to construct the managed session.
     */
-    required public init(configuration: NSURLSessionConfiguration? = nil) {
+    required init(configuration: NSURLSessionConfiguration? = nil) {
         self.delegate = SessionDelegate()
         self.session = NSURLSession(configuration: configuration, delegate: delegate, delegateQueue: nil)
     }
@@ -310,7 +310,7 @@ public class Manager {
 
         :returns: The created request.
     */
-    public func request(method: Method, _ URLString: URLStringConvertible, parameters: [String: AnyObject]? = nil, encoding: ParameterEncoding = .URL) -> Request {
+    func request(method: Method, _ URLString: URLStringConvertible, parameters: [String: AnyObject]? = nil, encoding: ParameterEncoding = .URL) -> Request {
         return request(encoding.encode(URLRequest(method, URLString), parameters: parameters).0)
     }
 
@@ -324,7 +324,7 @@ public class Manager {
 
         :returns: The created request.
     */
-    public func request(URLRequest: URLRequestConvertible) -> Request {
+    func request(URLRequest: URLRequestConvertible) -> Request {
         var dataTask: NSURLSessionDataTask?
         dispatch_sync(queue) {
             dataTask = self.session.dataTaskWithRequest(URLRequest.URLRequest)
@@ -529,23 +529,23 @@ public class Manager {
 /**
     Responsible for sending a request and receiving the response and associated data from the server, as well as managing its underlying `NSURLSessionTask`.
 */
-public class Request {
+class Request {
     private let delegate: TaskDelegate
 
     /// The underlying task.
-    public var task: NSURLSessionTask { return delegate.task }
+    var task: NSURLSessionTask { return delegate.task }
 
     /// The session belonging to the underlying task.
-    public let session: NSURLSession
+    let session: NSURLSession
 
     /// The request sent or to be sent to the server.
-    public var request: NSURLRequest { return task.originalRequest }
+    var request: NSURLRequest { return task.originalRequest }
 
     /// The response received from the server, if any.
-    public var response: NSHTTPURLResponse? { return task.response as? NSHTTPURLResponse }
+    var response: NSHTTPURLResponse? { return task.response as? NSHTTPURLResponse }
 
     /// The progress of the request lifecycle.
-    public var progress: NSProgress? { return delegate.progress }
+    var progress: NSProgress? { return delegate.progress }
 
     private init(session: NSURLSession, task: NSURLSessionTask) {
         self.session = session
@@ -572,7 +572,7 @@ public class Request {
 
         :returns: The request.
     */
-    public func authenticate(#user: String, password: String) -> Self {
+    func authenticate(#user: String, password: String) -> Self {
         let credential = NSURLCredential(user: user, password: password, persistence: .ForSession)
 
         return authenticate(usingCredential: credential)
@@ -585,7 +585,7 @@ public class Request {
 
         :returns: The request.
     */
-    public func authenticate(usingCredential credential: NSURLCredential) -> Self {
+    func authenticate(usingCredential credential: NSURLCredential) -> Self {
         delegate.credential = credential
 
         return self
@@ -603,7 +603,7 @@ public class Request {
 
         :returns: The request.
     */
-    public func progress(closure: ((Int64, Int64, Int64) -> Void)? = nil) -> Self {
+    func progress(closure: ((Int64, Int64, Int64) -> Void)? = nil) -> Self {
         if let uploadDelegate = delegate as? UploadTaskDelegate {
             uploadDelegate.uploadProgress = closure
         } else if let dataDelegate = delegate as? DataTaskDelegate {
@@ -620,14 +620,14 @@ public class Request {
     /**
         A closure used by response handlers that takes a request, response, and data and returns a serialized object and any error that occured in the process.
     */
-    public typealias Serializer = (NSURLRequest, NSHTTPURLResponse?, NSData?) -> (AnyObject?, NSError?)
+    typealias Serializer = (NSURLRequest, NSHTTPURLResponse?, NSData?) -> (AnyObject?, NSError?)
 
     /**
         Creates a response serializer that returns the associated data as-is.
 
         :returns: A data response serializer.
     */
-    public class func responseDataSerializer() -> Serializer {
+    class func responseDataSerializer() -> Serializer {
         return { (request, response, data) in
             return (data, nil)
         }
@@ -640,7 +640,7 @@ public class Request {
 
         :returns: The request.
     */
-    public func response(completionHandler: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> Void) -> Self {
+    func response(completionHandler: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> Void) -> Self {
         return response(Request.responseDataSerializer(), completionHandler: completionHandler)
     }
 
@@ -653,7 +653,7 @@ public class Request {
 
         :returns: The request.
     */
-    public func response(queue: dispatch_queue_t? = nil, serializer: Serializer, completionHandler: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> Void) -> Self {
+    func response(queue: dispatch_queue_t? = nil, serializer: Serializer, completionHandler: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> Void) -> Self {
         dispatch_async(delegate.queue) {
             let (responseObject: AnyObject?, serializationError: NSError?) = serializer(self.request, self.response, self.delegate.data)
 
@@ -668,21 +668,21 @@ public class Request {
     /**
         Suspends the request.
     */
-    public func suspend() {
+    func suspend() {
         task.suspend()
     }
 
     /**
         Resumes the request.
     */
-    public func resume() {
+    func resume() {
         task.resume()
     }
 
     /**
         Cancels the request.
     */
-    public func cancel() {
+    func cancel() {
         if let downloadDelegate = delegate as? DownloadTaskDelegate {
             downloadDelegate.downloadTask.cancelByProducingResumeData { (data) in
                 downloadDelegate.resumeData = data
@@ -845,7 +845,7 @@ extension Request {
     /**
         A closure used to validate a request that takes a URL request and URL response, and returns whether the request was valid.
     */
-    public typealias Validation = (NSURLRequest, NSHTTPURLResponse) -> (Bool)
+    typealias Validation = (NSURLRequest, NSHTTPURLResponse) -> (Bool)
 
     /**
         Validates the request, using the specified closure.
@@ -856,7 +856,7 @@ extension Request {
 
         :returns: The request.
     */
-    public func validate(validation: Validation) -> Self {
+    func validate(validation: Validation) -> Self {
         dispatch_async(delegate.queue) {
             if self.response != nil && self.delegate.error == nil {
                 if !validation(self.request, self.response!) {
@@ -883,7 +883,7 @@ extension Request {
 
         :returns: The request.
     */
-    public func validate(statusCode range: Range<Int>) -> Self {
+    func validate(statusCode range: Range<Int>) -> Self {
         return validate { (_, response) in
             return Request.response(response, hasAcceptableStatusCode: range.map({$0}))
         }
@@ -898,7 +898,7 @@ extension Request {
 
         :returns: The request.
     */
-    public func validate(statusCode array: [Int]) -> Self {
+    func validate(statusCode array: [Int]) -> Self {
         return validate { (_, response) in
             return Request.response(response, hasAcceptableStatusCode: array)
         }
@@ -949,7 +949,7 @@ extension Request {
 
         :returns: The request.
     */
-    public func validate(contentType array: [String]) -> Self {
+    func validate(contentType array: [String]) -> Self {
         return validate {(_, response) in
             return Request.response(response, hasAcceptableContentType: array)
         }
@@ -964,7 +964,7 @@ extension Request {
 
         :returns: The request.
     */
-    public func validate() -> Self {
+    func validate() -> Self {
         let acceptableStatusCodes: Range<Int> = 200..<300
         let acceptableContentTypes: [String] = {
             if let accept = self.request.valueForHTTPHeaderField("Accept") {
@@ -1028,7 +1028,7 @@ extension Manager {
 
         :returns: The created upload request.
     */
-    public func upload(URLRequest: URLRequestConvertible, file: NSURL) -> Request {
+    func upload(URLRequest: URLRequestConvertible, file: NSURL) -> Request {
         return upload(.File(URLRequest.URLRequest, file))
     }
   
@@ -1043,7 +1043,7 @@ extension Manager {
   
         :returns: The created upload request.
     */
-    public func upload(method: Method, _ URLString: URLStringConvertible, file: NSURL) -> Request {
+    func upload(method: Method, _ URLString: URLStringConvertible, file: NSURL) -> Request {
         return upload(URLRequest(method, URLString), file: file)
     }
 
@@ -1059,7 +1059,7 @@ extension Manager {
 
         :returns: The created upload request.
     */
-    public func upload(URLRequest: URLRequestConvertible, data: NSData) -> Request {
+    func upload(URLRequest: URLRequestConvertible, data: NSData) -> Request {
         return upload(.Data(URLRequest.URLRequest, data))
     }
   
@@ -1074,7 +1074,7 @@ extension Manager {
   
         :returns: The created upload request.
     */
-    public func upload(method: Method, _ URLString: URLStringConvertible, data: NSData) -> Request {
+    func upload(method: Method, _ URLString: URLStringConvertible, data: NSData) -> Request {
         return upload(URLRequest(method, URLString), data: data)
     }
 
@@ -1090,7 +1090,7 @@ extension Manager {
 
         :returns: The created upload request.
     */
-    public func upload(URLRequest: URLRequestConvertible, stream: NSInputStream) -> Request {
+    func upload(URLRequest: URLRequestConvertible, stream: NSInputStream) -> Request {
         return upload(.Stream(URLRequest.URLRequest, stream))
     }
   
@@ -1105,7 +1105,7 @@ extension Manager {
 
         :returns: The created upload request.
     */
-    public func upload(method: Method, _ URLString: URLStringConvertible, stream: NSInputStream) -> Request {
+    func upload(method: Method, _ URLString: URLStringConvertible, stream: NSInputStream) -> Request {
         return upload(URLRequest(method, URLString), stream: stream)
     }
 }
@@ -1170,7 +1170,7 @@ extension Manager {
 
         :returns: The created download request.
     */
-    public func download(method: Method, _ URLString: URLStringConvertible, destination: Request.DownloadFileDestination) -> Request {
+    func download(method: Method, _ URLString: URLStringConvertible, destination: Request.DownloadFileDestination) -> Request {
         return download(URLRequest(method, URLString), destination: destination)
     }
 
@@ -1184,7 +1184,7 @@ extension Manager {
 
         :returns: The created download request.
     */
-    public func download(URLRequest: URLRequestConvertible, destination: Request.DownloadFileDestination) -> Request {
+    func download(URLRequest: URLRequestConvertible, destination: Request.DownloadFileDestination) -> Request {
         return download(.Request(URLRequest.URLRequest), destination: destination)
     }
 
@@ -1200,7 +1200,7 @@ extension Manager {
 
         :returns: The created download request.
     */
-    public func download(resumeData: NSData, destination: Request.DownloadFileDestination) -> Request {
+    func download(resumeData: NSData, destination: Request.DownloadFileDestination) -> Request {
         return download(.ResumeData(resumeData), destination: destination)
     }
 }
@@ -1209,7 +1209,7 @@ extension Request {
     /**
         A closure executed once a request has successfully completed in order to determine where to move the temporary file written to during the download process. The closure takes two arguments: the temporary file URL and the URL response, and returns a single argument: the file URL where the temporary file should be moved.
     */
-    public typealias DownloadFileDestination = (NSURL, NSHTTPURLResponse) -> (NSURL)
+    typealias DownloadFileDestination = (NSURL, NSHTTPURLResponse) -> (NSURL)
 
     /**
         Creates a download file destination closure which uses the default file manager to move the temporary file to a file URL in the first available directory with the specified search path directory and search path domain mask.
@@ -1219,7 +1219,7 @@ extension Request {
 
         :returns: A download file destination closure.
     */
-    public class func suggestedDownloadDestination(directory: NSSearchPathDirectory = .DocumentDirectory, domain: NSSearchPathDomainMask = .UserDomainMask) -> DownloadFileDestination {
+    class func suggestedDownloadDestination(directory: NSSearchPathDirectory = .DocumentDirectory, domain: NSSearchPathDomainMask = .UserDomainMask) -> DownloadFileDestination {
 
         return { (temporaryURL, response) -> (NSURL) in
             if let directoryURL = NSFileManager.defaultManager().URLsForDirectory(directory, inDomains: domain)[0] as? NSURL {
@@ -1277,7 +1277,7 @@ extension Request {
 
 extension Request: Printable {
     /// The textual representation used when written to an `OutputStreamType`, which includes the HTTP method and URL, as well as the response status code if a response has been received.
-    public var description: String {
+    var description: String {
         var components: [String] = []
         if request.HTTPMethod != nil {
             components.append(request.HTTPMethod!)
@@ -1363,7 +1363,7 @@ extension Request: DebugPrintable {
     }
 
     /// The textual representation used when written to an `OutputStreamType`, in the form of a cURL command.
-    public var debugDescription: String {
+    var debugDescription: String {
         return cURLRepresentation()
     }
 }
@@ -1380,7 +1380,7 @@ extension Request {
 
         :returns: A string response serializer.
     */
-    public class func stringResponseSerializer(encoding: NSStringEncoding = NSUTF8StringEncoding) -> Serializer {
+    class func stringResponseSerializer(encoding: NSStringEncoding = NSUTF8StringEncoding) -> Serializer {
         return { (_, _, data) in
             let string = NSString(data: data!, encoding: encoding)
 
@@ -1395,7 +1395,7 @@ extension Request {
 
         :returns: The request.
     */
-    public func responseString(completionHandler: (NSURLRequest, NSHTTPURLResponse?, String?, NSError?) -> Void) -> Self {
+    func responseString(completionHandler: (NSURLRequest, NSHTTPURLResponse?, String?, NSError?) -> Void) -> Self {
         return responseString(completionHandler: completionHandler)
     }
 
@@ -1407,7 +1407,7 @@ extension Request {
 
         :returns: The request.
     */
-    public func responseString(encoding: NSStringEncoding = NSUTF8StringEncoding, completionHandler: (NSURLRequest, NSHTTPURLResponse?, String?, NSError?) -> Void) -> Self  {
+    func responseString(encoding: NSStringEncoding = NSUTF8StringEncoding, completionHandler: (NSURLRequest, NSHTTPURLResponse?, String?, NSError?) -> Void) -> Self  {
         return response(serializer: Request.stringResponseSerializer(encoding: encoding), completionHandler: { request, response, string, error in
             completionHandler(request, response, string as? String, error)
         })
@@ -1424,7 +1424,7 @@ extension Request {
 
         :returns: A JSON object response serializer.
     */
-    public class func JSONResponseSerializer(options: NSJSONReadingOptions = .AllowFragments) -> Serializer {
+    class func JSONResponseSerializer(options: NSJSONReadingOptions = .AllowFragments) -> Serializer {
         return { (request, response, data) in
             if data == nil || data?.length == 0 {
                 return (nil, nil)
@@ -1444,7 +1444,7 @@ extension Request {
 
         :returns: The request.
     */
-    public func responseJSON(completionHandler: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> Void) -> Self {
+    func responseJSON(completionHandler: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> Void) -> Self {
         return responseJSON(completionHandler: completionHandler)
     }
 
@@ -1456,7 +1456,7 @@ extension Request {
 
         :returns: The request.
     */
-    public func responseJSON(options: NSJSONReadingOptions = .AllowFragments, completionHandler: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> Void) -> Self {
+    func responseJSON(options: NSJSONReadingOptions = .AllowFragments, completionHandler: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> Void) -> Self {
         return response(serializer: Request.JSONResponseSerializer(options: options), completionHandler: { (request, response, JSON, error) in
             completionHandler(request, response, JSON, error)
         })
@@ -1473,7 +1473,7 @@ extension Request {
 
         :returns: A property list object response serializer.
     */
-    public class func propertyListResponseSerializer(options: NSPropertyListReadOptions = 0) -> Serializer {
+    class func propertyListResponseSerializer(options: NSPropertyListReadOptions = 0) -> Serializer {
         return { (request, response, data) in
             if data == nil || data?.length == 0 {
                 return (nil, nil)
@@ -1493,7 +1493,7 @@ extension Request {
 
         :returns: The request.
     */
-    public func responsePropertyList(completionHandler: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> Void) -> Self {
+    func responsePropertyList(completionHandler: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> Void) -> Self {
         return responsePropertyList(completionHandler: completionHandler)
     }
 
@@ -1505,7 +1505,7 @@ extension Request {
 
         :returns: The request.
     */
-    public func responsePropertyList(options: NSPropertyListReadOptions = 0, completionHandler: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> Void) -> Self {
+    func responsePropertyList(options: NSPropertyListReadOptions = 0, completionHandler: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> Void) -> Self {
         return response(serializer: Request.propertyListResponseSerializer(options: options), completionHandler: { (request, response, plist, error) in
             completionHandler(request, response, plist, error)
         })
@@ -1533,7 +1533,7 @@ private func URLRequest(method: Method, URL: URLStringConvertible) -> NSURLReque
 
     :returns: The created request.
 */
-public func request(method: Method, URLString: URLStringConvertible, parameters: [String: AnyObject]? = nil, encoding: ParameterEncoding = .URL) -> Request {
+func request(method: Method, URLString: URLStringConvertible, parameters: [String: AnyObject]? = nil, encoding: ParameterEncoding = .URL) -> Request {
     return Manager.sharedInstance.request(method, URLString, parameters: parameters, encoding: encoding)
 }
 
@@ -1546,7 +1546,7 @@ public func request(method: Method, URLString: URLStringConvertible, parameters:
 
     :returns: The created request.
 */
-public func request(URLRequest: URLRequestConvertible) -> Request {
+func request(URLRequest: URLRequestConvertible) -> Request {
     return Manager.sharedInstance.request(URLRequest.URLRequest)
 }
 
@@ -1563,7 +1563,7 @@ public func request(URLRequest: URLRequestConvertible) -> Request {
 
     :returns: The created upload request.
 */
-public func upload(method: Method, URLString: URLStringConvertible, file: NSURL) -> Request {
+func upload(method: Method, URLString: URLStringConvertible, file: NSURL) -> Request {
     return Manager.sharedInstance.upload(method, URLString, file: file)
 }
 
@@ -1575,7 +1575,7 @@ public func upload(method: Method, URLString: URLStringConvertible, file: NSURL)
 
     :returns: The created upload request.
 */
-public func upload(URLRequest: URLRequestConvertible, file: NSURL) -> Request {
+func upload(URLRequest: URLRequestConvertible, file: NSURL) -> Request {
     return Manager.sharedInstance.upload(URLRequest, file: file)
 }
 
@@ -1590,7 +1590,7 @@ public func upload(URLRequest: URLRequestConvertible, file: NSURL) -> Request {
 
     :returns: The created upload request.
 */
-public func upload(method: Method, URLString: URLStringConvertible, data: NSData) -> Request {
+func upload(method: Method, URLString: URLStringConvertible, data: NSData) -> Request {
     return Manager.sharedInstance.upload(method, URLString, data: data)
 }
 
@@ -1602,7 +1602,7 @@ public func upload(method: Method, URLString: URLStringConvertible, data: NSData
 
     :returns: The created upload request.
 */
-public func upload(URLRequest: URLRequestConvertible, data: NSData) -> Request {
+func upload(URLRequest: URLRequestConvertible, data: NSData) -> Request {
     return Manager.sharedInstance.upload(URLRequest, data: data)
 }
 
@@ -1617,7 +1617,7 @@ public func upload(URLRequest: URLRequestConvertible, data: NSData) -> Request {
 
     :returns: The created upload request.
 */
-public func upload(method: Method, URLString: URLStringConvertible, stream: NSInputStream) -> Request {
+func upload(method: Method, URLString: URLStringConvertible, stream: NSInputStream) -> Request {
     return Manager.sharedInstance.upload(method, URLString, stream: stream)
 }
 
@@ -1629,7 +1629,7 @@ public func upload(method: Method, URLString: URLStringConvertible, stream: NSIn
 
     :returns: The created upload request.
 */
-public func upload(URLRequest: URLRequestConvertible, stream: NSInputStream) -> Request {
+func upload(URLRequest: URLRequestConvertible, stream: NSInputStream) -> Request {
     return Manager.sharedInstance.upload(URLRequest, stream: stream)
 }
 
@@ -1646,7 +1646,7 @@ public func upload(URLRequest: URLRequestConvertible, stream: NSInputStream) -> 
 
     :returns: The created download request.
 */
-public func download(method: Method, URLString: URLStringConvertible, destination: Request.DownloadFileDestination) -> Request {
+func download(method: Method, URLString: URLStringConvertible, destination: Request.DownloadFileDestination) -> Request {
     return Manager.sharedInstance.download(method, URLString, destination: destination)
 }
 
@@ -1658,7 +1658,7 @@ public func download(method: Method, URLString: URLStringConvertible, destinatio
 
     :returns: The created download request.
 */
-public func download(URLRequest: URLRequestConvertible, destination: Request.DownloadFileDestination) -> Request {
+func download(URLRequest: URLRequestConvertible, destination: Request.DownloadFileDestination) -> Request {
     return Manager.sharedInstance.download(URLRequest, destination: destination)
 }
 
@@ -1672,6 +1672,6 @@ public func download(URLRequest: URLRequestConvertible, destination: Request.Dow
 
     :returns: The created download request.
 */
-public func download(resumeData data: NSData, destination: Request.DownloadFileDestination) -> Request {
+func download(resumeData data: NSData, destination: Request.DownloadFileDestination) -> Request {
     return Manager.sharedInstance.download(data, destination: destination)
 }
