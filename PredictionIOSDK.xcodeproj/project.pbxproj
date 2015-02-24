@@ -77,9 +77,9 @@
 		41B99C401A9B8341002090AC /* PredictionIOSDK */ = {
 			isa = PBXGroup;
 			children = (
-				41B99C6C1A9B9CEB002090AC /* Alamofire.swift */,
-				41B99C691A9B9CC6002090AC /* PredictionIOSDK.swift */,
 				41B99C431A9B8341002090AC /* PredictionIOSDK.h */,
+				41B99C691A9B9CC6002090AC /* PredictionIOSDK.swift */,
+				41B99C6C1A9B9CEB002090AC /* Alamofire.swift */,
 				41B99C411A9B8341002090AC /* Supporting Files */,
 			);
 			path = PredictionIOSDK;
