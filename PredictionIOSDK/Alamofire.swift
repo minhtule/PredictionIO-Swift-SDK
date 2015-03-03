@@ -207,7 +207,7 @@ extension NSURLRequest: URLRequestConvertible {
     }
 }
 
-// MARK: -
+// MARK: - Network Manager from Alamofire
 
 /**
     Responsible for creating and managing `Request` objects, as well as their underlying `NSURLSession`.

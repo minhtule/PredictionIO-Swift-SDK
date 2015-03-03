@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		41417B1E1AA57A1400508383 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B99C6C1A9B9CEB002090AC /* Alamofire.swift */; };
+		41417B1F1AA57A1400508383 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B99C6C1A9B9CEB002090AC /* Alamofire.swift */; };
 		41B99C441A9B8341002090AC /* PredictionIOSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 41B99C431A9B8341002090AC /* PredictionIOSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		41B99C4A1A9B8341002090AC /* PredictionIOSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41B99C3E1A9B8341002090AC /* PredictionIOSDK.framework */; };
 		41B99C511A9B8341002090AC /* PredictionIOSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B99C501A9B8341002090AC /* PredictionIOSDKTests.swift */; };
 		41B99C6A1A9B9CC6002090AC /* PredictionIOSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B99C691A9B9CC6002090AC /* PredictionIOSDK.swift */; };
 		41B99C6B1A9B9CC6002090AC /* PredictionIOSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B99C691A9B9CC6002090AC /* PredictionIOSDK.swift */; };
-		41B99C6D1A9B9CEB002090AC /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B99C6C1A9B9CEB002090AC /* Alamofire.swift */; };
-		41B99C6E1A9B9CEB002090AC /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B99C6C1A9B9CEB002090AC /* Alamofire.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -217,7 +217,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41B99C6D1A9B9CEB002090AC /* Alamofire.swift in Sources */,
+				41417B1E1AA57A1400508383 /* Alamofire.swift in Sources */,
 				41B99C6A1A9B9CC6002090AC /* PredictionIOSDK.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -226,7 +226,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41B99C6E1A9B9CEB002090AC /* Alamofire.swift in Sources */,
+				41417B1F1AA57A1400508383 /* Alamofire.swift in Sources */,
 				41B99C511A9B8341002090AC /* PredictionIOSDKTests.swift in Sources */,
 				41B99C6B1A9B9CC6002090AC /* PredictionIOSDK.swift in Sources */,
 			);

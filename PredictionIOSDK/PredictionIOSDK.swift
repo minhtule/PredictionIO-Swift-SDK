@@ -11,10 +11,12 @@ import Foundation
 // MARK: - Base Client
 
 /**
-    Base class to manage network activities.
+    Base client that manages network connections with the server.
 */
 public class BaseClient : Manager {
     let baseURL: String
+    
+    // MARK: Constructors
     
     /**
         :param: baseURL The base URL
@@ -36,6 +38,25 @@ public class BaseClient : Manager {
     its REST API.
 */
 public struct Event {
+    // MARK: Constants
+    
+    /// Reversed set event name.
+    public static let SetEvent = "$set"
+    
+    /// Reversed unset event name.
+    public static let UnsetEvent = "$unset"
+    
+    /// Reversed delete event name.
+    public static let DeleteEvent = "$delete"
+    
+    /// Predefined user entity type.
+    public static let UserEntityType = "user"
+    
+    /// Predefined item entity type.
+    public static let ItemEntityType = "item"
+    
+    // MARK: Properties
+    
     /// The event name e.g. "sign-up", "rate", "view".
     ///
     /// **Note:** All event names starting with "$" and "pio_" are reversed
@@ -72,20 +93,7 @@ public struct Event {
     /// The time of the event.
     public var eventTime: NSDate
     
-    /// Reversed event name.
-    public static let SetEvent = "$set"
-    
-    /// Reversed event name.
-    public static let UnsetEvent = "$unset"
-    
-    /// Reversed event name.
-    public static let DeleteEvent = "$delete"
-    
-    /// Predefined entity type.
-    public static let UserEntityType = "user"
-    
-    /// Predefined entity type.
-    public static let ItemEntityType = "item"
+    // MARK: Constructors
     
     /**
         :param: event The event name
@@ -105,6 +113,8 @@ public struct Event {
         self.properties = properties
         self.eventTime = eventTime
     }
+    
+    // MARK: Helpers
     
     func toDictionary() -> [String: AnyObject] {
         var dict: [String: AnyObject] = [
@@ -133,7 +143,7 @@ public struct Event {
         dateFormatter.timeZone = NSTimeZone(abbreviation: "UTC")
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
         return dateFormatter
-        }()
+    }()
 }
 
 // MARK: - Event Client
@@ -153,6 +163,8 @@ public class EventClient : BaseClient {
         return "\(baseURL)/events/\(eventID).json?accessKey=\(accessKey)"
     }
     
+    // MARK: Constructors
+    
     /**
         :param: accessKey The access key for your application
         :param: baseURL The base URL. Default to be http://localhost:7070.
@@ -162,6 +174,8 @@ public class EventClient : BaseClient {
         self.accessKey = accessKey
         super.init(baseURL: baseURL, timeout: timeout)
     }
+    
+    // MARK: Methods
     
     /**
         Create an event in Event Server.
@@ -214,8 +228,11 @@ public class EventClient : BaseClient {
     }
 }
 
-// MARK: - User
+// MARK: - Convenience Methods
 
+/*
+    For User entities
+*/
 extension EventClient {
     
     /**
@@ -283,8 +300,9 @@ extension EventClient {
     }
 }
 
-// MARK: - Item
-
+/**
+    For Item entities
+*/
 extension EventClient {
 
     /**
@@ -352,8 +370,9 @@ extension EventClient {
     }
 }
 
-// MARK: - User Action on Item
-
+/**
+    For User action on Item
+*/
 extension EventClient {
     
     /**
@@ -394,6 +413,8 @@ public class EngineClient : BaseClient {
         return "\(baseURL)/queries.json"
     }
     
+    // MARK: Constructors
+    
     /**
         :param: baseURL Base URL. Default to be http://localhost:8000.
         :param: timeout Request timeout. Default to be 5s.
@@ -401,6 +422,8 @@ public class EngineClient : BaseClient {
     public override init(baseURL: String = "http://localhost:8000", timeout: NSTimeInterval = 5) {
         super.init(baseURL: baseURL, timeout: timeout)
     }
+    
+    // MARK: Methods
     
     /**
         Sends a query to the prediction engine.
