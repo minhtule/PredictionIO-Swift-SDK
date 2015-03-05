@@ -155,11 +155,11 @@ public class EventClient : BaseClient {
     /// The access key for your application
     let accessKey: String
     
-    private var _createEventFullURL: String {
+    private var _fullURLForCreatingEvent: String {
         return "\(baseURL)/events.json?accessKey=\(accessKey)"
     }
     
-    private func _getEventFullURL(eventID: String) -> String {
+    private func _fullURLForGettingEvent(eventID: String) -> String {
         return "\(baseURL)/events/\(eventID).json?accessKey=\(accessKey)"
     }
     
@@ -184,12 +184,9 @@ public class EventClient : BaseClient {
         :param: completionHandler The callback to be executed when the request has finished.
     */
     public func createEvent(event: Event, completionHandler: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> Void) {
-        if event.event == Event.UnsetEvent && event.properties?.isEmpty == true {
-            // Properties cannot be empty for $unset event
-            return
-        }
+        assert((event.event == Event.UnsetEvent && event.properties?.isEmpty == true) == false, "Properties cannot be empty for $unset event")
         
-        request(.POST, _createEventFullURL, parameters: event.toDictionary(), encoding: .JSON)
+        request(.POST, _fullURLForCreatingEvent, parameters: event.toDictionary(), encoding: .JSON)
             .responseJSON { (request, response, JSON, error) -> Void in
                 completionHandler(request, response, JSON, error)
             }
@@ -205,7 +202,7 @@ public class EventClient : BaseClient {
     */
     public func getEvent(eventID: String, completionHandler: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> Void) {
         if let escapedEventID = eventID.stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding) {
-            request(.GET, _getEventFullURL(escapedEventID))
+            request(.GET, _fullURLForGettingEvent(escapedEventID))
                 .responseJSON { (request, response, JSON, error) -> Void in
                     completionHandler(request, response, JSON, error)
                 }
@@ -220,7 +217,7 @@ public class EventClient : BaseClient {
     */
     public func deleteEvent(eventID: String, completionHandler: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> Void) {
         if let escapedEventID = eventID.stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding) {
-            request(.DELETE, _getEventFullURL(escapedEventID))
+            request(.DELETE, _fullURLForGettingEvent(escapedEventID))
                 .responseJSON { (request, response, JSON, error) -> Void in
                     completionHandler(request, response, JSON, error)
             }
