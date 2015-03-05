@@ -10,7 +10,6 @@
 		41417B1E1AA57A1400508383 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B99C6C1A9B9CEB002090AC /* Alamofire.swift */; };
 		41417B1F1AA57A1400508383 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B99C6C1A9B9CEB002090AC /* Alamofire.swift */; };
 		41B99C441A9B8341002090AC /* PredictionIOSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 41B99C431A9B8341002090AC /* PredictionIOSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		41B99C4A1A9B8341002090AC /* PredictionIOSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41B99C3E1A9B8341002090AC /* PredictionIOSDK.framework */; };
 		41B99C511A9B8341002090AC /* PredictionIOSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B99C501A9B8341002090AC /* PredictionIOSDKTests.swift */; };
 		41B99C6A1A9B9CC6002090AC /* PredictionIOSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B99C691A9B9CC6002090AC /* PredictionIOSDK.swift */; };
 		41B99C6B1A9B9CC6002090AC /* PredictionIOSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B99C691A9B9CC6002090AC /* PredictionIOSDK.swift */; };
@@ -30,7 +29,7 @@
 		41B99C3E1A9B8341002090AC /* PredictionIOSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PredictionIOSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		41B99C421A9B8341002090AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		41B99C431A9B8341002090AC /* PredictionIOSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PredictionIOSDK.h; sourceTree = "<group>"; };
-		41B99C491A9B8341002090AC /* PredictionIOSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PredictionIOSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		41B99C491A9B8341002090AC /* PredictionIO iOS SDK Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PredictionIO iOS SDK Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		41B99C4F1A9B8341002090AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		41B99C501A9B8341002090AC /* PredictionIOSDKTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredictionIOSDKTests.swift; sourceTree = "<group>"; };
 		41B99C691A9B9CC6002090AC /* PredictionIOSDK.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PredictionIOSDK.swift; sourceTree = "<group>"; };
@@ -49,7 +48,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41B99C4A1A9B8341002090AC /* PredictionIOSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -69,7 +67,7 @@
 			isa = PBXGroup;
 			children = (
 				41B99C3E1A9B8341002090AC /* PredictionIOSDK.framework */,
-				41B99C491A9B8341002090AC /* PredictionIOSDKTests.xctest */,
+				41B99C491A9B8341002090AC /* PredictionIO iOS SDK Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -124,9 +122,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		41B99C3D1A9B8341002090AC /* PredictionIOSDK */ = {
+		41B99C3D1A9B8341002090AC /* PredictionIO iOS SDK */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 41B99C541A9B8341002090AC /* Build configuration list for PBXNativeTarget "PredictionIOSDK" */;
+			buildConfigurationList = 41B99C541A9B8341002090AC /* Build configuration list for PBXNativeTarget "PredictionIO iOS SDK" */;
 			buildPhases = (
 				41B99C391A9B8341002090AC /* Sources */,
 				41B99C3A1A9B8341002090AC /* Frameworks */,
@@ -137,14 +135,14 @@
 			);
 			dependencies = (
 			);
-			name = PredictionIOSDK;
+			name = "PredictionIO iOS SDK";
 			productName = PredictionIOSDK;
 			productReference = 41B99C3E1A9B8341002090AC /* PredictionIOSDK.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		41B99C481A9B8341002090AC /* PredictionIOSDKTests */ = {
+		41B99C481A9B8341002090AC /* PredictionIO iOS SDK Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 41B99C571A9B8341002090AC /* Build configuration list for PBXNativeTarget "PredictionIOSDKTests" */;
+			buildConfigurationList = 41B99C571A9B8341002090AC /* Build configuration list for PBXNativeTarget "PredictionIO iOS SDK Tests" */;
 			buildPhases = (
 				41B99C451A9B8341002090AC /* Sources */,
 				41B99C461A9B8341002090AC /* Frameworks */,
@@ -155,9 +153,9 @@
 			dependencies = (
 				41B99C4C1A9B8341002090AC /* PBXTargetDependency */,
 			);
-			name = PredictionIOSDKTests;
+			name = "PredictionIO iOS SDK Tests";
 			productName = PredictionIOSDKTests;
-			productReference = 41B99C491A9B8341002090AC /* PredictionIOSDKTests.xctest */;
+			productReference = 41B99C491A9B8341002090AC /* PredictionIO iOS SDK Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -189,8 +187,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				41B99C3D1A9B8341002090AC /* PredictionIOSDK */,
-				41B99C481A9B8341002090AC /* PredictionIOSDKTests */,
+				41B99C3D1A9B8341002090AC /* PredictionIO iOS SDK */,
+				41B99C481A9B8341002090AC /* PredictionIO iOS SDK Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -237,7 +235,7 @@
 /* Begin PBXTargetDependency section */
 		41B99C4C1A9B8341002090AC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 41B99C3D1A9B8341002090AC /* PredictionIOSDK */;
+			target = 41B99C3D1A9B8341002090AC /* PredictionIO iOS SDK */;
 			targetProxy = 41B99C4B1A9B8341002090AC /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -338,7 +336,7 @@
 				INFOPLIST_FILE = PredictionIOSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = PredictionIOSDK;
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -353,7 +351,7 @@
 				INFOPLIST_FILE = PredictionIOSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = PredictionIOSDK;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -400,7 +398,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		41B99C541A9B8341002090AC /* Build configuration list for PBXNativeTarget "PredictionIOSDK" */ = {
+		41B99C541A9B8341002090AC /* Build configuration list for PBXNativeTarget "PredictionIO iOS SDK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				41B99C551A9B8341002090AC /* Debug */,
@@ -409,7 +407,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		41B99C571A9B8341002090AC /* Build configuration list for PBXNativeTarget "PredictionIOSDKTests" */ = {
+		41B99C571A9B8341002090AC /* Build configuration list for PBXNativeTarget "PredictionIO iOS SDK Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				41B99C581A9B8341002090AC /* Debug */,
