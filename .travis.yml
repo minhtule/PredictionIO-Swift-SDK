@@ -15,5 +15,12 @@ before_script:
 - cd ../PredictionIO-Swift-SDK
 
 script:
+# Check Podspec
+- pod lib lint --quick
+
 - set -o pipefail
+# Test the SDK
 - xcodebuild -project PredictionIOSDK.xcodeproj -scheme "PredictionIO iOS SDK" -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 6" ONLY_ACTIVE_ARCH=NO test | xcpretty -c
+# Build the demo app
+- cd "iOS Example"
+- xcodebuild -project "iOS Example.xcodeproj" -scheme "iOS Example" -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 6" ONLY_ACTIVE_ARCH=NO build | xcpretty -c
