@@ -8,16 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		41417B1E1AA57A1400508383 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B99C6C1A9B9CEB002090AC /* Alamofire.swift */; };
-		41417B1F1AA57A1400508383 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B99C6C1A9B9CEB002090AC /* Alamofire.swift */; };
 		414FE8191AA82DBC003DB51B /* EngineClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414FE8181AA82DBC003DB51B /* EngineClientTests.swift */; };
 		414FE81B1AA83283003DB51B /* EventClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414FE81A1AA83283003DB51B /* EventClientTests.swift */; };
 		414FE81D1AA8331A003DB51B /* EventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414FE81C1AA8331A003DB51B /* EventTests.swift */; };
+		417F2F981AA94F3000BAABCE /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B99C6C1A9B9CEB002090AC /* Alamofire.swift */; };
+		417F2F9C1AA94F3000BAABCE /* PredictionIOSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B99C691A9B9CC6002090AC /* PredictionIOSDK.swift */; };
+		417F2FA61AA94FC700BAABCE /* EventPrivateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417F2FA51AA94FC700BAABCE /* EventPrivateTests.swift */; };
 		41B99C441A9B8341002090AC /* PredictionIOSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 41B99C431A9B8341002090AC /* PredictionIOSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		41B99C6A1A9B9CC6002090AC /* PredictionIOSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B99C691A9B9CC6002090AC /* PredictionIOSDK.swift */; };
-		41B99C6B1A9B9CC6002090AC /* PredictionIOSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B99C691A9B9CC6002090AC /* PredictionIOSDK.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		417F2F961AA94F3000BAABCE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 41B99C351A9B8341002090AC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 41B99C3D1A9B8341002090AC;
+			remoteInfo = PredictionIOSDK;
+		};
 		41B99C4B1A9B8341002090AC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 41B99C351A9B8341002090AC /* Project object */;
@@ -31,6 +39,8 @@
 		414FE8181AA82DBC003DB51B /* EngineClientTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EngineClientTests.swift; sourceTree = "<group>"; };
 		414FE81A1AA83283003DB51B /* EventClientTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventClientTests.swift; sourceTree = "<group>"; };
 		414FE81C1AA8331A003DB51B /* EventTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTests.swift; sourceTree = "<group>"; };
+		417F2FA21AA94F3000BAABCE /* Private iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Private iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		417F2FA51AA94FC700BAABCE /* EventPrivateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventPrivateTests.swift; path = PrivateTests/EventPrivateTests.swift; sourceTree = SOURCE_ROOT; };
 		41B99C3E1A9B8341002090AC /* PredictionIOSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PredictionIOSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		41B99C421A9B8341002090AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		41B99C431A9B8341002090AC /* PredictionIOSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PredictionIOSDK.h; sourceTree = "<group>"; };
@@ -41,6 +51,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		417F2F9D1AA94F3000BAABCE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		41B99C3A1A9B8341002090AC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -58,11 +75,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		417F2FA41AA94FA900BAABCE /* Private Tests */ = {
+			isa = PBXGroup;
+			children = (
+				417F2FA51AA94FC700BAABCE /* EventPrivateTests.swift */,
+			);
+			name = "Private Tests";
+			path = PredictionIOSDKTests;
+			sourceTree = "<group>";
+		};
 		41B99C341A9B8341002090AC = {
 			isa = PBXGroup;
 			children = (
 				41B99C401A9B8341002090AC /* PredictionIOSDK */,
 				41B99C4D1A9B8341002090AC /* PredictionIOSDKTests */,
+				417F2FA41AA94FA900BAABCE /* Private Tests */,
 				41B99C3F1A9B8341002090AC /* Products */,
 			);
 			sourceTree = "<group>";
@@ -72,6 +99,7 @@
 			children = (
 				41B99C3E1A9B8341002090AC /* PredictionIOSDK.framework */,
 				41B99C491A9B8341002090AC /* PredictionIO iOS SDK Tests.xctest */,
+				417F2FA21AA94F3000BAABCE /* Private iOS Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -128,6 +156,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		417F2F941AA94F3000BAABCE /* Private iOS Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 417F2F9F1AA94F3000BAABCE /* Build configuration list for PBXNativeTarget "Private iOS Tests" */;
+			buildPhases = (
+				417F2F971AA94F3000BAABCE /* Sources */,
+				417F2F9D1AA94F3000BAABCE /* Frameworks */,
+				417F2F9E1AA94F3000BAABCE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				417F2F951AA94F3000BAABCE /* PBXTargetDependency */,
+			);
+			name = "Private iOS Tests";
+			productName = PredictionIOSDKTests;
+			productReference = 417F2FA21AA94F3000BAABCE /* Private iOS Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		41B99C3D1A9B8341002090AC /* PredictionIO iOS SDK */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 41B99C541A9B8341002090AC /* Build configuration list for PBXNativeTarget "PredictionIO iOS SDK" */;
@@ -195,11 +241,19 @@
 			targets = (
 				41B99C3D1A9B8341002090AC /* PredictionIO iOS SDK */,
 				41B99C481A9B8341002090AC /* PredictionIO iOS SDK Tests */,
+				417F2F941AA94F3000BAABCE /* Private iOS Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		417F2F9E1AA94F3000BAABCE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		41B99C3C1A9B8341002090AC /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -217,6 +271,16 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		417F2F971AA94F3000BAABCE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				417F2F981AA94F3000BAABCE /* Alamofire.swift in Sources */,
+				417F2FA61AA94FC700BAABCE /* EventPrivateTests.swift in Sources */,
+				417F2F9C1AA94F3000BAABCE /* PredictionIOSDK.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		41B99C391A9B8341002090AC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -230,17 +294,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41417B1F1AA57A1400508383 /* Alamofire.swift in Sources */,
 				414FE81B1AA83283003DB51B /* EventClientTests.swift in Sources */,
 				414FE81D1AA8331A003DB51B /* EventTests.swift in Sources */,
 				414FE8191AA82DBC003DB51B /* EngineClientTests.swift in Sources */,
-				41B99C6B1A9B9CC6002090AC /* PredictionIOSDK.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		417F2F951AA94F3000BAABCE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 41B99C3D1A9B8341002090AC /* PredictionIO iOS SDK */;
+			targetProxy = 417F2F961AA94F3000BAABCE /* PBXContainerItemProxy */;
+		};
 		41B99C4C1A9B8341002090AC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 41B99C3D1A9B8341002090AC /* PredictionIO iOS SDK */;
@@ -249,6 +316,36 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		417F2FA01AA94F3000BAABCE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = PredictionIOSDKTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "Private iOS Tests";
+			};
+			name = Debug;
+		};
+		417F2FA11AA94F3000BAABCE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = PredictionIOSDKTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "Private iOS Tests";
+			};
+			name = Release;
+		};
 		41B99C521A9B8341002090AC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -397,6 +494,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		417F2F9F1AA94F3000BAABCE /* Build configuration list for PBXNativeTarget "Private iOS Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				417F2FA01AA94F3000BAABCE /* Debug */,
+				417F2FA11AA94F3000BAABCE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		41B99C381A9B8341002090AC /* Build configuration list for PBXProject "PredictionIOSDK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

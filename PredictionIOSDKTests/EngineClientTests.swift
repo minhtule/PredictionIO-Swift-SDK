@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import PredictionIOSDK
 
 class EngineClientTests: XCTestCase {
     var engineClient: EngineClient!

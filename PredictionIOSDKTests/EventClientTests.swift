@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import PredictionIOSDK
 
 class EventClientTests: XCTestCase {
     let accessKey = "123"  // Replace with the real app's access key if testing using actual PredictionIO localhost setup.
