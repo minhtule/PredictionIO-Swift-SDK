@@ -1,0 +1,19 @@
+language: objective-c
+osx_image: xcode611
+
+before_install:
+- gem install xcpretty -N
+
+before_script:
+# Set up mock API server
+- cd ..
+- git clone git://github.com/minhtule/PredictionIO-Mock-Server.git
+- cd PredictionIO-Mock-Server
+- npm install
+- node app.js &
+- sleep 3  # Give mock server some time to bind to sockets, etc
+- cd ../PredictionIO-Swift-SDK
+
+script:
+- set -o pipefail
+- xcodebuild -project PredictionIOSDK.xcodeproj -scheme "PredictionIO iOS SDK" -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 6" ONLY_ACTIVE_ARCH=NO test | xcpretty -c
