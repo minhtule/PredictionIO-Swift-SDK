@@ -20,6 +20,34 @@
                ReferencedContainer = "container:PredictionIOSDK.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "41B99C481A9B8341002090AC"
+               BuildableName = "PredictionIO iOS SDK Tests.xctest"
+               BlueprintName = "PredictionIO iOS SDK Tests"
+               ReferencedContainer = "container:PredictionIOSDK.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "417F2F941AA94F3000BAABCE"
+               BuildableName = "Private iOS Tests.xctest"
+               BlueprintName = "Private iOS Tests"
+               ReferencedContainer = "container:PredictionIOSDK.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
