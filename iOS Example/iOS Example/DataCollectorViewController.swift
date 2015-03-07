@@ -14,21 +14,21 @@ class DataCollectorViewController: UIViewController {
 
     @IBOutlet weak var userIDTextField: UITextField!
     @IBOutlet weak var movieIDTextField: UITextField!
-    @IBOutlet var startButtons: [UIButton]!
+    @IBOutlet var starButtons: [UIButton]!
     
     let eventClient = EventClient(accessKey: accessKey)
     var userID = ""
     var movieID = ""
     var rating = 0
     
-    @IBAction func startButtonAction(sender: UIButton) {
+    @IBAction func starButtonAction(sender: UIButton) {
         if sender.tag == rating {
             rating = 0
         } else {
             rating = sender.tag
         }
         
-        startButtons.map { $0.selected = ($0.tag <= self.rating) }
+        starButtons.map { $0.selected = ($0.tag <= self.rating) }
     }
     
     @IBAction func rateButtonAction(sender: UIButton) {

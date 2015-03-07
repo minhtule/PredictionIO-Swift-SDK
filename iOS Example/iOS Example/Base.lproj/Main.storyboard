@@ -169,7 +169,7 @@
                                 </state>
                                 <state key="selected" image="star"/>
                                 <connections>
-                                    <action selector="startButtonAction:" destination="K56-OU-3Qa" eventType="touchUpInside" id="slt-l5-tCa"/>
+                                    <action selector="starButtonAction:" destination="K56-OU-3Qa" eventType="touchUpInside" id="fyy-dc-0er"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v2G-XA-1fX">
@@ -183,7 +183,7 @@
                                 </state>
                                 <state key="selected" image="star"/>
                                 <connections>
-                                    <action selector="startButtonAction:" destination="K56-OU-3Qa" eventType="touchUpInside" id="fD4-FW-Ead"/>
+                                    <action selector="starButtonAction:" destination="K56-OU-3Qa" eventType="touchUpInside" id="lUF-yz-bJA"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VeQ-m5-lds">
@@ -197,7 +197,7 @@
                                 </state>
                                 <state key="selected" image="star"/>
                                 <connections>
-                                    <action selector="startButtonAction:" destination="K56-OU-3Qa" eventType="touchUpInside" id="SuH-v4-Ble"/>
+                                    <action selector="starButtonAction:" destination="K56-OU-3Qa" eventType="touchUpInside" id="g2l-z4-9Io"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FmE-X7-PON">
@@ -211,7 +211,7 @@
                                 </state>
                                 <state key="selected" image="star"/>
                                 <connections>
-                                    <action selector="startButtonAction:" destination="K56-OU-3Qa" eventType="touchUpInside" id="IUT-fM-vkZ"/>
+                                    <action selector="starButtonAction:" destination="K56-OU-3Qa" eventType="touchUpInside" id="iYL-Q8-xfZ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UtP-SX-47m">
@@ -225,7 +225,7 @@
                                 </state>
                                 <state key="selected" image="star"/>
                                 <connections>
-                                    <action selector="startButtonAction:" destination="K56-OU-3Qa" eventType="touchUpInside" id="1Q0-Q8-4cG"/>
+                                    <action selector="starButtonAction:" destination="K56-OU-3Qa" eventType="touchUpInside" id="pwf-1J-Hy7"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -263,11 +263,11 @@
                     <connections>
                         <outlet property="movieIDTextField" destination="xcq-jm-f2w" id="wuo-5g-E9N"/>
                         <outlet property="userIDTextField" destination="84z-Pg-cWF" id="2wY-cZ-YwC"/>
-                        <outletCollection property="startButtons" destination="VeQ-m5-lds" collectionClass="NSMutableArray" id="7Dq-Tf-jt8"/>
-                        <outletCollection property="startButtons" destination="FmE-X7-PON" collectionClass="NSMutableArray" id="CyC-Zb-KAu"/>
-                        <outletCollection property="startButtons" destination="UtP-SX-47m" collectionClass="NSMutableArray" id="utg-Xz-V4L"/>
-                        <outletCollection property="startButtons" destination="v2G-XA-1fX" collectionClass="NSMutableArray" id="f8H-wX-z1L"/>
-                        <outletCollection property="startButtons" destination="KzJ-s8-WI7" collectionClass="NSMutableArray" id="50s-Z6-l3D"/>
+                        <outletCollection property="starButtons" destination="UtP-SX-47m" collectionClass="NSMutableArray" id="ffh-LQ-Kdk"/>
+                        <outletCollection property="starButtons" destination="VeQ-m5-lds" collectionClass="NSMutableArray" id="cxv-hs-rgE"/>
+                        <outletCollection property="starButtons" destination="FmE-X7-PON" collectionClass="NSMutableArray" id="vUf-i3-zsc"/>
+                        <outletCollection property="starButtons" destination="v2G-XA-1fX" collectionClass="NSMutableArray" id="HZ7-Wg-rCJ"/>
+                        <outletCollection property="starButtons" destination="KzJ-s8-WI7" collectionClass="NSMutableArray" id="1h2-zy-gV2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v9t-eP-sBP" userLabel="First Responder" sceneMemberID="firstResponder"/>
