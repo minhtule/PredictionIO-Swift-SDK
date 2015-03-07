@@ -9,7 +9,8 @@
 import UIKit
 import PredictionIOSDK
 
-let accessKey = "9CQhFdGrLDgYkez9cwFkGAEU0Krfup3GLkdQ8r3pkOjO61BhL4BkjJ1F8CuShJey"
+// NOTE: replace with your app's access key here!
+let accessKey = ""
 
 class DataCollectorViewController: UIViewController {
 
@@ -36,13 +37,20 @@ class DataCollectorViewController: UIViewController {
         userID = userIDTextField.text
         movieID = movieIDTextField.text
         
-        eventClient.recordAction("rate", byUserID: userID, itemID: movieID, properties: ["rating": rating], completionHandler: { (_, _, JSON, error) in
+        eventClient.recordAction("rate", byUserID: userID, itemID: movieID, properties: ["rating": rating], completionHandler: { (_, response, JSON, error) in
             var alertView: UIAlertView!
             
             if let data = JSON as? [String: AnyObject] {
-                let eventID = data["eventId"] as String
-                alertView = UIAlertView(title: "Successful", message: "EventID: \(eventID)", delegate: nil, cancelButtonTitle: "OK!")
+                if response?.statusCode == 201 {
+                    // Successful!
+                    let eventID = data["eventId"] as String
+                    alertView = UIAlertView(title: "Successful", message: "EventID: \(eventID)", delegate: nil, cancelButtonTitle: "OK!")
+                } else {
+                    // Invalid access key.
+                    alertView = UIAlertView(title: "Failed", message: data["message"] as? String, delegate: nil, cancelButtonTitle: "OK!")
+                }
             } else {
+                // Other connection error e.g. event server is not running.
                 alertView = UIAlertView(title: "Error", message: error?.description, delegate: nil, cancelButtonTitle: "OK!")
             }
             
