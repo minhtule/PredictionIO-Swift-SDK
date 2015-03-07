@@ -14,8 +14,17 @@
 		417F2F981AA94F3000BAABCE /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B99C6C1A9B9CEB002090AC /* Alamofire.swift */; };
 		417F2F9C1AA94F3000BAABCE /* PredictionIOSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B99C691A9B9CC6002090AC /* PredictionIOSDK.swift */; };
 		417F2FA61AA94FC700BAABCE /* EventPrivateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417F2FA51AA94FC700BAABCE /* EventPrivateTests.swift */; };
+		419CE30A1AAAC92B003FC659 /* PredictionIOSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 41B99C431A9B8341002090AC /* PredictionIOSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		41B99C441A9B8341002090AC /* PredictionIOSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 41B99C431A9B8341002090AC /* PredictionIOSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		41B99C6A1A9B9CC6002090AC /* PredictionIOSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B99C691A9B9CC6002090AC /* PredictionIOSDK.swift */; };
+		41ED28FB1AAAA14E0040E3D2 /* PredictionIOSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B99C691A9B9CC6002090AC /* PredictionIOSDK.swift */; };
+		41ED28FC1AAAA14E0040E3D2 /* PredictionIOSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B99C691A9B9CC6002090AC /* PredictionIOSDK.swift */; };
+		41ED28FD1AAAA1560040E3D2 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B99C6C1A9B9CEB002090AC /* Alamofire.swift */; };
+		41ED28FE1AAAA1570040E3D2 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B99C6C1A9B9CEB002090AC /* Alamofire.swift */; };
+		41ED28FF1AAAA1660040E3D2 /* EventPrivateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417F2FA51AA94FC700BAABCE /* EventPrivateTests.swift */; };
+		41ED29001AAAA16A0040E3D2 /* EventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414FE81C1AA8331A003DB51B /* EventTests.swift */; };
+		41ED29011AAAA16D0040E3D2 /* EngineClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414FE8181AA82DBC003DB51B /* EngineClientTests.swift */; };
+		41ED29021AAAA1710040E3D2 /* EventClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414FE81A1AA83283003DB51B /* EventClientTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +42,20 @@
 			remoteGlobalIDString = 41B99C3D1A9B8341002090AC;
 			remoteInfo = PredictionIOSDK;
 		};
+		41ED28E21AAAA0870040E3D2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 41B99C351A9B8341002090AC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 41ED28D51AAAA0870040E3D2;
+			remoteInfo = "PredictionIO OSX SDK";
+		};
+		41ED28F11AAAA1180040E3D2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 41B99C351A9B8341002090AC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 41ED28D51AAAA0870040E3D2;
+			remoteInfo = "PredictionIO OSX SDK";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +71,9 @@
 		41B99C4F1A9B8341002090AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		41B99C691A9B9CC6002090AC /* PredictionIOSDK.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PredictionIOSDK.swift; sourceTree = "<group>"; };
 		41B99C6C1A9B9CEB002090AC /* Alamofire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alamofire.swift; sourceTree = "<group>"; };
+		41ED28D61AAAA0870040E3D2 /* PredictionIOSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PredictionIOSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		41ED28E01AAAA0870040E3D2 /* PredictionIO OSX SDK Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PredictionIO OSX SDK Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		41ED28F91AAAA1180040E3D2 /* Private OSX Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Private OSX Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +92,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		41B99C461A9B8341002090AC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		41ED28D21AAAA0870040E3D2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		41ED28DD1AAAA0870040E3D2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		41ED28F31AAAA1180040E3D2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -100,6 +147,9 @@
 				41B99C3E1A9B8341002090AC /* PredictionIOSDK.framework */,
 				41B99C491A9B8341002090AC /* PredictionIO iOS SDK Tests.xctest */,
 				417F2FA21AA94F3000BAABCE /* Private iOS Tests.xctest */,
+				41ED28D61AAAA0870040E3D2 /* PredictionIOSDK.framework */,
+				41ED28E01AAAA0870040E3D2 /* PredictionIO OSX SDK Tests.xctest */,
+				41ED28F91AAAA1180040E3D2 /* Private OSX Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -150,6 +200,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				41B99C441A9B8341002090AC /* PredictionIOSDK.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		41ED28D31AAAA0870040E3D2 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				419CE30A1AAAC92B003FC659 /* PredictionIOSDK.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,6 +268,60 @@
 			productReference = 41B99C491A9B8341002090AC /* PredictionIO iOS SDK Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		41ED28D51AAAA0870040E3D2 /* PredictionIO OSX SDK */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 41ED28ED1AAAA0870040E3D2 /* Build configuration list for PBXNativeTarget "PredictionIO OSX SDK" */;
+			buildPhases = (
+				41ED28D11AAAA0870040E3D2 /* Sources */,
+				41ED28D21AAAA0870040E3D2 /* Frameworks */,
+				41ED28D31AAAA0870040E3D2 /* Headers */,
+				41ED28D41AAAA0870040E3D2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "PredictionIO OSX SDK";
+			productName = "PredictionIO OSX SDK";
+			productReference = 41ED28D61AAAA0870040E3D2 /* PredictionIOSDK.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		41ED28DF1AAAA0870040E3D2 /* PredictionIO OSX SDK Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 41ED28EE1AAAA0870040E3D2 /* Build configuration list for PBXNativeTarget "PredictionIO OSX SDK Tests" */;
+			buildPhases = (
+				41ED28DC1AAAA0870040E3D2 /* Sources */,
+				41ED28DD1AAAA0870040E3D2 /* Frameworks */,
+				41ED28DE1AAAA0870040E3D2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				41ED28E31AAAA0870040E3D2 /* PBXTargetDependency */,
+			);
+			name = "PredictionIO OSX SDK Tests";
+			productName = "PredictionIO OSX SDKTests";
+			productReference = 41ED28E01AAAA0870040E3D2 /* PredictionIO OSX SDK Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		41ED28EF1AAAA1180040E3D2 /* Private OSX Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 41ED28F61AAAA1180040E3D2 /* Build configuration list for PBXNativeTarget "Private OSX Tests" */;
+			buildPhases = (
+				41ED28F21AAAA1180040E3D2 /* Sources */,
+				41ED28F31AAAA1180040E3D2 /* Frameworks */,
+				41ED28F51AAAA1180040E3D2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				41ED28F01AAAA1180040E3D2 /* PBXTargetDependency */,
+			);
+			name = "Private OSX Tests";
+			productName = "PredictionIO OSX SDKTests";
+			productReference = 41ED28F91AAAA1180040E3D2 /* Private OSX Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -223,6 +335,12 @@
 						CreatedOnToolsVersion = 6.1.1;
 					};
 					41B99C481A9B8341002090AC = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					41ED28D51AAAA0870040E3D2 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					41ED28DF1AAAA0870040E3D2 = {
 						CreatedOnToolsVersion = 6.1.1;
 					};
 				};
@@ -242,6 +360,9 @@
 				41B99C3D1A9B8341002090AC /* PredictionIO iOS SDK */,
 				41B99C481A9B8341002090AC /* PredictionIO iOS SDK Tests */,
 				417F2F941AA94F3000BAABCE /* Private iOS Tests */,
+				41ED28D51AAAA0870040E3D2 /* PredictionIO OSX SDK */,
+				41ED28DF1AAAA0870040E3D2 /* PredictionIO OSX SDK Tests */,
+				41ED28EF1AAAA1180040E3D2 /* Private OSX Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -262,6 +383,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		41B99C471A9B8341002090AC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		41ED28D41AAAA0870040E3D2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		41ED28DE1AAAA0870040E3D2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		41ED28F51AAAA1180040E3D2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -300,6 +442,35 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		41ED28D11AAAA0870040E3D2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				41ED28FD1AAAA1560040E3D2 /* Alamofire.swift in Sources */,
+				41ED28FB1AAAA14E0040E3D2 /* PredictionIOSDK.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		41ED28DC1AAAA0870040E3D2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				41ED29011AAAA16D0040E3D2 /* EngineClientTests.swift in Sources */,
+				41ED29001AAAA16A0040E3D2 /* EventTests.swift in Sources */,
+				41ED29021AAAA1710040E3D2 /* EventClientTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		41ED28F21AAAA1180040E3D2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				41ED28FE1AAAA1570040E3D2 /* Alamofire.swift in Sources */,
+				41ED28FF1AAAA1660040E3D2 /* EventPrivateTests.swift in Sources */,
+				41ED28FC1AAAA14E0040E3D2 /* PredictionIOSDK.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -312,6 +483,16 @@
 			isa = PBXTargetDependency;
 			target = 41B99C3D1A9B8341002090AC /* PredictionIO iOS SDK */;
 			targetProxy = 41B99C4B1A9B8341002090AC /* PBXContainerItemProxy */;
+		};
+		41ED28E31AAAA0870040E3D2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 41ED28D51AAAA0870040E3D2 /* PredictionIO OSX SDK */;
+			targetProxy = 41ED28E21AAAA0870040E3D2 /* PBXContainerItemProxy */;
+		};
+		41ED28F01AAAA1180040E3D2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 41ED28D51AAAA0870040E3D2 /* PredictionIO OSX SDK */;
+			targetProxy = 41ED28F11AAAA1180040E3D2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -382,6 +563,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -422,6 +604,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -434,6 +617,7 @@
 		41B99C551A9B8341002090AC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -449,6 +633,7 @@
 		41B99C561A9B8341002090AC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -491,6 +676,121 @@
 			};
 			name = Release;
 		};
+		41ED28E91AAAA0870040E3D2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = PredictionIOSDK/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = PredictionIOSDK;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		41ED28EA1AAAA0870040E3D2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = PredictionIOSDK/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = PredictionIOSDK;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		41ED28EB1AAAA0870040E3D2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = PredictionIOSDKTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		41ED28EC1AAAA0870040E3D2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = PredictionIOSDKTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		41ED28F71AAAA1180040E3D2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = PredictionIOSDKTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = "Private OSX Tests";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		41ED28F81AAAA1180040E3D2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = PredictionIOSDKTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = "Private OSX Tests";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -526,6 +826,33 @@
 			buildConfigurations = (
 				41B99C581A9B8341002090AC /* Debug */,
 				41B99C591A9B8341002090AC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		41ED28ED1AAAA0870040E3D2 /* Build configuration list for PBXNativeTarget "PredictionIO OSX SDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				41ED28E91AAAA0870040E3D2 /* Debug */,
+				41ED28EA1AAAA0870040E3D2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		41ED28EE1AAAA0870040E3D2 /* Build configuration list for PBXNativeTarget "PredictionIO OSX SDK Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				41ED28EB1AAAA0870040E3D2 /* Debug */,
+				41ED28EC1AAAA0870040E3D2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		41ED28F61AAAA1180040E3D2 /* Build configuration list for PBXNativeTarget "Private OSX Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				41ED28F71AAAA1180040E3D2 /* Debug */,
+				41ED28F81AAAA1180040E3D2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

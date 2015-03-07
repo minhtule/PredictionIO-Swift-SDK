@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 PredictionIO. All rights reserved.
 //
 
+import UIKit
 import PredictionIOSDK
 
 class ItemRecommendationViewController: UIViewController {

@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 PredictionIO. All rights reserved.
 //
 
+import UIKit
 import PredictionIOSDK
 
 let accessKey = "9CQhFdGrLDgYkez9cwFkGAEU0Krfup3GLkdQ8r3pkOjO61BhL4BkjJ1F8CuShJey"

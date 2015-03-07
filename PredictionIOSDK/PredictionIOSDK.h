@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 PredictionIO. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
 //! Project version number for PredictionIOSDK.
 FOUNDATION_EXPORT double PredictionIOSDKVersionNumber;
