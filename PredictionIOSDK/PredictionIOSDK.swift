@@ -13,8 +13,10 @@ import Foundation
 /**
     Base client that manages network connections with the server.
 */
-public class BaseClient : Manager {
+public class BaseClient {
     let baseURL: String
+
+    private let networkManager: Manager
     
     // MARK: Constructors
     
@@ -27,7 +29,7 @@ public class BaseClient : Manager {
         
         let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
         configuration.timeoutIntervalForRequest = timeout
-        super.init(configuration: configuration)
+        networkManager = Manager(configuration: configuration)
     }
 }
 
@@ -186,7 +188,7 @@ public class EventClient : BaseClient {
     public func createEvent(event: Event, completionHandler: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> Void) {
         assert((event.event == Event.UnsetEvent && event.properties?.isEmpty == true) == false, "Properties cannot be empty for $unset event")
         
-        request(.POST, _fullURLForCreatingEvent, parameters: event.toDictionary(), encoding: .JSON)
+        networkManager.request(.POST, _fullURLForCreatingEvent, parameters: event.toDictionary(), encoding: .JSON)
             .responseJSON { (request, response, JSON, error) -> Void in
                 completionHandler(request, response, JSON, error)
             }
@@ -202,7 +204,7 @@ public class EventClient : BaseClient {
     */
     public func getEvent(eventID: String, completionHandler: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> Void) {
         if let escapedEventID = eventID.stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding) {
-            request(.GET, _fullURLForGettingEvent(escapedEventID))
+            networkManager.request(.GET, _fullURLForGettingEvent(escapedEventID))
                 .responseJSON { (request, response, JSON, error) -> Void in
                     completionHandler(request, response, JSON, error)
                 }
@@ -217,7 +219,7 @@ public class EventClient : BaseClient {
     */
     public func deleteEvent(eventID: String, completionHandler: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> Void) {
         if let escapedEventID = eventID.stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding) {
-            request(.DELETE, _fullURLForGettingEvent(escapedEventID))
+            networkManager.request(.DELETE, _fullURLForGettingEvent(escapedEventID))
                 .responseJSON { (request, response, JSON, error) -> Void in
                     completionHandler(request, response, JSON, error)
             }
@@ -429,7 +431,7 @@ public class EngineClient : BaseClient {
         :param: completionHandler The callback to be executed when the request has finished.
     */
     public func sendQuery(query: [String: AnyObject], completionHandler: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> Void) {
-        request(.POST, _fullURL, parameters: query, encoding: .JSON)
+        networkManager.request(.POST, _fullURL, parameters: query, encoding: .JSON)
             .responseJSON { (request, response, JSON, error) -> Void in
                 completionHandler(request, response, JSON, error)
             }
