@@ -22,10 +22,10 @@ class EngineClientTests: XCTestCase {
         let expectation = expectationWithDescription("Sending query to engine server")
         
         engineClient.sendQuery(["user": "1"]) { (_, response, _, _) -> Void in
-            expectation.fulfill()
-            
             XCTAssertNotNil(response, "Request should succeed")
             XCTAssert(response?.statusCode == 200, "Sending query should succeed with 200 code")
+
+            expectation.fulfill()
         }
         
         waitForExpectationsWithTimeout(5) { (error) -> Void in

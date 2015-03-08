@@ -25,10 +25,10 @@ class EventClientTests: XCTestCase {
         let expectation = expectationWithDescription("Creating an event in event server")
 
         eventClient.createEvent(event) { (_, response, _, _) -> Void in
-            expectation.fulfill()
-            
             XCTAssertNotNil(response, "Request should succeed")
             XCTAssert(response?.statusCode == 201, "Creating an event should succeed with 201 code")
+            
+            expectation.fulfill()
         }
         
         waitForExpectationsWithTimeout(5) { (error) -> Void in
@@ -42,10 +42,10 @@ class EventClientTests: XCTestCase {
         let expectation = expectationWithDescription("Setting properties of a user")
         
         eventClient.setUser("u1", properties: ["p1": "foo", "p2": "bar"], completionHandler: { (_, response, _, _) -> Void in
-            expectation.fulfill()
-            
             XCTAssertNotNil(response, "Request should succeed")
             XCTAssert(response?.statusCode == 201, "Setting a user's properties should succeed with 201 code")
+
+            expectation.fulfill()
         })
         
         waitForExpectationsWithTimeout(5) { (error) -> Void in
@@ -57,10 +57,10 @@ class EventClientTests: XCTestCase {
         let expectation = expectationWithDescription("Unsetting properties of a user")
         
         eventClient.unsetUser("u2", properties: ["p1": NSNull()], completionHandler: { (_, response, _, _) -> Void in
-            expectation.fulfill()
-            
             XCTAssertNotNil(response, "Request should succeed")
             XCTAssert(response?.statusCode == 201, "Setting a user's properties should succeed with 201 code")
+
+            expectation.fulfill()
         })
         
         waitForExpectationsWithTimeout(5) { (error) -> Void in
@@ -72,10 +72,10 @@ class EventClientTests: XCTestCase {
         let expectation = expectationWithDescription("Unsetting properties of a user")
         
         eventClient.deleteUser("u4", completionHandler: { (_, response, _, _) -> Void in
-            expectation.fulfill()
-            
             XCTAssertNotNil(response, "Request should succeed")
             XCTAssert(response?.statusCode == 201, "Setting a user's properties should succeed with 201 code")
+
+            expectation.fulfill()
         })
         
         waitForExpectationsWithTimeout(5) { (error) -> Void in
@@ -89,10 +89,10 @@ class EventClientTests: XCTestCase {
         let expectation = expectationWithDescription("Setting properties of an item")
         
         eventClient.setItem("i1", properties: ["p1": "foo", "p2": "bar"], completionHandler: { (_, response, _, _) -> Void in
-            expectation.fulfill()
-            
             XCTAssertNotNil(response, "Request should succeed")
             XCTAssert(response?.statusCode == 201, "Setting an item's properties should succeed with 201 code")
+
+            expectation.fulfill()
         })
         
         waitForExpectationsWithTimeout(5) { (error) -> Void in
@@ -104,10 +104,10 @@ class EventClientTests: XCTestCase {
         let expectation = expectationWithDescription("Unsetting properties of an item")
         
         eventClient.unsetItem("i2", properties: ["p1": NSNull()], completionHandler: { (_, response, _, _) -> Void in
-            expectation.fulfill()
-            
             XCTAssertNotNil(response, "Request should succeed")
             XCTAssert(response?.statusCode == 201, "Setting an item's properties should succeed with 201 code")
+
+            expectation.fulfill()
         })
         
         waitForExpectationsWithTimeout(5) { (error) -> Void in
@@ -119,10 +119,10 @@ class EventClientTests: XCTestCase {
         let expectation = expectationWithDescription("Unsetting properties of an item")
         
         eventClient.deleteItem("i4", completionHandler: { (_, response, _, _) -> Void in
-            expectation.fulfill()
-            
             XCTAssertNotNil(response, "Request should succeed")
             XCTAssert(response?.statusCode == 201, "Setting an item's properties should succeed with 201 code")
+            
+            expectation.fulfill()
         })
         
         waitForExpectationsWithTimeout(5) { (error) -> Void in
@@ -136,10 +136,10 @@ class EventClientTests: XCTestCase {
         let expectation = expectationWithDescription("Record user action on item")
         
         eventClient.recordAction("rate", byUserID: "u1", itemID: "i1", properties: ["rating": 5], completionHandler: { (_, response, _, _) -> Void in
-            expectation.fulfill()
-            
             XCTAssertNotNil(response, "Request should succeed")
             XCTAssert(response?.statusCode == 201, "Record an action should succeed with 201 code")
+            
+            expectation.fulfill()
         })
         
         waitForExpectationsWithTimeout(5) { (error) -> Void in
