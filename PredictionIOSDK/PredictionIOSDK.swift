@@ -29,6 +29,7 @@ public class BaseClient {
         
         let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
         configuration.timeoutIntervalForRequest = timeout
+        configuration.URLCache = nil
         networkManager = Manager(configuration: configuration)
     }
 }
