@@ -48,10 +48,10 @@ extension ItemRecommendationViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("RecommendedItemCellIdentifier", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("RecommendedItemCellIdentifier", forIndexPath: indexPath) as! UITableViewCell
         let recommendedItem = recommendationList[indexPath.row]
-        let itemID = recommendedItem["item"] as String
-        let score = recommendedItem["score"] as Double
+        let itemID = recommendedItem["item"] as! String
+        let score = recommendedItem["score"] as! Double
         cell.textLabel?.text = "ID: \(itemID),\t score: \(score)"
         
         return cell

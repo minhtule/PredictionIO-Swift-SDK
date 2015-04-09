@@ -7,20 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		41417B1E1AA57A1400508383 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B99C6C1A9B9CEB002090AC /* Alamofire.swift */; };
 		414FE8191AA82DBC003DB51B /* EngineClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414FE8181AA82DBC003DB51B /* EngineClientTests.swift */; };
 		414FE81B1AA83283003DB51B /* EventClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414FE81A1AA83283003DB51B /* EventClientTests.swift */; };
 		414FE81D1AA8331A003DB51B /* EventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414FE81C1AA8331A003DB51B /* EventTests.swift */; };
-		417F2F981AA94F3000BAABCE /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B99C6C1A9B9CEB002090AC /* Alamofire.swift */; };
 		417F2F9C1AA94F3000BAABCE /* PredictionIOSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B99C691A9B9CC6002090AC /* PredictionIOSDK.swift */; };
 		417F2FA61AA94FC700BAABCE /* EventPrivateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417F2FA51AA94FC700BAABCE /* EventPrivateTests.swift */; };
 		419CE30A1AAAC92B003FC659 /* PredictionIOSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 41B99C431A9B8341002090AC /* PredictionIOSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		41B99C441A9B8341002090AC /* PredictionIOSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 41B99C431A9B8341002090AC /* PredictionIOSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		41B99C6A1A9B9CC6002090AC /* PredictionIOSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B99C691A9B9CC6002090AC /* PredictionIOSDK.swift */; };
+		41C6815D1AD6E894006E2A10 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C6815C1AD6E894006E2A10 /* Alamofire.swift */; };
+		41C6815E1AD6E894006E2A10 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C6815C1AD6E894006E2A10 /* Alamofire.swift */; };
+		41C6815F1AD6E894006E2A10 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C6815C1AD6E894006E2A10 /* Alamofire.swift */; };
+		41C681601AD6E894006E2A10 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C6815C1AD6E894006E2A10 /* Alamofire.swift */; };
 		41ED28FB1AAAA14E0040E3D2 /* PredictionIOSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B99C691A9B9CC6002090AC /* PredictionIOSDK.swift */; };
 		41ED28FC1AAAA14E0040E3D2 /* PredictionIOSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B99C691A9B9CC6002090AC /* PredictionIOSDK.swift */; };
-		41ED28FD1AAAA1560040E3D2 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B99C6C1A9B9CEB002090AC /* Alamofire.swift */; };
-		41ED28FE1AAAA1570040E3D2 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B99C6C1A9B9CEB002090AC /* Alamofire.swift */; };
 		41ED28FF1AAAA1660040E3D2 /* EventPrivateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417F2FA51AA94FC700BAABCE /* EventPrivateTests.swift */; };
 		41ED29001AAAA16A0040E3D2 /* EventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414FE81C1AA8331A003DB51B /* EventTests.swift */; };
 		41ED29011AAAA16D0040E3D2 /* EngineClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414FE8181AA82DBC003DB51B /* EngineClientTests.swift */; };
@@ -70,7 +70,7 @@
 		41B99C491A9B8341002090AC /* PredictionIO iOS SDK Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PredictionIO iOS SDK Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		41B99C4F1A9B8341002090AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		41B99C691A9B9CC6002090AC /* PredictionIOSDK.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PredictionIOSDK.swift; sourceTree = "<group>"; };
-		41B99C6C1A9B9CEB002090AC /* Alamofire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alamofire.swift; sourceTree = "<group>"; };
+		41C6815C1AD6E894006E2A10 /* Alamofire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alamofire.swift; sourceTree = "<group>"; };
 		41ED28D61AAAA0870040E3D2 /* PredictionIOSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PredictionIOSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		41ED28E01AAAA0870040E3D2 /* PredictionIO OSX SDK Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PredictionIO OSX SDK Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		41ED28F91AAAA1180040E3D2 /* Private OSX Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Private OSX Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -159,7 +159,7 @@
 			children = (
 				41B99C431A9B8341002090AC /* PredictionIOSDK.h */,
 				41B99C691A9B9CC6002090AC /* PredictionIOSDK.swift */,
-				41B99C6C1A9B9CEB002090AC /* Alamofire.swift */,
+				41C6815C1AD6E894006E2A10 /* Alamofire.swift */,
 				41B99C411A9B8341002090AC /* Supporting Files */,
 			);
 			path = PredictionIOSDK;
@@ -417,7 +417,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				417F2F981AA94F3000BAABCE /* Alamofire.swift in Sources */,
+				41C6815E1AD6E894006E2A10 /* Alamofire.swift in Sources */,
 				417F2FA61AA94FC700BAABCE /* EventPrivateTests.swift in Sources */,
 				417F2F9C1AA94F3000BAABCE /* PredictionIOSDK.swift in Sources */,
 			);
@@ -427,7 +427,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41417B1E1AA57A1400508383 /* Alamofire.swift in Sources */,
+				41C6815D1AD6E894006E2A10 /* Alamofire.swift in Sources */,
 				41B99C6A1A9B9CC6002090AC /* PredictionIOSDK.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -446,7 +446,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41ED28FD1AAAA1560040E3D2 /* Alamofire.swift in Sources */,
+				41C6815F1AD6E894006E2A10 /* Alamofire.swift in Sources */,
 				41ED28FB1AAAA14E0040E3D2 /* PredictionIOSDK.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -465,7 +465,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41ED28FE1AAAA1570040E3D2 /* Alamofire.swift in Sources */,
+				41C681601AD6E894006E2A10 /* Alamofire.swift in Sources */,
 				41ED28FF1AAAA1660040E3D2 /* EventPrivateTests.swift in Sources */,
 				41ED28FC1AAAA14E0040E3D2 /* PredictionIOSDK.swift in Sources */,
 			);

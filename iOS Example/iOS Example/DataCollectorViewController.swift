@@ -43,7 +43,7 @@ class DataCollectorViewController: UIViewController {
             if let data = JSON as? [String: AnyObject] {
                 if response?.statusCode == 201 {
                     // Successful!
-                    let eventID = data["eventId"] as String
+                    let eventID = data["eventId"] as! String
                     alertView = UIAlertView(title: "Successful", message: "EventID: \(eventID)", delegate: nil, cancelButtonTitle: "OK!")
                 } else {
                     // Invalid access key.
