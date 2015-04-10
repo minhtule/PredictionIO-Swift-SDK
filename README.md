@@ -1,6 +1,6 @@
 # PredictionIO Swift SDK
 
-[![Build Status](https://travis-ci.org/minhtule/PredictionIO-Swift-SDK.svg)]
+[![Build Status](https://travis-ci.org/minhtule/PredictionIO-Swift-SDK.svg?branch=master)]
 (https://travis-ci.org/minhtule/PredictionIO-Swift-SDK)
 
 The Swift SDK provides a convenient API for your iOS and OS X application to record your users' behaviors in the event server and retrieve predictions from PredictionIO engines.
