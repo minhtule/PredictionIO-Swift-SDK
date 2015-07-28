@@ -11,8 +11,11 @@ Pod::Spec.new do |spec|
   # Platform
   spec.platform = :ios
   spec.ios.deployment_target = '8.0'
+  spec.osx.deployment_target = '10.9'
   
   # Build settings
   spec.requires_arc = true
 
+  # Dependencies
+  spec.dependency 'Alamofire', '~> 1.2'
 end

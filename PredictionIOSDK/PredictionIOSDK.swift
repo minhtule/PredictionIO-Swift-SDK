@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Alamofire
 
 // MARK: - Base Client
 

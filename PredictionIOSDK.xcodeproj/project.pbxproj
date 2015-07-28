@@ -12,13 +12,11 @@
 		414FE81D1AA8331A003DB51B /* EventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414FE81C1AA8331A003DB51B /* EventTests.swift */; };
 		417F2F9C1AA94F3000BAABCE /* PredictionIOSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B99C691A9B9CC6002090AC /* PredictionIOSDK.swift */; };
 		417F2FA61AA94FC700BAABCE /* EventPrivateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417F2FA51AA94FC700BAABCE /* EventPrivateTests.swift */; };
+		4184F0571B676E76009A843E /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4184F0561B676E76009A843E /* Alamofire.framework */; };
+		4184F0591B676E84009A843E /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4184F0581B676E84009A843E /* Alamofire.framework */; };
 		419CE30A1AAAC92B003FC659 /* PredictionIOSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 41B99C431A9B8341002090AC /* PredictionIOSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		41B99C441A9B8341002090AC /* PredictionIOSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 41B99C431A9B8341002090AC /* PredictionIOSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		41B99C6A1A9B9CC6002090AC /* PredictionIOSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B99C691A9B9CC6002090AC /* PredictionIOSDK.swift */; };
-		41C6815D1AD6E894006E2A10 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C6815C1AD6E894006E2A10 /* Alamofire.swift */; };
-		41C6815E1AD6E894006E2A10 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C6815C1AD6E894006E2A10 /* Alamofire.swift */; };
-		41C6815F1AD6E894006E2A10 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C6815C1AD6E894006E2A10 /* Alamofire.swift */; };
-		41C681601AD6E894006E2A10 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C6815C1AD6E894006E2A10 /* Alamofire.swift */; };
 		41ED28FB1AAAA14E0040E3D2 /* PredictionIOSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B99C691A9B9CC6002090AC /* PredictionIOSDK.swift */; };
 		41ED28FC1AAAA14E0040E3D2 /* PredictionIOSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B99C691A9B9CC6002090AC /* PredictionIOSDK.swift */; };
 		41ED28FF1AAAA1660040E3D2 /* EventPrivateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417F2FA51AA94FC700BAABCE /* EventPrivateTests.swift */; };
@@ -64,13 +62,14 @@
 		414FE81C1AA8331A003DB51B /* EventTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTests.swift; sourceTree = "<group>"; };
 		417F2FA21AA94F3000BAABCE /* Private iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Private iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		417F2FA51AA94FC700BAABCE /* EventPrivateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventPrivateTests.swift; path = PrivateTests/EventPrivateTests.swift; sourceTree = SOURCE_ROOT; };
+		4184F0561B676E76009A843E /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "Carthage/Checkouts/Alamofire/build/Debug-iphoneos/Alamofire.framework"; sourceTree = "<group>"; };
+		4184F0581B676E84009A843E /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Checkouts/Alamofire/build/Debug/Alamofire.framework; sourceTree = "<group>"; };
 		41B99C3E1A9B8341002090AC /* PredictionIOSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PredictionIOSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		41B99C421A9B8341002090AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		41B99C431A9B8341002090AC /* PredictionIOSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PredictionIOSDK.h; sourceTree = "<group>"; };
 		41B99C491A9B8341002090AC /* PredictionIO iOS SDK Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PredictionIO iOS SDK Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		41B99C4F1A9B8341002090AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		41B99C691A9B9CC6002090AC /* PredictionIOSDK.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PredictionIOSDK.swift; sourceTree = "<group>"; };
-		41C6815C1AD6E894006E2A10 /* Alamofire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alamofire.swift; sourceTree = "<group>"; };
 		41ED28D61AAAA0870040E3D2 /* PredictionIOSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PredictionIOSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		41ED28E01AAAA0870040E3D2 /* PredictionIO OSX SDK Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PredictionIO OSX SDK Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		41ED28F91AAAA1180040E3D2 /* Private OSX Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Private OSX Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,6 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4184F0571B676E76009A843E /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,6 +102,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4184F0591B676E84009A843E /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -131,6 +132,15 @@
 			path = PredictionIOSDKTests;
 			sourceTree = "<group>";
 		};
+		4184F0021B663054009A843E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4184F0581B676E84009A843E /* Alamofire.framework */,
+				4184F0561B676E76009A843E /* Alamofire.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		41B99C341A9B8341002090AC = {
 			isa = PBXGroup;
 			children = (
@@ -138,6 +148,7 @@
 				41B99C4D1A9B8341002090AC /* PredictionIOSDKTests */,
 				417F2FA41AA94FA900BAABCE /* Private Tests */,
 				41B99C3F1A9B8341002090AC /* Products */,
+				4184F0021B663054009A843E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -159,7 +170,6 @@
 			children = (
 				41B99C431A9B8341002090AC /* PredictionIOSDK.h */,
 				41B99C691A9B9CC6002090AC /* PredictionIOSDK.swift */,
-				41C6815C1AD6E894006E2A10 /* Alamofire.swift */,
 				41B99C411A9B8341002090AC /* Supporting Files */,
 			);
 			path = PredictionIOSDK;
@@ -239,7 +249,6 @@
 				41B99C391A9B8341002090AC /* Sources */,
 				41B99C3A1A9B8341002090AC /* Frameworks */,
 				41B99C3B1A9B8341002090AC /* Headers */,
-				41B99C3C1A9B8341002090AC /* Resources */,
 			);
 			buildRules = (
 			);
@@ -375,13 +384,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		41B99C3C1A9B8341002090AC /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		41B99C471A9B8341002090AC /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -417,7 +419,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41C6815E1AD6E894006E2A10 /* Alamofire.swift in Sources */,
 				417F2FA61AA94FC700BAABCE /* EventPrivateTests.swift in Sources */,
 				417F2F9C1AA94F3000BAABCE /* PredictionIOSDK.swift in Sources */,
 			);
@@ -427,7 +428,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41C6815D1AD6E894006E2A10 /* Alamofire.swift in Sources */,
 				41B99C6A1A9B9CC6002090AC /* PredictionIOSDK.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -446,7 +446,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41C6815F1AD6E894006E2A10 /* Alamofire.swift in Sources */,
 				41ED28FB1AAAA14E0040E3D2 /* PredictionIOSDK.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -465,7 +464,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41C681601AD6E894006E2A10 /* Alamofire.swift in Sources */,
 				41ED28FF1AAAA1660040E3D2 /* EventPrivateTests.swift in Sources */,
 				41ED28FC1AAAA14E0040E3D2 /* PredictionIOSDK.swift in Sources */,
 			);
@@ -562,7 +560,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -603,7 +602,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
@@ -624,7 +624,6 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = PredictionIOSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = PredictionIOSDK;
 				SKIP_INSTALL = YES;
 			};
@@ -640,7 +639,6 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = PredictionIOSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = PredictionIOSDK;
 				SKIP_INSTALL = YES;
 			};
