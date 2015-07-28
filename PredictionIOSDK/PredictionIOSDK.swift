@@ -159,11 +159,15 @@ public class EventClient : BaseClient {
     /// The access key for your application
     let accessKey: String
     
-    private var _fullURLForCreatingEvent: String {
+    private var URLForCreatingEvent: String {
         return "\(baseURL)/events.json?accessKey=\(accessKey)"
     }
     
-    private func _fullURLForGettingEvent(eventID: String) -> String {
+    private var URLForCreatingBatchEvents: String {
+        return "\(baseURL)/batch/events.json?accessKey=\(accessKey)"
+    }
+    
+    private func URLForGettingEvent(eventID: String) -> String {
         return "\(baseURL)/events/\(eventID).json?accessKey=\(accessKey)"
     }
     
@@ -190,7 +194,26 @@ public class EventClient : BaseClient {
     public func createEvent(event: Event, completionHandler: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> Void) {
         assert((event.event == Event.UnsetEvent && event.properties?.isEmpty == true) == false, "Properties cannot be empty for $unset event")
         
-        networkManager.request(.POST, _fullURLForCreatingEvent, parameters: event.toDictionary(), encoding: .JSON)
+        networkManager.request(.POST, URLForCreatingEvent, parameters: event.toDictionary(), encoding: .JSON)
+            .responseJSON { (request, response, JSON, error) -> Void in
+                completionHandler(request, response, JSON, error)
+            }
+    }
+    
+    /**
+        Create events with a batch request.
+    
+    
+    */
+    public func createBatchEvents(events: [Event], completionHandler: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> Void) {
+        let eventDicts = events.map { event in event.toDictionary() }
+        var error: NSError?
+        let request = NSMutableURLRequest(URL: NSURL(string: URLForCreatingBatchEvents)!)
+        request.HTTPMethod = Method.POST.rawValue
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.HTTPBody = NSJSONSerialization.dataWithJSONObject(eventDicts, options: NSJSONWritingOptions.allZeros, error: &error)
+
+        networkManager.request(request)
             .responseJSON { (request, response, JSON, error) -> Void in
                 completionHandler(request, response, JSON, error)
             }
@@ -206,7 +229,7 @@ public class EventClient : BaseClient {
     */
     public func getEvent(eventID: String, completionHandler: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> Void) {
         if let escapedEventID = eventID.stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding) {
-            networkManager.request(.GET, _fullURLForGettingEvent(escapedEventID))
+            networkManager.request(.GET, URLForGettingEvent(escapedEventID))
                 .responseJSON { (request, response, JSON, error) -> Void in
                     completionHandler(request, response, JSON, error)
                 }
@@ -221,7 +244,7 @@ public class EventClient : BaseClient {
     */
     public func deleteEvent(eventID: String, completionHandler: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> Void) {
         if let escapedEventID = eventID.stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding) {
-            networkManager.request(.DELETE, _fullURLForGettingEvent(escapedEventID))
+            networkManager.request(.DELETE, URLForGettingEvent(escapedEventID))
                 .responseJSON { (request, response, JSON, error) -> Void in
                     completionHandler(request, response, JSON, error)
             }
@@ -410,7 +433,7 @@ extension EventClient {
 */
 public class EngineClient : BaseClient {
     
-    private var _fullURL: String {
+    private var URLForQuerying: String {
         return "\(baseURL)/queries.json"
     }
     
@@ -433,7 +456,7 @@ public class EngineClient : BaseClient {
         :param: completionHandler The callback to be executed when the request has finished.
     */
     public func sendQuery(query: [String: AnyObject], completionHandler: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> Void) {
-        networkManager.request(.POST, _fullURL, parameters: query, encoding: .JSON)
+        networkManager.request(.POST, URLForQuerying, parameters: query, encoding: .JSON)
             .responseJSON { (request, response, JSON, error) -> Void in
                 completionHandler(request, response, JSON, error)
             }
