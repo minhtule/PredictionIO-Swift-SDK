@@ -8,8 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		411904301FF9E02A0097434E /* PredictionIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 411904261FF9E02A0097434E /* PredictionIO.framework */; };
-		411904351FF9E02A0097434E /* PredictionIOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411904341FF9E02A0097434E /* PredictionIOTests.swift */; };
 		411904371FF9E02A0097434E /* PredictionIO.h in Headers */ = {isa = PBXBuildFile; fileRef = 411904291FF9E02A0097434E /* PredictionIO.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		411904441FF9E3B40097434E /* PredictionIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411904431FF9E3B40097434E /* PredictionIO.swift */; };
+		411904461FF9E3C50097434E /* NetworkConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411904451FF9E3C50097434E /* NetworkConnection.swift */; };
+		414638D81FFB3CD30017253C /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414638D71FFB3CD30017253C /* Error.swift */; };
+		414638DA1FFB792A0017253C /* EventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414638D91FFB792A0017253C /* EventTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,8 +30,11 @@
 		411904291FF9E02A0097434E /* PredictionIO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PredictionIO.h; sourceTree = "<group>"; };
 		4119042A1FF9E02A0097434E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4119042F1FF9E02A0097434E /* PredictionIOTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PredictionIOTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		411904341FF9E02A0097434E /* PredictionIOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredictionIOTests.swift; sourceTree = "<group>"; };
 		411904361FF9E02A0097434E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		411904431FF9E3B40097434E /* PredictionIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredictionIO.swift; sourceTree = "<group>"; };
+		411904451FF9E3C50097434E /* NetworkConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConnection.swift; sourceTree = "<group>"; };
+		414638D71FFB3CD30017253C /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		414638D91FFB792A0017253C /* EventTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,8 +59,8 @@
 		4119041C1FF9E02A0097434E = {
 			isa = PBXGroup;
 			children = (
-				411904281FF9E02A0097434E /* PredictionIO */,
-				411904331FF9E02A0097434E /* PredictionIOTests */,
+				411904281FF9E02A0097434E /* Source */,
+				411904331FF9E02A0097434E /* Tests */,
 				411904271FF9E02A0097434E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -68,22 +74,41 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		411904281FF9E02A0097434E /* PredictionIO */ = {
+		411904281FF9E02A0097434E /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				414638D71FFB3CD30017253C /* Error.swift */,
+				411904451FF9E3C50097434E /* NetworkConnection.swift */,
+				411904431FF9E3B40097434E /* PredictionIO.swift */,
+				411904411FF9E32D0097434E /* Supporting Files */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		411904331FF9E02A0097434E /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				414638D91FFB792A0017253C /* EventTests.swift */,
+				411904421FF9E35D0097434E /* Supporting Files */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		411904411FF9E32D0097434E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
 				411904291FF9E02A0097434E /* PredictionIO.h */,
 				4119042A1FF9E02A0097434E /* Info.plist */,
 			);
-			path = PredictionIO;
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		411904331FF9E02A0097434E /* PredictionIOTests */ = {
+		411904421FF9E35D0097434E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				411904341FF9E02A0097434E /* PredictionIOTests.swift */,
 				411904361FF9E02A0097434E /* Info.plist */,
 			);
-			path = PredictionIOTests;
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -107,7 +132,6 @@
 				411904211FF9E02A0097434E /* Sources */,
 				411904221FF9E02A0097434E /* Frameworks */,
 				411904231FF9E02A0097434E /* Headers */,
-				411904241FF9E02A0097434E /* Resources */,
 			);
 			buildRules = (
 			);
@@ -144,14 +168,16 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
 				LastUpgradeCheck = 0920;
-				ORGANIZATIONNAME = "Minh Tu Le";
+				ORGANIZATIONNAME = PredictionIO;
 				TargetAttributes = {
 					411904251FF9E02A0097434E = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
 					4119042E1FF9E02A0097434E = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -175,13 +201,6 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		411904241FF9E02A0097434E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		4119042D1FF9E02A0097434E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -196,6 +215,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				411904461FF9E3C50097434E /* NetworkConnection.swift in Sources */,
+				414638D81FFB3CD30017253C /* Error.swift in Sources */,
+				411904441FF9E3B40097434E /* PredictionIO.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -203,7 +225,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				411904351FF9E02A0097434E /* PredictionIOTests.swift in Sources */,
+				414638DA1FFB792A0017253C /* EventTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,6 +356,7 @@
 		4119043B1FF9E02A0097434E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -341,12 +364,13 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = PredictionIO/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.prediction.PredictionIO;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -355,6 +379,7 @@
 		4119043C1FF9E02A0097434E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -362,7 +387,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = PredictionIO/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.prediction.PredictionIO;
@@ -376,14 +401,17 @@
 		4119043E1FF9E02A0097434E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = PredictionIOTests/Info.plist;
+				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.prediction.PredictionIOTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -392,10 +420,12 @@
 		4119043F1FF9E02A0097434E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = PredictionIOTests/Info.plist;
+				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.prediction.PredictionIOTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
