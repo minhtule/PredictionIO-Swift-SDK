@@ -16,8 +16,8 @@ enum HTTPMethod: String {
 }
 
 
-public typealias JSON = [String: Any]
 typealias HTTPHeaders = [String: String]
+typealias QueryParams = [String: String]
 
 
 class NetworkConnection {
@@ -28,22 +28,41 @@ class NetworkConnection {
     }
     
     @discardableResult
-    func request(_ url: String, method: HTTPMethod, parameters: JSON? = nil, headers: HTTPHeaders? = nil, completionHandler: @escaping (JSON?, Error?) -> Void) -> URLSessionDataTask? {
+    func get(url: String, queryParams: QueryParams? = nil, headers: HTTPHeaders? = nil, completionHandler: @escaping (Data?, Error?) -> Void) -> URLSessionDataTask? {
+        return request(url, method: .get, queryParams: queryParams, payload: nil, headers: headers, completionHandler: completionHandler)
+    }
+    
+    @discardableResult
+    func post(url: String, payload: Data?, queryParams: QueryParams? = nil, headers: HTTPHeaders? = nil, completionHandler: @escaping (Data?, Error?) -> Void) -> URLSessionDataTask? {
+        return request(url, method: .post, queryParams: queryParams, payload: payload, headers: headers, completionHandler: completionHandler)
+    }
+    
+    @discardableResult
+    func delete(url: String, queryParams: QueryParams? = nil, headers: HTTPHeaders? = nil, completionHandler: @escaping (Data?, Error?) -> Void) -> URLSessionDataTask? {
+        return request(url, method: .delete, queryParams: queryParams, payload: nil, headers: headers, completionHandler: completionHandler)
+    }
+    
+    private func request(_ url: String, method: HTTPMethod, queryParams: QueryParams? = nil, payload: Data?, headers: HTTPHeaders? = nil, completionHandler: @escaping (Data?, Error?) -> Void) -> URLSessionDataTask? {
         do {
-            let request = try URLRequest(url: url, method: method, parameters: parameters, headers: headers)
+            let request = try URLRequest(url: url, method: method, queryParams: queryParams, payload: payload, headers: headers)
             let task = session.dataTask(with: request) { data, response, error in
-                let error = PIOError.createRequestFailed(error: error)
-                guard let data = data else {
-                    completionHandler(nil, error)
+                if let error = error {
+                    completionHandler(nil, PIOError.Request.failed(error: error))
                     return
                 }
                 
-                do {
-                    let json = try JSONSerialization.jsonObject(with: data, options: []) as? JSON
-                    completionHandler(json, error)
-                } catch {
-                    completionHandler(nil, PIOError.jsonDecodingFailed(error: error))
+                guard let response = response as? HTTPURLResponse else {
+                    completionHandler(nil, PIOError.Request.unknownResponse)
+                    return
                 }
+                
+                if response.statusCode == 401 {
+                    completionHandler(nil, PIOError.Request.unauthorized)
+                } else if response.statusCode == 404 {
+                    completionHandler(nil, PIOError.Request.notFound)
+                }
+                
+                completionHandler(data, nil)
             }
             task.resume()
             return task
@@ -54,33 +73,29 @@ class NetworkConnection {
     }
 }
 
+
 extension URLRequest {
-    init(url: String, method: HTTPMethod, parameters: JSON? = nil, headers: HTTPHeaders? = nil) throws {
-        guard let convertedURL = URL(string: url) else {
-            throw PIOError.invalidURL(string: url)
+    init(url: String, method: HTTPMethod, queryParams: QueryParams? = nil, payload: Data? = nil, headers: HTTPHeaders? = nil) throws {
+        var urlComponent = URLComponents(string: url)
+        
+        if let queryParams = queryParams {
+            urlComponent?.queryItems = queryParams.map { URLQueryItem(name: $0, value: $1) }
         }
         
-        self.init(url: convertedURL)
+        guard let urlWithQuery = urlComponent?.url else {
+            throw PIOError.invalidURL(string: url, queryParams: queryParams)
+        }
+        
+        self.init(url: urlWithQuery)
         httpMethod = method.rawValue
         
-        if let headers = headers {
-            for (headerField, headerValue) in headers {
-                setValue(headerValue, forHTTPHeaderField: headerField)
-            }
+        headers?.forEach { field, value in
+            setValue(value, forHTTPHeaderField: field)
         }
         
-        if let parameters = parameters, method == .post {
-            // Only POST requests would need a payload in PredictionIO.
-            if !JSONSerialization.isValidJSONObject(parameters) {
-                throw PIOError.invalidJSON(json: parameters)
-            }
-            
-            do {
-                httpBody = try JSONSerialization.data(withJSONObject: parameters, options: [])
-                setValue("application/json", forHTTPHeaderField: "Content-Type")
-            } catch {
-                throw PIOError.jsonEncodingFailed(json: parameters, error: error)
-            }
+        if let payload = payload, method == .post {
+            httpBody = payload
+            setValue("application/json", forHTTPHeaderField: "Content-Type")
         }
     }
 }

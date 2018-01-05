@@ -12,7 +12,7 @@ import Foundation
 // MARK: - Event
 
 /**
- An `Event` class that represents a PredictionIO's event JSON dictionary in
+ An `Event` class that represents a PredictionIO's event  dictionary in
  its REST API.
  */
 public struct Event {
@@ -39,7 +39,7 @@ public struct Event {
     ///
     /// **Note:** All event names starting with "$" and "pio_" are reversed
     /// and shouldn't be used as your custom event (e.g. "$set").
-    public var event: String
+    public let event: String
     
     /// The entity type. It is the namespace of the `entityID` and analogous
     /// to the table name of a relational database. The `entityID` must be
@@ -47,29 +47,29 @@ public struct Event {
     ///
     /// **Note:** All entityType names starting with "$" and "pio_" are reversed
     /// and shouldn't be used.
-    public var entityType: String
+    public let entityType: String
     
     /// The entity ID. `entityType-entityID` becomes the unique identifier
     /// of the entity.
-    public var entityID: String
+    public let entityID: String
     
     /// The target entity type.
     ///
     /// **Note:** All targetEntityType names starting with "$" and "pio_" are reversed
     /// and shouldn't be used.
-    public var targetEntityType: String?
+    public let targetEntityType: String?
     
     /// The target entity ID.
-    public var targetEntityID: String?
+    public let targetEntityID: String?
     
     /// The event properties.
     ///
     /// **Note:** All properties names starting with "$" and "pio_" are reversed
     /// and shouldn't be used.
-    public var properties: JSON?
+    public let properties: [String: Any]?
     
     /// The time of the event.
-    public var eventTime: Date
+    public let eventTime: Date
     
     // MARK: Constructors
     
@@ -82,7 +82,11 @@ public struct Event {
      :param: properties The event properties
      :param: eventTime The event time
      */
-    public init(event: String, entityType: String, entityID: String, targetEntityType: String? = nil, targetEntityID: String? = nil, properties: JSON? = nil, eventTime: Date = Date()) {
+    public init(event: String, entityType: String, entityID: String, targetEntityType: String? = nil, targetEntityID: String? = nil, properties: [String: Any]? = nil, eventTime: Date = Date()) {
+        if let properties = properties {
+            assert(JSONSerialization.isValidJSONObject(properties), "Event's properties is not a valid JSON. \(properties)")
+        }
+        
         self.event = event
         self.entityType = entityType
         self.entityID = entityID
@@ -94,8 +98,8 @@ public struct Event {
     
     // MARK: Helpers
     
-    func toJSON() -> JSON {
-        var json: JSON = [
+    func toJSON() -> Data? {
+        var json: [String: Any] = [
             "event": event,
             "entityType": entityType,
             "entityId": entityID,
@@ -111,7 +115,7 @@ public struct Event {
             json["properties"] = properties
         }
         
-        return json
+        return try? JSONSerialization.data(withJSONObject: json, options: [])
     }
     
     private static let dateTimeFormatter: DateFormatter = {
@@ -130,6 +134,7 @@ public class BaseClient {
     
     init(baseURL: String, timeout: TimeInterval) {
         self.baseURL = baseURL
+        
         let configuration = URLSessionConfiguration.default
         configuration.timeoutIntervalForRequest = timeout
         configuration.urlCache = nil
@@ -139,43 +144,76 @@ public class BaseClient {
 }
 
 
+public struct EventResponse: Decodable {
+    let id: String
+    
+    enum CodingKeys: String, CodingKey {
+        case id = "eventId"
+    }
+}
+
+
 public class EventClient: BaseClient {
     let accessKey: String
+    let channel: String?
     
-    public init(accessKey: String, baseURL: String = "http://localhost:7070", timout: TimeInterval = 5) {
+    public init(accessKey: String, baseURL: String = "http://localhost:7070", channel: String? = nil, timout: TimeInterval = 5) {
         self.accessKey = accessKey
+        self.channel = channel
         super.init(baseURL: baseURL, timeout: timout)
     }
     
-    public func createEvent(event: Event, completionHandler:  @escaping (JSON?, Error?) -> Void) {
+    public func createEvent(event: Event, completionHandler:  @escaping (EventResponse?, Error?) -> Void) {
         assert(event.event != Event.unsetEvent || event.properties?.isEmpty == false, "Properties cannot be empty for $unset event")
         
-        networkConnection.request(URLForCreatingEvent, method: .post, parameters: event.toJSON(), completionHandler: completionHandler)
+        networkConnection.post(url: URLForCreatingEvent, payload: event.toJSON(), queryParams: queryParams) { data, error in
+            guard let data = data else {
+                completionHandler(nil, error)
+                return
+            }
+            
+            do {
+                let decoder = JSONDecoder()
+                let event = try decoder.decode(EventResponse.self, from: data)
+                completionHandler(event, error)
+            } catch {
+                completionHandler(nil, error)
+            }
+        }
     }
     
-//    public func createBatchEvents(events: [Event], completionHandler:  @escaping (JSON?, Error?) -> Void) {
+//    public func createBatchEvents(events: [Event], completionHandler:  @escaping ([String: Any]?, Error?) -> Void) {
 //        let eventsJSON = events.map { event in event.toJSON() }
 //        networkConnection.request(URLForCreatingBatchEvents, method: .post, parameters: eventsJSON, completionHandler: completionHandler)
 //    }
     
-    public func getEvent(eventID: String, completionHandler: @escaping (JSON?, Error?) -> Void) {
-        if let escapedEventID = eventID.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) {
-            networkConnection.request(URLForGettingEvent(eventID: escapedEventID), method: .get, completionHandler: completionHandler)
-        }
-    }
+//    public func getEvent(eventID: String, completionHandler: @escaping ([String: Any]?, Error?) -> Void) {
+//        if let escapedEventID = eventID.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) {
+//            networkConnection.request(URLForGettingEvent(eventID: escapedEventID), method: .get, completionHandler: completionHandler)
+//        }
+//    }
     
-    public func deleteEvent(eventID: String, completionHandler: @escaping (JSON?, Error?) -> Void) {
-        if let escapedEventID = eventID.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) {
-            networkConnection.request(URLForGettingEvent(eventID: escapedEventID), method: .delete, completionHandler: completionHandler)
-        }
-    }
+//    public func deleteEvent(eventID: String, completionHandler: @escaping ([String: Any]?, Error?) -> Void) {
+//        if let escapedEventID = eventID.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) {
+//            networkConnection.request(URLForGettingEvent(eventID: escapedEventID), method: .delete, completionHandler: completionHandler)
+//        }
+//    }
     
     lazy var URLForCreatingEvent: String = {
-        return "\(baseURL)/events.json?accessKey=\(accessKey)"
+        return "\(baseURL)/events.json"
     }()
     
     lazy var URLForCreatingBatchEvents: String = {
-        return "\(baseURL)/batch/events.json?accessKey=\(accessKey)"
+        return "\(baseURL)/batch/events.json"
+    }()
+    
+    lazy var queryParams: QueryParams = {
+        var queryParams = ["accessKey": accessKey]
+        
+        if let channel = self.channel {
+            queryParams["channel"] = channel
+        }
+        return queryParams
     }()
     
     func URLForGettingEvent(eventID: String) -> String {
@@ -184,7 +222,7 @@ public class EventClient: BaseClient {
 }
 
 public extension EventClient {
-    public func setUser(userID: String, properties: JSON, eventTime: Date = Date(), completionHandler: @escaping (JSON?, Error?) -> Void) {
+    public func setUser(userID: String, properties: [String: Any], eventTime: Date = Date(), completionHandler: @escaping (EventResponse?, Error?) -> Void) {
         
         let userEvent = Event(
             event: Event.setEvent,
@@ -197,7 +235,7 @@ public extension EventClient {
         createEvent(event: userEvent, completionHandler: completionHandler)
     }
     
-    public func unsetUser(userID: String, properties: JSON, eventTime: Date = Date(), completionHandler: @escaping (JSON?, Error?) -> Void) {
+    public func unsetUser(userID: String, properties: [String: Any], eventTime: Date = Date(), completionHandler: @escaping (EventResponse?, Error?) -> Void) {
         let userEvent = Event(
             event: Event.unsetEvent,
             entityType: Event.userEntityType,
@@ -209,7 +247,7 @@ public extension EventClient {
         createEvent(event: userEvent, completionHandler: completionHandler)
     }
     
-    public func deleteUser(userID: String, eventTime: Date = Date(), completionHandler: @escaping (JSON?, Error?) -> Void) {
+    public func deleteUser(userID: String, eventTime: Date = Date(), completionHandler: @escaping (EventResponse?, Error?) -> Void) {
         let userEvent = Event(
             event: Event.deleteEvent,
             entityType: Event.userEntityType,
@@ -222,7 +260,7 @@ public extension EventClient {
 }
 
 public extension EventClient {
-    public func setItem(itemID: String, properties: JSON, eventTime: Date = Date(), completionHandler: @escaping (JSON?, Error?) -> Void) {
+    public func setItem(itemID: String, properties: [String: Any], eventTime: Date = Date(), completionHandler: @escaping (EventResponse?, Error?) -> Void) {
         let itemEvent = Event(
             event: Event.setEvent,
             entityType: Event.itemEntityType,
@@ -234,7 +272,7 @@ public extension EventClient {
         createEvent(event: itemEvent, completionHandler: completionHandler)
     }
     
-    public func unsetItem(itemID: String, properties: JSON, eventTime: Date = Date(), completionHandler: @escaping (JSON?, Error?) -> Void) {
+    public func unsetItem(itemID: String, properties: [String: Any], eventTime: Date = Date(), completionHandler: @escaping (EventResponse?, Error?) -> Void) {
         let itemEvent = Event(
             event: Event.unsetEvent,
             entityType: Event.itemEntityType,
@@ -246,7 +284,7 @@ public extension EventClient {
         createEvent(event: itemEvent, completionHandler: completionHandler)
     }
     
-    public func deleteItem(itemID: String, eventTime: Date = Date(), completionHandler: @escaping (JSON?, Error?) -> Void) {
+    public func deleteItem(itemID: String, eventTime: Date = Date(), completionHandler: @escaping (EventResponse?, Error?) -> Void) {
         let itemEvent = Event(
             event: Event.deleteEvent,
             entityType: Event.itemEntityType,
@@ -259,7 +297,7 @@ public extension EventClient {
 }
 
 public extension EventClient {
-    public func recordAction(action: String, byUserID userID: String, onItemID itemID: String, properties: JSON = [:], eventTime: Date = Date(), completionHandler: @escaping (JSON?, Error?) -> Void) {
+    public func recordAction(action: String, byUserID userID: String, onItemID itemID: String, properties: [String: Any] = [:], eventTime: Date = Date(), completionHandler: @escaping (EventResponse?, Error?) -> Void) {
         let event = Event(
             event: action,
             entityType: Event.userEntityType,
@@ -281,9 +319,9 @@ public class EngineClient: BaseClient {
         super.init(baseURL: baseURL, timeout: timeout)
     }
     
-    public func sendQuery(query: JSON, completionHandler:  @escaping (JSON?, Error?) -> Void) {
-        networkConnection.request(URLForQuerying, method: .post, parameters: query, completionHandler: completionHandler)
-    }
+//    public func sendQuery(query: [String: Any], completionHandler:  @escaping (JSON?, Error?) -> Void) {
+//        networkConnection.request(URLForQuerying, method: .post, parameters: query, completionHandler: completionHandler)
+//    }
     
     lazy var URLForQuerying: String = {
         return "\(baseURL)/queries.json"
