@@ -79,17 +79,23 @@ public struct Event {
      :param: event The event name
      :param: entityType The entity type
      :param: entityID The entity ID
-     :param: targetEntityType The target entity type
-     :param: targetEntityID The target entity ID
+     :param: targetEntity The target entity (type, ID) tuple
      :param: properties The event properties
      :param: eventTime The event time
      */
-    public init(event: String, entityType: String, entityID: String, targetEntityType: String? = nil, targetEntityID: String? = nil, properties: [String: Any]? = nil, eventTime: Date = Date()) {
+    public init(event: String, entityType: String, entityID: String, targetEntity: (type: String, id: String)? = nil, properties: [String: Any]? = nil, eventTime: Date = Date()) {
         self.event = event
         self.entityType = entityType
         self.entityID = entityID
-        self.targetEntityType = targetEntityType
-        self.targetEntityID = targetEntityID
+        
+        if let targetEntity = targetEntity {
+            self.targetEntityType = targetEntity.type
+            self.targetEntityID = targetEntity.id
+        } else {
+            self.targetEntityType = nil
+            self.targetEntityID = nil
+        }
+        
         self.properties = properties
         self.eventTime = eventTime
         self.eventID = nil

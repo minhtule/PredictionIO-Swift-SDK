@@ -190,8 +190,7 @@ public extension EventClient {
             event: action,
             entityType: Event.userEntityType,
             entityID: userID,
-            targetEntityType: Event.itemEntityType,
-            targetEntityID: itemID,
+            targetEntity: (type: Event.itemEntityType, id: itemID),
             properties: properties,
             eventTime: eventTime
         )

@@ -17,8 +17,7 @@ class EventTests: XCTestCase {
             event: "rate",
             entityType: "customer",
             entityID: "c1",
-            targetEntityType: "book",
-            targetEntityID: "b1",
+            targetEntity: (type: "book", id: "b1"),
             properties: ["rating": 5],
             eventTime: Date(timeIntervalSince1970: 0)
         )
