@@ -9,125 +9,6 @@
 import Foundation
 
 
-// MARK: - Event
-
-/**
- An `Event` class that represents a PredictionIO's event  dictionary in
- its REST API.
- */
-public struct Event {
-    // MARK: Constants
-    
-    /// Reversed set event name.
-    public static let setEvent = "$set"
-    
-    /// Reversed unset event name.
-    public static let unsetEvent = "$unset"
-    
-    /// Reversed delete event name.
-    public static let deleteEvent = "$delete"
-    
-    /// Predefined user entity type.
-    public static let userEntityType = "user"
-    
-    /// Predefined item entity type.
-    public static let itemEntityType = "item"
-    
-    // MARK: Properties
-    
-    /// The event name e.g. "sign-up", "rate", "view".
-    ///
-    /// **Note:** All event names starting with "$" and "pio_" are reversed
-    /// and shouldn't be used as your custom event (e.g. "$set").
-    public let event: String
-    
-    /// The entity type. It is the namespace of the `entityID` and analogous
-    /// to the table name of a relational database. The `entityID` must be
-    /// unique within the same `entityType`.
-    ///
-    /// **Note:** All entityType names starting with "$" and "pio_" are reversed
-    /// and shouldn't be used.
-    public let entityType: String
-    
-    /// The entity ID. `entityType-entityID` becomes the unique identifier
-    /// of the entity.
-    public let entityID: String
-    
-    /// The target entity type.
-    ///
-    /// **Note:** All targetEntityType names starting with "$" and "pio_" are reversed
-    /// and shouldn't be used.
-    public let targetEntityType: String?
-    
-    /// The target entity ID.
-    public let targetEntityID: String?
-    
-    /// The event properties.
-    ///
-    /// **Note:** All properties names starting with "$" and "pio_" are reversed
-    /// and shouldn't be used.
-    public let properties: [String: Any]?
-    
-    /// The time of the event.
-    public let eventTime: Date
-    
-    // MARK: Constructors
-    
-    /**
-     :param: event The event name
-     :param: entityType The entity type
-     :param: entityID The entity ID
-     :param: targetEntityType The target entity type
-     :param: targetEntityID The target entity ID
-     :param: properties The event properties
-     :param: eventTime The event time
-     */
-    public init(event: String, entityType: String, entityID: String, targetEntityType: String? = nil, targetEntityID: String? = nil, properties: [String: Any]? = nil, eventTime: Date = Date()) {
-        if let properties = properties {
-            assert(JSONSerialization.isValidJSONObject(properties), "Event's properties is not a valid JSON. \(properties)")
-        }
-        
-        self.event = event
-        self.entityType = entityType
-        self.entityID = entityID
-        self.targetEntityType = targetEntityType
-        self.targetEntityID = targetEntityID
-        self.properties = properties
-        self.eventTime = eventTime
-    }
-    
-    // MARK: Helpers
-    
-    func toJSON() -> Data? {
-        var json: [String: Any] = [
-            "event": event,
-            "entityType": entityType,
-            "entityId": entityID,
-            "eventTime": Event.dateTimeFormatter.string(from: eventTime)
-        ]
-        
-        if let targetEntityType = targetEntityType, let targetEntityID = targetEntityID {
-            json["targetEntityType"] = targetEntityType
-            json["targetEntityId"] = targetEntityID
-        }
-        
-        if let properties = properties {
-            json["properties"] = properties
-        }
-        
-        return try? JSONSerialization.data(withJSONObject: json, options: [])
-    }
-    
-    private static let dateTimeFormatter: DateFormatter = {
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
-        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-        return dateFormatter
-    }()
-}
-
-
 public class BaseClient {
     let baseURL: String
     let networkConnection: NetworkConnection
@@ -164,21 +45,25 @@ public class EventClient: BaseClient {
     }
     
     public func createEvent(event: Event, completionHandler:  @escaping (EventResponse?, Error?) -> Void) {
-        assert(event.event != Event.unsetEvent || event.properties?.isEmpty == false, "Properties cannot be empty for $unset event")
-        
-        networkConnection.post(url: URLForCreatingEvent, payload: event.toJSON(), queryParams: queryParams) { data, error in
-            guard let data = data else {
-                completionHandler(nil, error)
-                return
+        do {
+            let payload = try JSONSerialization.data(withJSONObject: event.json, options: [])
+            networkConnection.post(url: URLForCreatingEvent, payload: payload, queryParams: queryParams) { data, error in
+                guard let data = data else {
+                    completionHandler(nil, error)
+                    return
+                }
+                
+                do {
+                    let decoder = JSONDecoder()
+                    let event = try decoder.decode(EventResponse.self, from: data)
+                    completionHandler(event, error)
+                } catch {
+                    completionHandler(nil, PIOError.DeserializationFailureReason.failedError(error))
+                }
             }
-            
-            do {
-                let decoder = JSONDecoder()
-                let event = try decoder.decode(EventResponse.self, from: data)
-                completionHandler(event, error)
-            } catch {
-                completionHandler(nil, error)
-            }
+        } catch {
+            completionHandler(nil, PIOError.SerializationFailureReason.failedError(error))
+            return
         }
     }
     
@@ -189,7 +74,10 @@ public class EventClient: BaseClient {
     
 //    public func getEvent(eventID: String, completionHandler: @escaping ([String: Any]?, Error?) -> Void) {
 //        if let escapedEventID = eventID.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) {
-//            networkConnection.request(URLForGettingEvent(eventID: escapedEventID), method: .get, completionHandler: completionHandler)
+//            let url = URLForGettingEvent(eventID: escapedEventID)
+//            networkConnection.get(url: url, completionHandler: completionHandler)
+//        } else {
+//            completionHandler(nil, PIOError.invalidEventID(id: eventID))
 //        }
 //    }
     

@@ -47,22 +47,28 @@ class NetworkConnection {
             let request = try URLRequest(url: url, method: method, queryParams: queryParams, payload: payload, headers: headers)
             let task = session.dataTask(with: request) { data, response, error in
                 if let error = error {
-                    completionHandler(nil, PIOError.Request.failed(error: error))
+                    completionHandler(nil, PIOError.RequestFailureReason.failedError(error))
                     return
                 }
                 
                 guard let response = response as? HTTPURLResponse else {
-                    completionHandler(nil, PIOError.Request.unknownResponse)
+                    completionHandler(nil, PIOError.RequestFailureReason.unknownResponseError())
                     return
                 }
                 
-                if response.statusCode == 401 {
-                    completionHandler(nil, PIOError.Request.unauthorized)
-                } else if response.statusCode == 404 {
-                    completionHandler(nil, PIOError.Request.notFound)
-                }
                 
-                completionHandler(data, nil)
+                switch response.statusCode {
+                case 400:
+                    completionHandler(nil, PIOError.RequestFailureReason.badRequestError())
+                case 401:
+                    completionHandler(nil, PIOError.RequestFailureReason.unauthorizedError())
+                case 404:
+                    completionHandler(nil, PIOError.RequestFailureReason.notFoundError())
+                case 200...201:
+                    completionHandler(data, nil)
+                default:
+                    completionHandler(nil, PIOError.RequestFailureReason.unknownStatusCodeError(statusCode: response.statusCode))
+                }
             }
             task.resume()
             return task
