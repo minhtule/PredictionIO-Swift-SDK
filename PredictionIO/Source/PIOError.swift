@@ -11,15 +11,15 @@ import Foundation
 
 public enum PIOError: Error {
     case invalidURL(string: String, queryParams: [String: String]?)
-    case invalidEventID(id: String)
     case invalidEvent(reason: InvalidEventReason)
     case failedRequest(reason: RequestFailureReason)
     case failedSerialization(reason: SerializationFailureReason)
     case failedDeserialization(reason: DeserializationFailureReason)
     
     public enum InvalidEventReason {
-        case unsetEventWithEmptyProperties
+        case invalidEventID
         case invalidJSONProperties
+        case unsetEventWithEmptyProperties
     }
     
     public enum RequestFailureReason {
@@ -32,23 +32,27 @@ public enum PIOError: Error {
     }
     
     public enum SerializationFailureReason {
-        case missingField(String)
-        case invalidField(String, value: Any?)
         case failed(error: Error)
     }
     
     public enum DeserializationFailureReason {
+        case missingField(String)
+        case invalidField(String, value: Any?)
         case failed(error: Error)
     }
 }
 
 extension PIOError.InvalidEventReason {
-    static func unsetEventWithEmptyPropertiesError() -> PIOError {
-        return PIOError.invalidEvent(reason: .unsetEventWithEmptyProperties)
+    static func invalidEventIDError() -> PIOError {
+        return PIOError.invalidEvent(reason: .invalidEventID)
     }
     
     static func invalidJSONPropertiesError() -> PIOError {
         return PIOError.invalidEvent(reason: .invalidJSONProperties)
+    }
+    
+    static func unsetEventWithEmptyPropertiesError() -> PIOError {
+        return PIOError.invalidEvent(reason: .unsetEventWithEmptyProperties)
     }
 }
 
@@ -79,14 +83,6 @@ extension PIOError.RequestFailureReason {
 }
 
 extension PIOError.SerializationFailureReason {
-    static func missingFieldError(field: String) -> PIOError {
-        return PIOError.failedSerialization(reason: .missingField(field))
-    }
-    
-    static func invalidFieldError(field: String, value: Any?) -> PIOError {
-        return PIOError.failedSerialization(reason: .invalidField(field, value: value))
-    }
-    
     static func failedError(_ error: Error) -> PIOError {
         return PIOError.failedSerialization(reason: .failed(error: error))
     }
@@ -95,5 +91,13 @@ extension PIOError.SerializationFailureReason {
 extension PIOError.DeserializationFailureReason {
     static func failedError(_ error: Error) -> PIOError {
         return PIOError.failedDeserialization(reason: .failed(error: error))
+    }
+    
+    static func missingFieldError(field: String) -> PIOError {
+        return PIOError.failedDeserialization(reason: .missingField(field))
+    }
+    
+    static func invalidFieldError(field: String, value: Any?) -> PIOError {
+        return PIOError.failedDeserialization(reason: .invalidField(field, value: value))
     }
 }

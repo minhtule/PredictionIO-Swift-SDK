@@ -118,42 +118,49 @@ extension Event {
     
     public init(json: [String: Any]) throws {
         guard let event = json["event"] as? String else {
-            throw PIOError.SerializationFailureReason.missingFieldError(field: "event")
+            throw PIOError.DeserializationFailureReason.missingFieldError(field: "event")
         }
         
         guard let eventID = json["eventId"] as? String else {
-            throw PIOError.SerializationFailureReason.missingFieldError(field: "eventId")
+            throw PIOError.DeserializationFailureReason.missingFieldError(field: "eventId")
         }
         
         guard let entityType = json["entityType"] as? String else {
-            throw PIOError.SerializationFailureReason.missingFieldError(field: "entityType")
+            throw PIOError.DeserializationFailureReason.missingFieldError(field: "entityType")
         }
         
         guard let entityID = json["entityId"] as? String else {
-            throw PIOError.SerializationFailureReason.missingFieldError(field: "entityId")
+            throw PIOError.DeserializationFailureReason.missingFieldError(field: "entityId")
         }
         
         guard let et = json["eventTime"] as? String else {
-            throw PIOError.SerializationFailureReason.missingFieldError(field: "eventTime")
+            throw PIOError.DeserializationFailureReason.missingFieldError(field: "eventTime")
         }
         
         guard let eventTime = Event.dateTimeFormatter.date(from: et) else {
-            throw PIOError.SerializationFailureReason.missingFieldError(field: "eventTime")
+            throw PIOError.DeserializationFailureReason.missingFieldError(field: "eventTime")
         }
         
-        let targetEntityType = json["targetEntityType"] as? String
-        let targetEntityID = json["targetEntityId"] as? String
-        let properties = json["properites"] as? [String: Any]
+        let properties = json["properties"] as? [String: Any]
         
         if let properties = properties, !JSONSerialization.isValidJSONObject(properties) {
-            throw PIOError.SerializationFailureReason.invalidFieldError(field: "properties", value: properties)
+            throw PIOError.DeserializationFailureReason.invalidFieldError(field: "properties", value: properties)
         }
         
         self.event = event
         self.entityType = entityType
         self.entityID = entityID
-        self.targetEntityType = targetEntityType
-        self.targetEntityID = targetEntityID
+        
+        if let targetEntityType = json["targetEntityType"] as? String,
+            let targetEntityID = json["targetEntityId"] as? String
+        {
+            self.targetEntityType = targetEntityType
+            self.targetEntityID = targetEntityID
+        } else {
+            self.targetEntityType = nil
+            self.targetEntityID = nil
+        }
+        
         self.properties = properties
         self.eventTime = eventTime
         self.eventID = eventID
