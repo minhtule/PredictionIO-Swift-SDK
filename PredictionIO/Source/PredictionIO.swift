@@ -47,7 +47,7 @@ public class EventClient: BaseClient {
     public func createEvent(event: Event, completionHandler:  @escaping (EventResponse?, Error?) -> Void) {
         do {
             let payload = try JSONSerialization.data(withJSONObject: event.json, options: [])
-            networkConnection.post(url: URLForCreatingEvent, payload: payload, queryParams: queryParams) { data, error in
+            networkConnection.post(url: eventsURL, payload: payload, queryParams: queryParams) { data, error in
                 guard let data = data else {
                     completionHandler(nil, error)
                     return
@@ -74,7 +74,7 @@ public class EventClient: BaseClient {
     
     public func getEvent(eventID: String, completionHandler: @escaping (Event?, Error?) -> Void) {
         do {
-            let url = try URLForEvent(eventID: eventID)
+            let url = try eventURL(for: eventID)
             networkConnection.get(url: url, queryParams: queryParams) { data, error in
                 guard let data = data else {
                     completionHandler(nil, error)
@@ -89,7 +89,11 @@ public class EventClient: BaseClient {
                         throw PIOError.DeserializationFailureReason.unknownFormatError()
                     }
                 } catch {
-                    completionHandler(nil, PIOError.DeserializationFailureReason.failedError(error))
+                    if !(error is PIOError) {
+                        completionHandler(nil, error)
+                    } else {
+                        completionHandler(nil, PIOError.DeserializationFailureReason.failedError(error))
+                    }
                 }
             }
         } catch {
@@ -97,9 +101,48 @@ public class EventClient: BaseClient {
         }
     }
     
+    public func getEvents(startTime: Date? = nil, endTime: Date? = nil, entityType: String? = nil, entityID: String? = nil, limit: Int = 20, isReversed: Bool = false, completionHandler: @escaping ([Event]?, Error?) -> Void) {
+        var queryParams = self.queryParams
+        
+        if let startTime = startTime {
+            queryParams["startTime"] = Event.dateTimeFormatter.string(from: startTime)
+        }
+        
+        if let endTime = endTime {
+            queryParams["endTime"] = Event.dateTimeFormatter.string(from: endTime)
+        }
+        
+        queryParams["entityType"] = entityType
+        queryParams["entityId"] = entityID
+        queryParams["limit"] = String(limit)
+        queryParams["reversed"] = String(isReversed)
+        
+        networkConnection.get(url: eventsURL, queryParams: queryParams) { data, error in
+            guard let data = data else {
+                completionHandler(nil, error)
+                return
+            }
+            
+            do {
+                if let jsonArray = try JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]] {
+                    let events = try jsonArray.map { try Event(json: $0) }
+                    completionHandler(events, nil)
+                } else {
+                    throw PIOError.DeserializationFailureReason.unknownFormatError()
+                }
+            } catch {
+                if !(error is PIOError) {
+                    completionHandler(nil, error)
+                } else {
+                    completionHandler(nil, PIOError.DeserializationFailureReason.failedError(error))
+                }
+            }
+        }
+    }
+    
     public func deleteEvent(eventID: String, completionHandler: @escaping (Error?) -> Void) {
         do {
-            let url = try URLForEvent(eventID: eventID)
+            let url = try eventURL(for: eventID)
             networkConnection.get(url: url, queryParams: queryParams) { data, error in
                 guard let _ = data else {
                     completionHandler(error)
@@ -114,24 +157,21 @@ public class EventClient: BaseClient {
         }
     }
     
-    lazy var URLForCreatingEvent: String = {
+    lazy var eventsURL: String = {
         return "\(baseURL)/events.json"
     }()
     
-    lazy var URLForCreatingBatchEvents: String = {
+    lazy var batchEventsURL: String = {
         return "\(baseURL)/batch/events.json"
     }()
     
     lazy var queryParams: QueryParams = {
         var queryParams = ["accessKey": accessKey]
-        
-        if let channel = self.channel {
-            queryParams["channel"] = channel
-        }
+        queryParams["channel"] = channel
         return queryParams
     }()
     
-    func URLForEvent(eventID: String) throws -> String {
+    func eventURL(for eventID: String) throws -> String {
         if let escapedEventID = eventID.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) {
             return "\(baseURL)/events/\(escapedEventID).json"
         } else {

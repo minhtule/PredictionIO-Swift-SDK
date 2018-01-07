@@ -38,22 +38,35 @@ class EventClientTests: XCTestCase {
     
     func testGetEvent() {
         let event = Event(event: "register", entityType: "user", entityID: "foo")
-        let createEventExpectation = self.expectation(description: "Creating an event in event server")
-        var eventID: String?
-        
-        eventClient.createEvent(event: event) { response, error in
-            eventID = response!.eventID
-            createEventExpectation.fulfill()
-        }
-        
-        waitForExpectations(timeout: 5)
+        let eventID = createEvent(event)
         
         let getEventExpectation = self.expectation(description: "Getting an event in event server")
-        eventClient.getEvent(eventID: eventID!) { createdEvent, error in
+        eventClient.getEvent(eventID: eventID) { createdEvent, error in
             XCTAssertNotNil(createdEvent, "Request should succeed, got \(error!)")
             XCTAssertEqual(event.event, createdEvent!.event)
             
             getEventExpectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 5)
+    }
+    
+    func testGetEvents() {
+        let randomType = "random"
+        let randomId = "\(arc4random())"
+        let events = [
+            Event(event: "register", entityType: randomType, entityID: randomId),
+            Event(event: "register", entityType: randomType, entityID: randomId),
+            Event(event: "register", entityType: "book", entityID: "math")
+        ]
+        events.forEach { createEvent($0) }
+        
+        let getEventsExpectation = self.expectation(description: "Getting events in event server")
+        eventClient.getEvents(entityType: randomType, entityID: randomId) { events, error in
+            XCTAssertNotNil(events, "Request should succeed, got \(error!)")
+            XCTAssertEqual(events!.count, 2)
+            
+            getEventsExpectation.fulfill()
         }
         
         waitForExpectations(timeout: 5)
@@ -183,5 +196,21 @@ class EventClientTests: XCTestCase {
         waitForExpectations(timeout: 5) { error in
             XCTAssertNil(error, "\(error!)")
         }
+    }
+    
+    // MARK: Helpers
+    
+    @discardableResult
+    private func createEvent(_ event: Event) -> String {
+        let createEventExpectation = self.expectation(description: "Creating an event in event server")
+        var eventID: String = ""
+        
+        eventClient.createEvent(event: event) { response, error in
+            eventID = response!.eventID
+            createEventExpectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 5)
+        return eventID
     }
 }
