@@ -73,9 +73,9 @@ public class EventClient: BaseClient {
 //    }
     
     public func getEvent(eventID: String, completionHandler: @escaping (Event?, Error?) -> Void) {
-        if let escapedEventID = eventID.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) {
-            let url = URLForGettingEvent(eventID: escapedEventID)
-            networkConnection.get(url: url) { data, error in
+        do {
+            let url = try URLForEvent(eventID: eventID)
+            networkConnection.get(url: url, queryParams: queryParams) { data, error in
                 guard let data = data else {
                     completionHandler(nil, error)
                     return
@@ -92,16 +92,27 @@ public class EventClient: BaseClient {
                     completionHandler(nil, PIOError.DeserializationFailureReason.failedError(error))
                 }
             }
-        } else {
-            completionHandler(nil, PIOError.invalidEvent(reason: .invalidEventID))
+        } catch {
+            completionHandler(nil, error)
         }
     }
     
-//    public func deleteEvent(eventID: String, completionHandler: @escaping ([String: Any]?, Error?) -> Void) {
-//        if let escapedEventID = eventID.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) {
-//            networkConnection.request(URLForGettingEvent(eventID: escapedEventID), method: .delete, completionHandler: completionHandler)
-//        }
-//    }
+    public func deleteEvent(eventID: String, completionHandler: @escaping (Error?) -> Void) {
+        do {
+            let url = try URLForEvent(eventID: eventID)
+            networkConnection.get(url: url, queryParams: queryParams) { data, error in
+                guard let _ = data else {
+                    completionHandler(error)
+                    return
+                }
+                
+                // Event server would return a message in payload but not useful.
+                completionHandler(nil)
+            }
+        } catch {
+            completionHandler(error)
+        }
+    }
     
     lazy var URLForCreatingEvent: String = {
         return "\(baseURL)/events.json"
@@ -120,8 +131,12 @@ public class EventClient: BaseClient {
         return queryParams
     }()
     
-    func URLForGettingEvent(eventID: String) -> String {
-        return "\(baseURL)/events/\(eventID).json?accessKey=\(accessKey)"
+    func URLForEvent(eventID: String) throws -> String {
+        if let escapedEventID = eventID.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) {
+            return "\(baseURL)/events/\(escapedEventID).json"
+        } else {
+            throw PIOError.invalidEvent(reason: .invalidEventID)
+        }
     }
 }
 

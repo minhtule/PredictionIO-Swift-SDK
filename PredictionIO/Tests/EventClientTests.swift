@@ -59,6 +59,28 @@ class EventClientTests: XCTestCase {
         waitForExpectations(timeout: 5)
     }
     
+    func testDeleteEvent() {
+        let event = Event(event: "register", entityType: "user", entityID: "foo")
+        let createEventExpectation = self.expectation(description: "Creating an event in event server")
+        var eventID: String?
+        
+        eventClient.createEvent(event: event) { response, error in
+            eventID = response!.eventID
+            createEventExpectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 5)
+        
+        let deleteEventExpectation = self.expectation(description: "Deleting an event in event server")
+        eventClient.deleteEvent(eventID: eventID!) { error in
+            XCTAssertNil(error, "Request should succeed, got \(error!)")
+            
+            deleteEventExpectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 5)
+    }
+    
     // Mark: Convenient methods for user entity
     
     func testSetUser() {
