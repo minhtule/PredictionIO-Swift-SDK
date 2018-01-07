@@ -21,7 +21,6 @@ class EventClientTests: XCTestCase {
         eventClient = EventClient(accessKey: accessKey, baseURL: "http://localhost:7070")
     }
     
-    
     func testCreateEvent() {
         let event = Event(event: "register", entityType: "user", entityID: "foo")
         let expectation = self.expectation(description: "Creating an event in event server")
@@ -32,9 +31,32 @@ class EventClientTests: XCTestCase {
             expectation.fulfill()
         }
         
-        waitForExpectations(timeout: 5) { (error) -> Void in
+        waitForExpectations(timeout: 5) { error in
             XCTAssertNil(error, "\(error!)")
         }
+    }
+    
+    func testGetEvent() {
+        let event = Event(event: "register", entityType: "user", entityID: "foo")
+        let createEventExpectation = self.expectation(description: "Creating an event in event server")
+        var eventID: String?
+        
+        eventClient.createEvent(event: event) { response, error in
+            eventID = response!.eventID
+            createEventExpectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 5)
+        
+        let getEventExpectation = self.expectation(description: "Getting an event in event server")
+        eventClient.getEvent(eventID: eventID!) { createdEvent, error in
+            XCTAssertNotNil(createdEvent, "Request should succeed, got \(error!)")
+            XCTAssertEqual(event.event, createdEvent!.event)
+            
+            getEventExpectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 5)
     }
     
     // Mark: Convenient methods for user entity
@@ -48,7 +70,7 @@ class EventClientTests: XCTestCase {
             expectation.fulfill()
         })
         
-        waitForExpectations(timeout: 5) { (error) -> Void in
+        waitForExpectations(timeout: 5) { error in
             XCTAssertNil(error, "\(error!)")
         }
     }
@@ -62,7 +84,7 @@ class EventClientTests: XCTestCase {
             expectation.fulfill()
         })
         
-        waitForExpectations(timeout: 5) { (error) -> Void in
+        waitForExpectations(timeout: 5) { error in
             XCTAssertNil(error, "\(error!)")
         }
     }
@@ -76,7 +98,7 @@ class EventClientTests: XCTestCase {
             expectation.fulfill()
         })
         
-        waitForExpectations(timeout: 5) { (error) -> Void in
+        waitForExpectations(timeout: 5) { error in
             XCTAssertNil(error, "\(error!)")
         }
     }
@@ -92,7 +114,7 @@ class EventClientTests: XCTestCase {
             expectation.fulfill()
         })
         
-        waitForExpectations(timeout: 5) { (error) -> Void in
+        waitForExpectations(timeout: 5) { error in
             XCTAssertNil(error, "\(error!)")
         }
     }
@@ -106,7 +128,7 @@ class EventClientTests: XCTestCase {
             expectation.fulfill()
         })
         
-        waitForExpectations(timeout: 5) { (error) -> Void in
+        waitForExpectations(timeout: 5) { error in
             XCTAssertNil(error, "\(error!)")
         }
     }
@@ -120,7 +142,7 @@ class EventClientTests: XCTestCase {
             expectation.fulfill()
         })
         
-        waitForExpectations(timeout: 5) { (error) -> Void in
+        waitForExpectations(timeout: 5) { error in
             XCTAssertNil(error, "\(error!)")
         }
     }
@@ -136,7 +158,7 @@ class EventClientTests: XCTestCase {
             expectation.fulfill()
         })
         
-        waitForExpectations(timeout: 5) { (error) -> Void in
+        waitForExpectations(timeout: 5) { error in
             XCTAssertNil(error, "\(error!)")
         }
     }

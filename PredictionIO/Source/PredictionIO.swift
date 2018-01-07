@@ -26,10 +26,10 @@ public class BaseClient {
 
 
 public struct EventResponse: Decodable {
-    let id: String
+    public let eventID: String
     
     enum CodingKeys: String, CodingKey {
-        case id = "eventId"
+        case eventID = "eventId"
     }
 }
 
@@ -56,7 +56,7 @@ public class EventClient: BaseClient {
                 do {
                     let decoder = JSONDecoder()
                     let event = try decoder.decode(EventResponse.self, from: data)
-                    completionHandler(event, error)
+                    completionHandler(event, nil)
                 } catch {
                     completionHandler(nil, PIOError.DeserializationFailureReason.failedError(error))
                 }
@@ -72,14 +72,30 @@ public class EventClient: BaseClient {
 //        networkConnection.request(URLForCreatingBatchEvents, method: .post, parameters: eventsJSON, completionHandler: completionHandler)
 //    }
     
-//    public func getEvent(eventID: String, completionHandler: @escaping ([String: Any]?, Error?) -> Void) {
-//        if let escapedEventID = eventID.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) {
-//            let url = URLForGettingEvent(eventID: escapedEventID)
-//            networkConnection.get(url: url, completionHandler: completionHandler)
-//        } else {
-//            completionHandler(nil, PIOError.invalidEventID(id: eventID))
-//        }
-//    }
+    public func getEvent(eventID: String, completionHandler: @escaping (Event?, Error?) -> Void) {
+        if let escapedEventID = eventID.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) {
+            let url = URLForGettingEvent(eventID: escapedEventID)
+            networkConnection.get(url: url) { data, error in
+                guard let data = data else {
+                    completionHandler(nil, error)
+                    return
+                }
+                
+                do {
+                    if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                        let event = try Event(json: json)
+                        completionHandler(event, nil)
+                    } else {
+                        throw PIOError.DeserializationFailureReason.unknownFormatError()
+                    }
+                } catch {
+                    completionHandler(nil, PIOError.DeserializationFailureReason.failedError(error))
+                }
+            }
+        } else {
+            completionHandler(nil, PIOError.invalidEvent(reason: .invalidEventID))
+        }
+    }
     
 //    public func deleteEvent(eventID: String, completionHandler: @escaping ([String: Any]?, Error?) -> Void) {
 //        if let escapedEventID = eventID.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) {

@@ -129,6 +129,15 @@ extension PIOError {
     
     // Failed Deserialization
     
+    func isDeserializingUnknownFormat() -> Bool {
+        if case let .failedDeserialization(reason) = self,
+            case PIOError.DeserializationFailureReason.unknownFormat = reason
+        {
+            return true
+        }
+        return false
+    }
+    
     func isDeserializingMissingField(_ field: String? = nil) -> Bool {
         if case let .failedDeserialization(reason) = self,
             case let PIOError.DeserializationFailureReason.missingField(myMissingField) = reason

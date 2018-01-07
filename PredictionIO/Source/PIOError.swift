@@ -36,6 +36,7 @@ public enum PIOError: Error {
     }
     
     public enum DeserializationFailureReason {
+        case unknownFormat
         case missingField(String)
         case invalidField(String, value: Any?)
         case failed(error: Error)
@@ -89,8 +90,8 @@ extension PIOError.SerializationFailureReason {
 }
 
 extension PIOError.DeserializationFailureReason {
-    static func failedError(_ error: Error) -> PIOError {
-        return PIOError.failedDeserialization(reason: .failed(error: error))
+    static func unknownFormatError() -> PIOError {
+        return PIOError.failedDeserialization(reason: .unknownFormat)
     }
     
     static func missingFieldError(field: String) -> PIOError {
@@ -99,5 +100,9 @@ extension PIOError.DeserializationFailureReason {
     
     static func invalidFieldError(field: String, value: Any?) -> PIOError {
         return PIOError.failedDeserialization(reason: .invalidField(field, value: value))
+    }
+    
+    static func failedError(_ error: Error) -> PIOError {
+        return PIOError.failedDeserialization(reason: .failed(error: error))
     }
 }
