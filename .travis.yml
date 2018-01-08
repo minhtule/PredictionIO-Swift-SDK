@@ -3,27 +3,37 @@ osx_image: xcode9.2
 git:
   depth: 1
 
+env:
+  global:
+    - WORKSPACE=PredictionIO.xcworkspace
+    - IOS_FRAMEWORK_SCHEME="PredictionIO iOS"
+    - MACOS_FRAMEWORK_SCHEME="PredictionIO macOS"
+  matrix:
+    # iOS
+    - DESTINATION="OS=11.2,name=iPhone X"         SCHEME="$IOS_FRAMEWORK_SCHEME"    BUILD_EXAMPLE="YES"  POD_LINT="YES"
+    - DESTINATION="OS=10.3.1,name=iPhone 7 Plus"  SCHEME="$IOS_FRAMEWORK_SCHEME"    BUILD_EXAMPLE="YES"  POD_LINT="NO"
+    # macOS
+    - DESTINATION="arch=x86_64"                   SCHEME="$MACOS_FRAMEWORK_SCHEME"  BUILD_EXAMPLE="NO"   POD_LINT="NO"
+
 before_script:
-# Set up mock API server
-- cd ..
-- git clone git://github.com/minhtule/PredictionIO-Mock-Server.git --depth 1
-- cd PredictionIO-Mock-Server
-- npm install
-- node app.js &
-- sleep 3  # Give mock server some time to bind to sockets, etc
-- cd ../PredictionIO-Swift-SDK
+  # Set up mock API server
+  - cd ..
+  - git clone git://github.com/minhtule/PredictionIO-Mock-Server.git --depth 1
+  - cd PredictionIO-Mock-Server
+  - npm install
+  - node app.js &
+  - sleep 3  # Give mock server some time to bind to sockets, etc
+  - cd ../PredictionIO-Swift-SDK
 
 script:
-# Check Podspec
-- pod lib lint
+  - set -o pipefail
 
-- set -o pipefail
+  # Test in Release
+  - xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" -destination "$DESTINATION" -configuration Release ONLY_ACTIVE_ARCH=NO ENABLE_TESTABILITY=YES test | xcpretty
 
-# Test the SDK on iOS
-- xcodebuild -workspace PredictionIO.xcworkspace -scheme "PredictionIO iOS" -destination "OS=11.2,name=iPhone X" ONLY_ACTIVE_ARCH=NO ENABLE_TESTABILITY=YES test | xcpretty
+  # Build the iOS demo app in Debug
+  # - xcodebuild -workspace PredictionIO.xcworkspace -scheme "iOS Example" -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 6" ONLY_ACTIVE_ARCH=NO build | xcpretty
 
-# Build the SDK on OS X
-# - xcodebuild -workspace PredictionIO.xcworkspace -scheme "PredictionIO OSX SDK" -sdk macosx -destination "platform=OS X,arch=x86_64" ONLY_ACTIVE_ARCH=NO build | xcpretty
-
-# Build the iOS demo app
-# - xcodebuild -workspace PredictionIO.xcworkspace -scheme "iOS Example" -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 6" ONLY_ACTIVE_ARCH=NO build | xcpretty
+  - if [ $POD_LINT == "YES" ]; then
+      pod lib lint;
+    fi
