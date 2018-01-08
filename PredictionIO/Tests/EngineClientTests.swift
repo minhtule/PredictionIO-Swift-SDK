@@ -9,30 +9,29 @@
 import XCTest
 import PredictionIO
 
-
 class EngineClientTests: XCTestCase {
     var engineClient: EngineClient!
-    
+
     override func setUp() {
         super.setUp()
-        
+
         engineClient = EngineClient(baseURL: "http://localhost:8000")
     }
-    
+
     func testSendQuery() {
         let expectation = self.expectation(description: "Sending query")
-        
+
         engineClient.sendQuery(["user": "1"]) { data, error in
             XCTAssertNotNil(data, "Request should succeed, got \(error!)")
-            
+
             expectation.fulfill()
         }
-        
+
         waitForExpectations(timeout: 5) { error in
             XCTAssertNil(error, "\(error!)")
         }
     }
-    
+
     func testSendQueryWithResponseType() {
         // This test expects the engine server to return a JSON response that
         // has same response format as the similar product engine template e.g.
@@ -51,24 +50,24 @@ class EngineClientTests: XCTestCase {
         // }
         //
         let expectation = self.expectation(description: "Sending query")
-        
+
         engineClient.sendQuery(["user": "1"], responseType: SimilarProductResponse.self) { response, error in
             XCTAssertNotNil(response, "Request should succeed, got \(error!)")
-            
+
             expectation.fulfill()
         }
-        
+
         waitForExpectations(timeout: 5) { error in
             XCTAssertNil(error, "\(error!)")
         }
     }
-    
+
     private struct SimilarProductResponse: Decodable {
         struct ItemScore: Decodable {
             let item: Int
             let score: Double
         }
-        
+
         let itemScores: [ItemScore]
     }
 }

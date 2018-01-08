@@ -9,9 +9,8 @@
 import XCTest
 @testable import PredictionIO
 
-
 class EventTests: XCTestCase {
-    
+
     func testInit() {
         let event = Event(
             event: "rate",
@@ -21,7 +20,7 @@ class EventTests: XCTestCase {
             properties: ["rating": 5],
             eventTime: Date(timeIntervalSince1970: 0)
         )
-        
+
         XCTAssertEqual(event.event, "rate")
         XCTAssertEqual(event.entityType, "customer")
         XCTAssertEqual(event.entityID, "c1")
@@ -30,14 +29,14 @@ class EventTests: XCTestCase {
         XCTAssert(event.properties!["rating"] as? Int == 5)
         XCTAssertEqual(event.eventTime, Date(timeIntervalSince1970: 0))
     }
-    
+
     func testInit_withoutOptionalParameters() {
         let event = Event(
             event: "create",
             entityType: "customer",
             entityID: "c1"
         )
-        
+
         XCTAssertEqual(event.event, "create")
         XCTAssertEqual(event.entityType, "customer")
         XCTAssertEqual(event.entityID, "c1")
@@ -46,7 +45,7 @@ class EventTests: XCTestCase {
         XCTAssertNil(event.properties)
         XCTAssertNotNil(event.eventTime)
     }
-    
+
     func testInitWithJSON() {
         let json: [String: Any] = [
             "event": "rate",
@@ -63,7 +62,7 @@ class EventTests: XCTestCase {
         ]
         let eventTime = Event.dateTimeFormatter.date(from: json["eventTime"] as! String)!
         let event = try! Event(json: json)
-        
+
         XCTAssertEqual(event.event, json["event"] as! String)
         XCTAssertEqual(event.entityType, json["entityType"] as! String)
         XCTAssertEqual(event.entityID, json["entityId"] as! String)
@@ -73,7 +72,7 @@ class EventTests: XCTestCase {
         XCTAssertEqual(event.eventID!, json["eventId"] as! String)
         XCTAssertEqual(event.eventTime, eventTime)
     }
-    
+
     func testInitiWithJSON_missingEventID_throwsSerializationError() {
         let json: [String: Any] = [
             "event": "rate",
@@ -86,7 +85,7 @@ class EventTests: XCTestCase {
             XCTAssertTrue((error as! PIOError).isDeserializingMissingField("eventId"))
         }
     }
-    
+
     func testInitiWithJSON_invalidJSONProperties_throwsSerializationError() {
         let json: [String: Any] = [
             "event": "rate",
@@ -100,12 +99,12 @@ class EventTests: XCTestCase {
             "eventId": "fake_id",
             "eventTime": "2018-01-13T21:39:45.618Z"
         ]
-        
+
         XCTAssertThrowsError(try Event(json: json)) { error in
             XCTAssertTrue((error as! PIOError).isDeserializingInvalidField("properties"))
         }
     }
-    
+
     func testJSON() {
         let event = Event(
             event: "rate",
@@ -117,7 +116,7 @@ class EventTests: XCTestCase {
             ],
             eventTime: Date(timeIntervalSince1970: 0)
         )
-        
+
         let expectedJSON: [String: Any] = [
             "event": "rate",
             "entityType": "customer",
@@ -129,10 +128,10 @@ class EventTests: XCTestCase {
             ],
             "eventTime": "1970-01-01T00:00:00.000Z"
         ]
-        
+
         XCTAssertTrue(isEqualJSON(event.json, expectedJSON))
     }
-    
+
     func testValidate_invalidJSONProperties_throwsInvalidEventError() {
         let event = Event(
             event: "rate",
@@ -144,11 +143,11 @@ class EventTests: XCTestCase {
                 ]
             ]
         )
-        
+
         let error = event.validate()! as! PIOError
         XCTAssertTrue(error.isInvalidJSONProperties())
     }
-    
+
     func testValidate_unsetEventWithEmptyProperties_throwsInvalidEventError() {
         let event = Event(
             event: Event.unsetEvent,
@@ -156,61 +155,59 @@ class EventTests: XCTestCase {
             entityID: "c1",
             properties: [:]
         )
-        
+
         let error = event.validate()! as! PIOError
         XCTAssertTrue(error.isUnsetEventWithEmptyProperties())
     }
-    
+
     private func isEqualJSON(_ left: Any, _ right: Any) -> Bool {
         // Dictionary
         if let leftDict = left as? [String: Any],
-            let rightDict = right as? [String: Any]
-        {
+            let rightDict = right as? [String: Any] {
             if leftDict.count != rightDict.count {
                 return false
             }
-            
+
             for (key, leftValue) in leftDict {
                 if rightDict[key] == nil || !isEqualJSON(leftValue, rightDict[key]!) {
                     return false
                 }
             }
-            
+
             return true
         }
-        
+
         // Array
         if let leftArray = left as? [Any],
-            let rightArray = right as? [Any]
-        {
+            let rightArray = right as? [Any] {
             if leftArray.count != rightArray.count {
                 return false
             }
-            
+
             for (index, leftElement) in leftArray.enumerated() {
                 if !isEqualJSON(leftElement, rightArray[index]) {
                     return false
                 }
             }
-            
+
             return true
         }
-        
+
         // Bool
         if let leftBool = left as? Bool, let rightBool = right as? Bool {
             return leftBool == rightBool
         }
-        
+
         // String
         if let leftString = left as? String, let rightString = right as? String {
             return leftString == rightString
         }
-        
+
         // Number
         if let leftNumber = left as? NSNumber, let rightNumber = right as? NSNumber {
             return leftNumber == rightNumber
         }
-        
+
         return false
     }
 }

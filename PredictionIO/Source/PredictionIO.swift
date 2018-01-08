@@ -8,14 +8,13 @@
 
 import Foundation
 
-
 public class BaseClient {
     let baseURL: String
     let networkConnection: NetworkConnection
-    
+
     init(baseURL: String, timeout: TimeInterval) {
         self.baseURL = baseURL
-        
+
         let configuration = URLSessionConfiguration.default
         configuration.timeoutIntervalForRequest = timeout
         configuration.urlCache = nil
@@ -24,30 +23,28 @@ public class BaseClient {
     }
 }
 
-
 public struct EventResponse: Decodable {
     public let eventID: String
-    
+
     enum CodingKeys: String, CodingKey {
         case eventID = "eventId"
     }
 }
 
-
 public enum BatchEventStatus: Decodable {
     case success(eventID: String)
     case failed(message: String)
-    
+
     enum CodingKeys: String, CodingKey {
         case status
         case eventID = "eventId"
         case message
     }
-    
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let status = try container.decode(Int.self, forKey: .status)
-        
+
         switch status {
         case 201:
             let eventID = try container.decode(String.self, forKey: .eventID)
@@ -61,24 +58,23 @@ public enum BatchEventStatus: Decodable {
     }
 }
 
-
 public class EventClient: BaseClient {
     let accessKey: String
     let channel: String?
-    
+
     public init(accessKey: String, baseURL: String = "http://localhost:7070", channel: String? = nil, timout: TimeInterval = 5) {
         self.accessKey = accessKey
         self.channel = channel
         super.init(baseURL: baseURL, timeout: timout)
     }
-    
+
     public func createEvent(_ event: Event, completionHandler: @escaping (EventResponse?, Error?) -> Void) {
         networkConnection.post(url: eventsURL, payload: event.json, queryParams: queryParams) { data, error in
             guard let data = data else {
                 completionHandler(nil, error)
                 return
             }
-            
+
             do {
                 let decoder = JSONDecoder()
                 let event = try decoder.decode(EventResponse.self, from: data)
@@ -88,7 +84,7 @@ public class EventClient: BaseClient {
             }
         }
     }
-    
+
     public func createBatchEvents(_ events: [Event], completionHandler: @escaping ([BatchEventStatus]?, Error?) -> Void) {
         let eventsJSON = events.map { $0.json }
         networkConnection.post(url: batchEventsURL, payload: eventsJSON, queryParams: queryParams) { data, error in
@@ -96,7 +92,7 @@ public class EventClient: BaseClient {
                 completionHandler(nil, error)
                 return
             }
-            
+
             do {
                 let decoder = JSONDecoder()
                 let eventStatuses = try decoder.decode([BatchEventStatus].self, from: data)
@@ -106,7 +102,7 @@ public class EventClient: BaseClient {
             }
         }
     }
-    
+
     public func getEvent(eventID: String, completionHandler: @escaping (Event?, Error?) -> Void) {
         do {
             let url = try eventURL(for: eventID)
@@ -115,7 +111,7 @@ public class EventClient: BaseClient {
                     completionHandler(nil, error)
                     return
                 }
-                
+
                 do {
                     if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
                         let event = try Event(json: json)
@@ -135,29 +131,29 @@ public class EventClient: BaseClient {
             completionHandler(nil, error)
         }
     }
-    
+
     public func getEvents(startTime: Date? = nil, endTime: Date? = nil, entityType: String? = nil, entityID: String? = nil, limit: Int = 20, isReversed: Bool = false, completionHandler: @escaping ([Event]?, Error?) -> Void) {
         var queryParams = self.queryParams
-        
+
         if let startTime = startTime {
             queryParams["startTime"] = Event.dateTimeFormatter.string(from: startTime)
         }
-        
+
         if let endTime = endTime {
             queryParams["endTime"] = Event.dateTimeFormatter.string(from: endTime)
         }
-        
+
         queryParams["entityType"] = entityType
         queryParams["entityId"] = entityID
         queryParams["limit"] = String(limit)
         queryParams["reversed"] = String(isReversed)
-        
+
         networkConnection.get(url: eventsURL, queryParams: queryParams) { data, error in
             guard let data = data else {
                 completionHandler(nil, error)
                 return
             }
-            
+
             do {
                 if let jsonArray = try JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]] {
                     let events = try jsonArray.map { try Event(json: $0) }
@@ -174,7 +170,7 @@ public class EventClient: BaseClient {
             }
         }
     }
-    
+
     public func deleteEvent(eventID: String, completionHandler: @escaping (Error?) -> Void) {
         do {
             let url = try eventURL(for: eventID)
@@ -183,7 +179,7 @@ public class EventClient: BaseClient {
                     completionHandler(error)
                     return
                 }
-                
+
                 // Event server would return a message in payload but not useful.
                 completionHandler(nil)
             }
@@ -191,21 +187,21 @@ public class EventClient: BaseClient {
             completionHandler(error)
         }
     }
-    
+
     lazy var eventsURL: String = {
         return "\(baseURL)/events.json"
     }()
-    
+
     lazy var batchEventsURL: String = {
         return "\(baseURL)/batch/events.json"
     }()
-    
+
     lazy var queryParams: QueryParams = {
         var queryParams = ["accessKey": accessKey]
         queryParams["channel"] = channel
         return queryParams
     }()
-    
+
     func eventURL(for eventID: String) throws -> String {
         if let escapedEventID = eventID.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) {
             return "\(baseURL)/events/\(escapedEventID).json"
@@ -217,7 +213,7 @@ public class EventClient: BaseClient {
 
 public extension EventClient {
     public func setUser(userID: String, properties: [String: Any], eventTime: Date = Date(), completionHandler: @escaping (EventResponse?, Error?) -> Void) {
-        
+
         let userEvent = Event(
             event: Event.setEvent,
             entityType: Event.userEntityType,
@@ -225,10 +221,10 @@ public extension EventClient {
             properties: properties,
             eventTime: eventTime
         )
-        
+
         createEvent(userEvent, completionHandler: completionHandler)
     }
-    
+
     public func unsetUser(userID: String, properties: [String: Any], eventTime: Date = Date(), completionHandler: @escaping (EventResponse?, Error?) -> Void) {
         let userEvent = Event(
             event: Event.unsetEvent,
@@ -237,10 +233,10 @@ public extension EventClient {
             properties: properties,
             eventTime: eventTime
         )
-        
+
         createEvent(userEvent, completionHandler: completionHandler)
     }
-    
+
     public func deleteUser(userID: String, eventTime: Date = Date(), completionHandler: @escaping (EventResponse?, Error?) -> Void) {
         let userEvent = Event(
             event: Event.deleteEvent,
@@ -248,7 +244,7 @@ public extension EventClient {
             entityID: userID,
             eventTime: eventTime
         )
-        
+
         createEvent(userEvent, completionHandler: completionHandler)
     }
 }
@@ -262,10 +258,10 @@ public extension EventClient {
             properties: properties,
             eventTime: eventTime
         )
-        
+
         createEvent(itemEvent, completionHandler: completionHandler)
     }
-    
+
     public func unsetItem(itemID: String, properties: [String: Any], eventTime: Date = Date(), completionHandler: @escaping (EventResponse?, Error?) -> Void) {
         let itemEvent = Event(
             event: Event.unsetEvent,
@@ -274,10 +270,10 @@ public extension EventClient {
             properties: properties,
             eventTime: eventTime
         )
-        
+
         createEvent(itemEvent, completionHandler: completionHandler)
     }
-    
+
     public func deleteItem(itemID: String, eventTime: Date = Date(), completionHandler: @escaping (EventResponse?, Error?) -> Void) {
         let itemEvent = Event(
             event: Event.deleteEvent,
@@ -285,7 +281,7 @@ public extension EventClient {
             entityID: itemID,
             eventTime: eventTime
         )
-        
+
         createEvent(itemEvent, completionHandler: completionHandler)
     }
 }
@@ -300,29 +296,28 @@ public extension EventClient {
             properties: properties,
             eventTime: eventTime
         )
-        
+
         createEvent(event, completionHandler: completionHandler)
     }
 }
 
-
 public class EngineClient: BaseClient {
-    
+
     public override init(baseURL: String = "http://localhost:8000", timeout: TimeInterval = 5) {
         super.init(baseURL: baseURL, timeout: timeout)
     }
-    
+
     public func sendQuery(_ query: [String: Any], completionHandler: @escaping (Data?, Error?) -> Void) {
         networkConnection.post(url: queriesURL, payload: query, completionHandler: completionHandler)
     }
-    
+
     public func sendQuery<Response>(_ query: [String: Any], responseType: Response.Type, completionHandler: @escaping (Response?, Error?) -> Void) where Response: Decodable {
         networkConnection.post(url: queriesURL, payload: query) { data, error in
             guard let data = data else {
                 completionHandler(nil, error)
                 return
             }
-            
+
             do {
                 let decoder = JSONDecoder()
                 let response = try decoder.decode(Response.self, from: data)
@@ -332,9 +327,8 @@ public class EngineClient: BaseClient {
             }
         }
     }
-    
+
     lazy var queriesURL: String = {
         return "\(baseURL)/queries.json"
     }()
 }
-
