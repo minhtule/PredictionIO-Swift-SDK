@@ -33,7 +33,7 @@
 		411904261FF9E02A0097434E /* PredictionIO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PredictionIO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		411904291FF9E02A0097434E /* PredictionIO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PredictionIO.h; sourceTree = "<group>"; };
 		4119042A1FF9E02A0097434E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4119042F1FF9E02A0097434E /* PredictionIOTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PredictionIOTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4119042F1FF9E02A0097434E /* PredictionIO iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PredictionIO iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		411904361FF9E02A0097434E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		411904431FF9E3B40097434E /* PredictionIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredictionIO.swift; sourceTree = "<group>"; };
 		411904451FF9E3C50097434E /* NetworkConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConnection.swift; sourceTree = "<group>"; };
@@ -77,7 +77,7 @@
 			isa = PBXGroup;
 			children = (
 				411904261FF9E02A0097434E /* PredictionIO.framework */,
-				4119042F1FF9E02A0097434E /* PredictionIOTests.xctest */,
+				4119042F1FF9E02A0097434E /* PredictionIO iOS Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -137,9 +137,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		411904251FF9E02A0097434E /* PredictionIO */ = {
+		411904251FF9E02A0097434E /* PredictionIO iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4119043A1FF9E02A0097434E /* Build configuration list for PBXNativeTarget "PredictionIO" */;
+			buildConfigurationList = 4119043A1FF9E02A0097434E /* Build configuration list for PBXNativeTarget "PredictionIO iOS" */;
 			buildPhases = (
 				411904211FF9E02A0097434E /* Sources */,
 				411904221FF9E02A0097434E /* Frameworks */,
@@ -149,14 +149,14 @@
 			);
 			dependencies = (
 			);
-			name = PredictionIO;
+			name = "PredictionIO iOS";
 			productName = PredictionIO;
 			productReference = 411904261FF9E02A0097434E /* PredictionIO.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		4119042E1FF9E02A0097434E /* PredictionIOTests */ = {
+		4119042E1FF9E02A0097434E /* PredictionIO iOS Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4119043D1FF9E02A0097434E /* Build configuration list for PBXNativeTarget "PredictionIOTests" */;
+			buildConfigurationList = 4119043D1FF9E02A0097434E /* Build configuration list for PBXNativeTarget "PredictionIO iOS Tests" */;
 			buildPhases = (
 				4119042B1FF9E02A0097434E /* Sources */,
 				4119042C1FF9E02A0097434E /* Frameworks */,
@@ -167,9 +167,9 @@
 			dependencies = (
 				411904321FF9E02A0097434E /* PBXTargetDependency */,
 			);
-			name = PredictionIOTests;
+			name = "PredictionIO iOS Tests";
 			productName = PredictionIOTests;
-			productReference = 4119042F1FF9E02A0097434E /* PredictionIOTests.xctest */;
+			productReference = 4119042F1FF9E02A0097434E /* PredictionIO iOS Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -206,8 +206,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				411904251FF9E02A0097434E /* PredictionIO */,
-				4119042E1FF9E02A0097434E /* PredictionIOTests */,
+				411904251FF9E02A0097434E /* PredictionIO iOS */,
+				4119042E1FF9E02A0097434E /* PredictionIO iOS Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -250,7 +250,7 @@
 /* Begin PBXTargetDependency section */
 		411904321FF9E02A0097434E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 411904251FF9E02A0097434E /* PredictionIO */;
+			target = 411904251FF9E02A0097434E /* PredictionIO iOS */;
 			targetProxy = 411904311FF9E02A0097434E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -384,7 +384,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.prediction.PredictionIO;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = PredictionIO;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
@@ -407,7 +407,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.prediction.PredictionIO;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = PredictionIO;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -463,7 +463,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4119043A1FF9E02A0097434E /* Build configuration list for PBXNativeTarget "PredictionIO" */ = {
+		4119043A1FF9E02A0097434E /* Build configuration list for PBXNativeTarget "PredictionIO iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4119043B1FF9E02A0097434E /* Debug */,
@@ -472,7 +472,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4119043D1FF9E02A0097434E /* Build configuration list for PBXNativeTarget "PredictionIOTests" */ = {
+		4119043D1FF9E02A0097434E /* Build configuration list for PBXNativeTarget "PredictionIO iOS Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4119043E1FF9E02A0097434E /* Debug */,
