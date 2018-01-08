@@ -34,6 +34,22 @@ class EngineClientTests: XCTestCase {
     }
     
     func testSendQueryWithResponseType() {
+        // This test expects the engine server to return a JSON response that
+        // has same response format as the similar product engine template e.g.
+        //
+        // {
+        //     "itemScores": [
+        //         {
+        //             "item": 39,
+        //             "score": 6.177719297832409
+        //         },
+        //         {
+        //             "item": 79,
+        //             "score": 5.931687319083594
+        //         }
+        //     ]
+        // }
+        //
         let expectation = self.expectation(description: "Sending query")
         
         engineClient.sendQuery(["user": "1"], responseType: SimilarProductResponse.self) { response, error in
