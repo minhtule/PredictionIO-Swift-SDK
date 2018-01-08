@@ -11,8 +11,7 @@ import PredictionIO
 
 
 class EventClientTests: XCTestCase {
-//    let accessKey = "123"  // Replace with the real app's access key if testing using actual PredictionIO localhost setup.
-    let accessKey = "qmakL8SG5lAYkw62-JEOaSAjXCGhM_s__ggGyw_Hm8wSSEJj49x0Qvhmm2TZu5qL"
+    let accessKey = "123"  // Replace with the real app's access key if testing using actual PredictionIO localhost setup.
     var eventClient: EventClient!
     
     override func setUp() {
@@ -47,10 +46,10 @@ class EventClientTests: XCTestCase {
         eventClient.createBatchEvents(events) { eventStatuses, error in
             XCTAssertNotNil(eventStatuses, "Request should succeed, got \(error!)")
             XCTAssertEqual(eventStatuses!.count, 3)
-            
+
             for eventStatus in eventStatuses! {
                 if case .failed = eventStatus {
-                    XCTAssert(false, "There should be any failure here.")
+                    XCTFail("There should be any failure here.")
                 }
             }
             
@@ -61,22 +60,22 @@ class EventClientTests: XCTestCase {
             XCTAssertNil(error, "\(error!)")
         }
     }
-    
+
     func testGetEvent() {
         let event = Event(event: "register", entityType: "user", entityID: "foo")
         let eventID = createEvent(event)
-        
+
         let getEventExpectation = self.expectation(description: "Getting an event")
         eventClient.getEvent(eventID: eventID) { createdEvent, error in
             XCTAssertNotNil(createdEvent, "Request should succeed, got \(error!)")
             XCTAssertEqual(event.event, createdEvent!.event)
-            
+
             getEventExpectation.fulfill()
         }
-        
+
         waitForExpectations(timeout: 5)
     }
-    
+
     func testGetEvents() {
         let randomType = "random"
         let randomId = "\(arc4random())"
@@ -86,37 +85,37 @@ class EventClientTests: XCTestCase {
             Event(event: "register", entityType: "book", entityID: "math")
         ]
         events.forEach { createEvent($0) }
-        
+
         let getEventsExpectation = self.expectation(description: "Getting events in event server")
         eventClient.getEvents(entityType: randomType, entityID: randomId) { events, error in
             XCTAssertNotNil(events, "Request should succeed, got \(error!)")
             XCTAssertEqual(events!.count, 2)
-            
+
             getEventsExpectation.fulfill()
         }
-        
+
         waitForExpectations(timeout: 5)
     }
-    
+
     func testDeleteEvent() {
         let event = Event(event: "register", entityType: "user", entityID: "foo")
         let createEventExpectation = self.expectation(description: "Creating an event")
         var eventID: String?
-        
+
         eventClient.createEvent(event) { response, error in
             eventID = response!.eventID
             createEventExpectation.fulfill()
         }
-        
+
         waitForExpectations(timeout: 5)
-        
+
         let deleteEventExpectation = self.expectation(description: "Deleting an event")
         eventClient.deleteEvent(eventID: eventID!) { error in
             XCTAssertNil(error, "Request should succeed, got \(error!)")
-            
+
             deleteEventExpectation.fulfill()
         }
-        
+
         waitForExpectations(timeout: 5)
     }
     

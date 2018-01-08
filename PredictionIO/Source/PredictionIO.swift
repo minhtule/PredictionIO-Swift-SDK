@@ -73,47 +73,37 @@ public class EventClient: BaseClient {
     }
     
     public func createEvent(_ event: Event, completionHandler: @escaping (EventResponse?, Error?) -> Void) {
-        do {
-            let payload = try JSONSerialization.data(withJSONObject: event.json, options: [])
-            networkConnection.post(url: eventsURL, payload: payload, queryParams: queryParams) { data, error in
-                guard let data = data else {
-                    completionHandler(nil, error)
-                    return
-                }
-                
-                do {
-                    let decoder = JSONDecoder()
-                    let event = try decoder.decode(EventResponse.self, from: data)
-                    completionHandler(event, nil)
-                } catch {
-                    completionHandler(nil, PIOError.DeserializationFailureReason.failedError(error))
-                }
+        networkConnection.post(url: eventsURL, payload: event.json, queryParams: queryParams) { data, error in
+            guard let data = data else {
+                completionHandler(nil, error)
+                return
             }
-        } catch {
-            completionHandler(nil, PIOError.SerializationFailureReason.failedError(error))
+            
+            do {
+                let decoder = JSONDecoder()
+                let event = try decoder.decode(EventResponse.self, from: data)
+                completionHandler(event, nil)
+            } catch {
+                completionHandler(nil, PIOError.DeserializationFailureReason.failedError(error))
+            }
         }
     }
     
     public func createBatchEvents(_ events: [Event], completionHandler: @escaping ([BatchEventStatus]?, Error?) -> Void) {
-        do {
-            let eventsJSON = events.map { $0.json }
-            let payload = try JSONSerialization.data(withJSONObject: eventsJSON, options: [])
-            networkConnection.post(url: batchEventsURL, payload: payload, queryParams: queryParams) { data, error in
-                guard let data = data else {
-                    completionHandler(nil, error)
-                    return
-                }
-                
-                do {
-                    let decoder = JSONDecoder()
-                    let eventStatuses = try decoder.decode([BatchEventStatus].self, from: data)
-                    completionHandler(eventStatuses, nil)
-                } catch {
-                    completionHandler(nil, PIOError.DeserializationFailureReason.failedError(error))
-                }
+        let eventsJSON = events.map { $0.json }
+        networkConnection.post(url: batchEventsURL, payload: eventsJSON, queryParams: queryParams) { data, error in
+            guard let data = data else {
+                completionHandler(nil, error)
+                return
             }
-        } catch {
-            completionHandler(nil, PIOError.SerializationFailureReason.failedError(error))
+            
+            do {
+                let decoder = JSONDecoder()
+                let eventStatuses = try decoder.decode([BatchEventStatus].self, from: data)
+                completionHandler(eventStatuses, nil)
+            } catch {
+                completionHandler(nil, PIOError.DeserializationFailureReason.failedError(error))
+            }
         }
     }
     
@@ -322,11 +312,28 @@ public class EngineClient: BaseClient {
         super.init(baseURL: baseURL, timeout: timeout)
     }
     
-//    public func sendQuery(query: [String: Any], completionHandler:  @escaping (JSON?, Error?) -> Void) {
-//        networkConnection.request(URLForQuerying, method: .post, parameters: query, completionHandler: completionHandler)
-//    }
+    public func sendQuery(_ query: [String: Any], completionHandler: @escaping (Data?, Error?) -> Void) {
+        networkConnection.post(url: queriesURL, payload: query, completionHandler: completionHandler)
+    }
     
-    lazy var URLForQuerying: String = {
+    public func sendQuery<Response>(_ query: [String: Any], responseType: Response.Type, completionHandler: @escaping (Response?, Error?) -> Void) where Response: Decodable {
+        networkConnection.post(url: queriesURL, payload: query) { data, error in
+            guard let data = data else {
+                completionHandler(nil, error)
+                return
+            }
+            
+            do {
+                let decoder = JSONDecoder()
+                let response = try decoder.decode(Response.self, from: data)
+                completionHandler(response, nil)
+            } catch {
+                completionHandler(nil, PIOError.DeserializationFailureReason.unknownFormatError())
+            }
+        }
+    }
+    
+    lazy var queriesURL: String = {
         return "\(baseURL)/queries.json"
     }()
 }

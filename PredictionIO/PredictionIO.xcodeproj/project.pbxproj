@@ -15,6 +15,7 @@
 		414638DA1FFB792A0017253C /* EventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414638D91FFB792A0017253C /* EventTests.swift */; };
 		41A12E4D20007B810054A91E /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A12E4C20007B810054A91E /* Event.swift */; };
 		41A12E532001EB0D0054A91E /* PIOError+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A12E522001EB0D0054A91E /* PIOError+Tests.swift */; };
+		41A66CFA20031B1D00BFC1F3 /* EngineClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A66CF920031B1D00BFC1F3 /* EngineClientTests.swift */; };
 		41BB25581FFF5D7400E67252 /* EventClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BB25571FFF5D7400E67252 /* EventClientTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +41,7 @@
 		414638D91FFB792A0017253C /* EventTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTests.swift; sourceTree = "<group>"; };
 		41A12E4C20007B810054A91E /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		41A12E522001EB0D0054A91E /* PIOError+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PIOError+Tests.swift"; sourceTree = "<group>"; };
+		41A66CF920031B1D00BFC1F3 /* EngineClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngineClientTests.swift; sourceTree = "<group>"; };
 		41BB25571FFF5D7400E67252 /* EventClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventClientTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -97,6 +99,7 @@
 			children = (
 				414638D91FFB792A0017253C /* EventTests.swift */,
 				41BB25571FFF5D7400E67252 /* EventClientTests.swift */,
+				41A66CF920031B1D00BFC1F3 /* EngineClientTests.swift */,
 				41A12E522001EB0D0054A91E /* PIOError+Tests.swift */,
 				411904421FF9E35D0097434E /* Supporting Files */,
 			);
@@ -237,6 +240,7 @@
 			files = (
 				414638DA1FFB792A0017253C /* EventTests.swift in Sources */,
 				41BB25581FFF5D7400E67252 /* EventClientTests.swift in Sources */,
+				41A66CFA20031B1D00BFC1F3 /* EngineClientTests.swift in Sources */,
 				41A12E532001EB0D0054A91E /* PIOError+Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

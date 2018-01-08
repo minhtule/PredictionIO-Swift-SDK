@@ -33,7 +33,7 @@ class NetworkConnection {
     }
     
     @discardableResult
-    func post(url: String, payload: Data?, queryParams: QueryParams? = nil, headers: HTTPHeaders? = nil, completionHandler: @escaping (Data?, Error?) -> Void) -> URLSessionDataTask? {
+    func post(url: String, payload: Any?, queryParams: QueryParams? = nil, headers: HTTPHeaders? = nil, completionHandler: @escaping (Data?, Error?) -> Void) -> URLSessionDataTask? {
         return request(url, method: .post, queryParams: queryParams, payload: payload, headers: headers, completionHandler: completionHandler)
     }
     
@@ -42,9 +42,11 @@ class NetworkConnection {
         return request(url, method: .delete, queryParams: queryParams, payload: nil, headers: headers, completionHandler: completionHandler)
     }
     
-    private func request(_ url: String, method: HTTPMethod, queryParams: QueryParams? = nil, payload: Data?, headers: HTTPHeaders? = nil, completionHandler: @escaping (Data?, Error?) -> Void) -> URLSessionDataTask? {
+    private func request(_ url: String, method: HTTPMethod, queryParams: QueryParams? = nil, payload: Any?, headers: HTTPHeaders? = nil, completionHandler: @escaping (Data?, Error?) -> Void) -> URLSessionDataTask? {
         do {
-            let request = try URLRequest(url: url, method: method, queryParams: queryParams, payload: payload, headers: headers)
+            var request = try URLRequest(url: url, method: method, queryParams: queryParams, headers: headers)
+            try request.attachJSONPayload(payload: payload)
+            
             let task = session.dataTask(with: request) { data, response, error in
                 if let error = error {
                     completionHandler(nil, PIOError.RequestFailureReason.failedError(error))
@@ -55,7 +57,6 @@ class NetworkConnection {
                     completionHandler(nil, PIOError.RequestFailureReason.unknownResponseError())
                     return
                 }
-                
                 
                 switch response.statusCode {
                 case 400:
@@ -81,7 +82,7 @@ class NetworkConnection {
 
 
 extension URLRequest {
-    init(url: String, method: HTTPMethod, queryParams: QueryParams? = nil, payload: Data? = nil, headers: HTTPHeaders? = nil) throws {
+    init(url: String, method: HTTPMethod, queryParams: QueryParams? = nil, payload: Any? = nil, headers: HTTPHeaders? = nil) throws {
         var urlComponent = URLComponents(string: url)
         
         if let queryParams = queryParams {
@@ -98,10 +99,18 @@ extension URLRequest {
         headers?.forEach { field, value in
             setValue(value, forHTTPHeaderField: field)
         }
-        
-        if let payload = payload, method == .post {
-            httpBody = payload
-            setValue("application/json", forHTTPHeaderField: "Content-Type")
+    }
+    
+    mutating func attachJSONPayload(payload: Any?) throws {
+        if let payload = payload,
+            let httpMethod = httpMethod, httpMethod == HTTPMethod.post.rawValue
+        {
+            do {
+                httpBody = try JSONSerialization.data(withJSONObject: payload, options: [])
+                setValue("application/json", forHTTPHeaderField: "Content-Type")
+            } catch {
+                throw PIOError.SerializationFailureReason.failedError(error)
+            }
         }
     }
 }
