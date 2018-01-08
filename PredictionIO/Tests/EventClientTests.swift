@@ -23,10 +23,36 @@ class EventClientTests: XCTestCase {
     
     func testCreateEvent() {
         let event = Event(event: "register", entityType: "user", entityID: "foo")
-        let expectation = self.expectation(description: "Creating an event in event server")
+        let expectation = self.expectation(description: "Creating an event")
         
-        eventClient.createEvent(event: event) { response, error in
+        eventClient.createEvent(event) { response, error in
             XCTAssertNotNil(response, "Request should succeed, got \(error!)")
+            
+            expectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 5) { error in
+            XCTAssertNil(error, "\(error!)")
+        }
+    }
+    
+    func testCreateBatchEvents() {
+        let events = [
+            Event(event: "register", entityType: "user", entityID: "foo1"),
+            Event(event: "register", entityType: "user", entityID: "foo2"),
+            Event(event: "register", entityType: "user", entityID: "foo3")
+        ]
+        let expectation = self.expectation(description: "Creating batch events")
+        
+        eventClient.createBatchEvents(events) { eventStatuses, error in
+            XCTAssertNotNil(eventStatuses, "Request should succeed, got \(error!)")
+            XCTAssertEqual(eventStatuses!.count, 3)
+            
+            for eventStatus in eventStatuses! {
+                if case .failed = eventStatus {
+                    XCTAssert(false, "There should be any failure here.")
+                }
+            }
             
             expectation.fulfill()
         }
@@ -40,7 +66,7 @@ class EventClientTests: XCTestCase {
         let event = Event(event: "register", entityType: "user", entityID: "foo")
         let eventID = createEvent(event)
         
-        let getEventExpectation = self.expectation(description: "Getting an event in event server")
+        let getEventExpectation = self.expectation(description: "Getting an event")
         eventClient.getEvent(eventID: eventID) { createdEvent, error in
             XCTAssertNotNil(createdEvent, "Request should succeed, got \(error!)")
             XCTAssertEqual(event.event, createdEvent!.event)
@@ -74,17 +100,17 @@ class EventClientTests: XCTestCase {
     
     func testDeleteEvent() {
         let event = Event(event: "register", entityType: "user", entityID: "foo")
-        let createEventExpectation = self.expectation(description: "Creating an event in event server")
+        let createEventExpectation = self.expectation(description: "Creating an event")
         var eventID: String?
         
-        eventClient.createEvent(event: event) { response, error in
+        eventClient.createEvent(event) { response, error in
             eventID = response!.eventID
             createEventExpectation.fulfill()
         }
         
         waitForExpectations(timeout: 5)
         
-        let deleteEventExpectation = self.expectation(description: "Deleting an event in event server")
+        let deleteEventExpectation = self.expectation(description: "Deleting an event")
         eventClient.deleteEvent(eventID: eventID!) { error in
             XCTAssertNil(error, "Request should succeed, got \(error!)")
             
@@ -187,7 +213,7 @@ class EventClientTests: XCTestCase {
     func testRecordAction() {
         let expectation = self.expectation(description: "Record user action on item")
         
-        eventClient.recordAction(action: "rate", byUserID: "u1", onItemID: "i1", properties: ["rating": 5], completionHandler: { response, error in
+        eventClient.recordAction("rate", byUserID: "u1", onItemID: "i1", properties: ["rating": 5], completionHandler: { response, error in
             XCTAssertNotNil(response, "Request should succeed, got \(error!)")
             
             expectation.fulfill()
@@ -202,10 +228,10 @@ class EventClientTests: XCTestCase {
     
     @discardableResult
     private func createEvent(_ event: Event) -> String {
-        let createEventExpectation = self.expectation(description: "Creating an event in event server")
+        let createEventExpectation = self.expectation(description: "Creating an event")
         var eventID: String = ""
         
-        eventClient.createEvent(event: event) { response, error in
+        eventClient.createEvent(event) { response, error in
             eventID = response!.eventID
             createEventExpectation.fulfill()
         }

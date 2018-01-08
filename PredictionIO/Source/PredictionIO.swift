@@ -34,6 +34,34 @@ public struct EventResponse: Decodable {
 }
 
 
+public enum BatchEventStatus: Decodable {
+    case success(eventID: String)
+    case failed(message: String)
+    
+    enum CodingKeys: String, CodingKey {
+        case status
+        case eventID = "eventId"
+        case message
+    }
+    
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let status = try container.decode(Int.self, forKey: .status)
+        
+        switch status {
+        case 201:
+            let eventID = try container.decode(String.self, forKey: .eventID)
+            self = .success(eventID: eventID)
+        case 400:
+            let message = try container.decode(String.self, forKey: .message)
+            self = .failed(message: message)
+        default:
+            throw DecodingError.dataCorruptedError(forKey: .status, in: container, debugDescription: "Status code is not supported: \(status).")
+        }
+    }
+}
+
+
 public class EventClient: BaseClient {
     let accessKey: String
     let channel: String?
@@ -44,7 +72,7 @@ public class EventClient: BaseClient {
         super.init(baseURL: baseURL, timeout: timout)
     }
     
-    public func createEvent(event: Event, completionHandler:  @escaping (EventResponse?, Error?) -> Void) {
+    public func createEvent(_ event: Event, completionHandler: @escaping (EventResponse?, Error?) -> Void) {
         do {
             let payload = try JSONSerialization.data(withJSONObject: event.json, options: [])
             networkConnection.post(url: eventsURL, payload: payload, queryParams: queryParams) { data, error in
@@ -63,14 +91,31 @@ public class EventClient: BaseClient {
             }
         } catch {
             completionHandler(nil, PIOError.SerializationFailureReason.failedError(error))
-            return
         }
     }
     
-//    public func createBatchEvents(events: [Event], completionHandler:  @escaping ([String: Any]?, Error?) -> Void) {
-//        let eventsJSON = events.map { event in event.toJSON() }
-//        networkConnection.request(URLForCreatingBatchEvents, method: .post, parameters: eventsJSON, completionHandler: completionHandler)
-//    }
+    public func createBatchEvents(_ events: [Event], completionHandler: @escaping ([BatchEventStatus]?, Error?) -> Void) {
+        do {
+            let eventsJSON = events.map { $0.json }
+            let payload = try JSONSerialization.data(withJSONObject: eventsJSON, options: [])
+            networkConnection.post(url: batchEventsURL, payload: payload, queryParams: queryParams) { data, error in
+                guard let data = data else {
+                    completionHandler(nil, error)
+                    return
+                }
+                
+                do {
+                    let decoder = JSONDecoder()
+                    let eventStatuses = try decoder.decode([BatchEventStatus].self, from: data)
+                    completionHandler(eventStatuses, nil)
+                } catch {
+                    completionHandler(nil, PIOError.DeserializationFailureReason.failedError(error))
+                }
+            }
+        } catch {
+            completionHandler(nil, PIOError.SerializationFailureReason.failedError(error))
+        }
+    }
     
     public func getEvent(eventID: String, completionHandler: @escaping (Event?, Error?) -> Void) {
         do {
@@ -191,7 +236,7 @@ public extension EventClient {
             eventTime: eventTime
         )
         
-        createEvent(event: userEvent, completionHandler: completionHandler)
+        createEvent(userEvent, completionHandler: completionHandler)
     }
     
     public func unsetUser(userID: String, properties: [String: Any], eventTime: Date = Date(), completionHandler: @escaping (EventResponse?, Error?) -> Void) {
@@ -203,7 +248,7 @@ public extension EventClient {
             eventTime: eventTime
         )
         
-        createEvent(event: userEvent, completionHandler: completionHandler)
+        createEvent(userEvent, completionHandler: completionHandler)
     }
     
     public func deleteUser(userID: String, eventTime: Date = Date(), completionHandler: @escaping (EventResponse?, Error?) -> Void) {
@@ -214,7 +259,7 @@ public extension EventClient {
             eventTime: eventTime
         )
         
-        createEvent(event: userEvent, completionHandler: completionHandler)
+        createEvent(userEvent, completionHandler: completionHandler)
     }
 }
 
@@ -228,7 +273,7 @@ public extension EventClient {
             eventTime: eventTime
         )
         
-        createEvent(event: itemEvent, completionHandler: completionHandler)
+        createEvent(itemEvent, completionHandler: completionHandler)
     }
     
     public func unsetItem(itemID: String, properties: [String: Any], eventTime: Date = Date(), completionHandler: @escaping (EventResponse?, Error?) -> Void) {
@@ -240,7 +285,7 @@ public extension EventClient {
             eventTime: eventTime
         )
         
-        createEvent(event: itemEvent, completionHandler: completionHandler)
+        createEvent(itemEvent, completionHandler: completionHandler)
     }
     
     public func deleteItem(itemID: String, eventTime: Date = Date(), completionHandler: @escaping (EventResponse?, Error?) -> Void) {
@@ -251,12 +296,12 @@ public extension EventClient {
             eventTime: eventTime
         )
         
-        createEvent(event: itemEvent, completionHandler: completionHandler)
+        createEvent(itemEvent, completionHandler: completionHandler)
     }
 }
 
 public extension EventClient {
-    public func recordAction(action: String, byUserID userID: String, onItemID itemID: String, properties: [String: Any] = [:], eventTime: Date = Date(), completionHandler: @escaping (EventResponse?, Error?) -> Void) {
+    public func recordAction(_ action: String, byUserID userID: String, onItemID itemID: String, properties: [String: Any] = [:], eventTime: Date = Date(), completionHandler: @escaping (EventResponse?, Error?) -> Void) {
         let event = Event(
             event: action,
             entityType: Event.userEntityType,
@@ -266,7 +311,7 @@ public extension EventClient {
             eventTime: eventTime
         )
         
-        createEvent(event: event, completionHandler: completionHandler)
+        createEvent(event, completionHandler: completionHandler)
     }
 }
 
