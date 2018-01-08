@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name = 'PredictionIO'
-  spec.version = '0.4.0'
+  spec.version = '1.0.0'
   spec.license = 'Apache 2.0'
   spec.summary = 'The iOS SDK that provides easy-to-use functions to integrate with PredictionIO REST API services'
   spec.homepage = 'https://github.com/minhtule/PredictionIO-Swift-SDK'
