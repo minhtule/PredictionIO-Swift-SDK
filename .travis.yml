@@ -1,13 +1,12 @@
 language: objective-c
-osx_image: xcode6.4
-
-before_install:
-- gem install xcpretty -N
+osx_image: xcode9.2
+git:
+  depth: 1
 
 before_script:
 # Set up mock API server
 - cd ..
-- git clone git://github.com/minhtule/PredictionIO-Mock-Server.git
+- git clone git://github.com/minhtule/PredictionIO-Mock-Server.git --depth 1
 - cd PredictionIO-Mock-Server
 - npm install
 - node app.js &
@@ -16,15 +15,15 @@ before_script:
 
 script:
 # Check Podspec
-- pod lib lint --quick
+- pod lib lint
 
 - set -o pipefail
 
 # Test the SDK on iOS
-- xcodebuild -workspace PredictionIOSDK.xcworkspace -scheme "PredictionIO iOS SDK" -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 6" ONLY_ACTIVE_ARCH=NO test | xcpretty -c
+- xcodebuild -workspace PredictionIO.xcworkspace -scheme "PredictionIO iOS" -destination "OS=11.2,name=iPhone X" ONLY_ACTIVE_ARCH=NO ENABLE_TESTABILITY=YES test | xcpretty
 
 # Build the SDK on OS X
-- xcodebuild -workspace PredictionIOSDK.xcworkspace -scheme "PredictionIO OSX SDK" -sdk macosx -destination "platform=OS X,arch=x86_64" ONLY_ACTIVE_ARCH=NO build | xcpretty -c
+# - xcodebuild -workspace PredictionIO.xcworkspace -scheme "PredictionIO OSX SDK" -sdk macosx -destination "platform=OS X,arch=x86_64" ONLY_ACTIVE_ARCH=NO build | xcpretty
 
 # Build the iOS demo app
-- xcodebuild -workspace PredictionIOSDK.xcworkspace -scheme "iOS Example" -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 6" ONLY_ACTIVE_ARCH=NO build | xcpretty -c
+# - xcodebuild -workspace PredictionIO.xcworkspace -scheme "iOS Example" -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 6" ONLY_ACTIVE_ARCH=NO build | xcpretty
