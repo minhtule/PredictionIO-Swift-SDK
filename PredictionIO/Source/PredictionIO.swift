@@ -212,7 +212,7 @@ public class EventClient: BaseClient {
 }
 
 public extension EventClient {
-    public func setUser(userID: String, properties: [String: Any], eventTime: Date = Date(), completionHandler: @escaping (EventResponse?, Error?) -> Void) {
+    func setUser(userID: String, properties: [String: Any], eventTime: Date = Date(), completionHandler: @escaping (EventResponse?, Error?) -> Void) {
 
         let userEvent = Event(
             event: Event.setEvent,
@@ -225,7 +225,7 @@ public extension EventClient {
         createEvent(userEvent, completionHandler: completionHandler)
     }
 
-    public func unsetUser(userID: String, properties: [String: Any], eventTime: Date = Date(), completionHandler: @escaping (EventResponse?, Error?) -> Void) {
+    func unsetUser(userID: String, properties: [String: Any], eventTime: Date = Date(), completionHandler: @escaping (EventResponse?, Error?) -> Void) {
         let userEvent = Event(
             event: Event.unsetEvent,
             entityType: Event.userEntityType,
@@ -237,7 +237,7 @@ public extension EventClient {
         createEvent(userEvent, completionHandler: completionHandler)
     }
 
-    public func deleteUser(userID: String, eventTime: Date = Date(), completionHandler: @escaping (EventResponse?, Error?) -> Void) {
+    func deleteUser(userID: String, eventTime: Date = Date(), completionHandler: @escaping (EventResponse?, Error?) -> Void) {
         let userEvent = Event(
             event: Event.deleteEvent,
             entityType: Event.userEntityType,
@@ -250,7 +250,7 @@ public extension EventClient {
 }
 
 public extension EventClient {
-    public func setItem(itemID: String, properties: [String: Any], eventTime: Date = Date(), completionHandler: @escaping (EventResponse?, Error?) -> Void) {
+    func setItem(itemID: String, properties: [String: Any], eventTime: Date = Date(), completionHandler: @escaping (EventResponse?, Error?) -> Void) {
         let itemEvent = Event(
             event: Event.setEvent,
             entityType: Event.itemEntityType,
@@ -262,7 +262,7 @@ public extension EventClient {
         createEvent(itemEvent, completionHandler: completionHandler)
     }
 
-    public func unsetItem(itemID: String, properties: [String: Any], eventTime: Date = Date(), completionHandler: @escaping (EventResponse?, Error?) -> Void) {
+    func unsetItem(itemID: String, properties: [String: Any], eventTime: Date = Date(), completionHandler: @escaping (EventResponse?, Error?) -> Void) {
         let itemEvent = Event(
             event: Event.unsetEvent,
             entityType: Event.itemEntityType,
@@ -274,7 +274,7 @@ public extension EventClient {
         createEvent(itemEvent, completionHandler: completionHandler)
     }
 
-    public func deleteItem(itemID: String, eventTime: Date = Date(), completionHandler: @escaping (EventResponse?, Error?) -> Void) {
+    func deleteItem(itemID: String, eventTime: Date = Date(), completionHandler: @escaping (EventResponse?, Error?) -> Void) {
         let itemEvent = Event(
             event: Event.deleteEvent,
             entityType: Event.itemEntityType,
@@ -287,7 +287,7 @@ public extension EventClient {
 }
 
 public extension EventClient {
-    public func recordAction(_ action: String, byUserID userID: String, onItemID itemID: String, properties: [String: Any] = [:], eventTime: Date = Date(), completionHandler: @escaping (EventResponse?, Error?) -> Void) {
+    func recordAction(_ action: String, byUserID userID: String, onItemID itemID: String, properties: [String: Any] = [:], eventTime: Date = Date(), completionHandler: @escaping (EventResponse?, Error?) -> Void) {
         let event = Event(
             event: action,
             entityType: Event.userEntityType,

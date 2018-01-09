@@ -46,10 +46,8 @@ class EventClientTests: XCTestCase {
             XCTAssertNotNil(eventStatuses, "Request should succeed, got \(error!)")
             XCTAssertEqual(eventStatuses!.count, 3)
 
-            for eventStatus in eventStatuses! {
-                if case .failed = eventStatus {
-                    XCTFail("There should be any failure here.")
-                }
+            for case .failed in eventStatuses! {
+                XCTFail("There should be any failure here.")
             }
 
             expectation.fulfill()
@@ -98,18 +96,10 @@ class EventClientTests: XCTestCase {
 
     func testDeleteEvent() {
         let event = Event(event: "register", entityType: "user", entityID: "foo")
-        let createEventExpectation = self.expectation(description: "Creating an event")
-        var eventID: String?
-
-        eventClient.createEvent(event) { response, error in
-            eventID = response!.eventID
-            createEventExpectation.fulfill()
-        }
-
-        waitForExpectations(timeout: 5)
+        let eventID = createEvent(event)
 
         let deleteEventExpectation = self.expectation(description: "Deleting an event")
-        eventClient.deleteEvent(eventID: eventID!) { error in
+        eventClient.deleteEvent(eventID: eventID) { error in
             XCTAssertNil(error, "Request should succeed, got \(error!)")
 
             deleteEventExpectation.fulfill()
@@ -118,7 +108,7 @@ class EventClientTests: XCTestCase {
         waitForExpectations(timeout: 5)
     }
 
-    // Mark: Convenient methods for user entity
+    // MARK: Convenient methods for user entity
 
     func testSetUser() {
         let expectation = self.expectation(description: "Setting properties of a user")
@@ -162,7 +152,7 @@ class EventClientTests: XCTestCase {
         }
     }
 
-    // Mark: Convenient methods for item entity
+    // MARK: Convenient methods for item entity
 
     func testSetItem() {
         let expectation = self.expectation(description: "Setting properties of an item")
@@ -229,7 +219,7 @@ class EventClientTests: XCTestCase {
         let createEventExpectation = self.expectation(description: "Creating an event")
         var eventID: String = ""
 
-        eventClient.createEvent(event) { response, error in
+        eventClient.createEvent(event) { response, _ in
             eventID = response!.eventID
             createEventExpectation.fulfill()
         }

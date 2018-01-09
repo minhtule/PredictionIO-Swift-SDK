@@ -61,13 +61,13 @@ class EngineClientTests: XCTestCase {
             XCTAssertNil(error, "\(error!)")
         }
     }
+}
 
-    private struct SimilarProductResponse: Decodable {
-        struct ItemScore: Decodable {
-            let item: Int
-            let score: Double
-        }
-
-        let itemScores: [ItemScore]
+private struct SimilarProductResponse: Decodable {
+    struct ItemScore: Decodable {
+        let item: Int
+        let score: Double
     }
+
+    let itemScores: [ItemScore]
 }

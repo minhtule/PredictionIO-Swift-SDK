@@ -9,6 +9,7 @@
 import XCTest
 @testable import PredictionIO
 
+// swiftlint:disable force_cast force_try
 class EventTests: XCTestCase {
 
     func testInit() {
@@ -161,9 +162,9 @@ class EventTests: XCTestCase {
     }
 
     private func isEqualJSON(_ left: Any, _ right: Any) -> Bool {
+        switch (left, right) {
         // Dictionary
-        if let leftDict = left as? [String: Any],
-            let rightDict = right as? [String: Any] {
+        case let (leftDict as [String: Any], rightDict as [String: Any]):
             if leftDict.count != rightDict.count {
                 return false
             }
@@ -175,11 +176,8 @@ class EventTests: XCTestCase {
             }
 
             return true
-        }
-
         // Array
-        if let leftArray = left as? [Any],
-            let rightArray = right as? [Any] {
+        case let (leftArray as [Any], rightArray as [Any]):
             if leftArray.count != rightArray.count {
                 return false
             }
@@ -191,23 +189,18 @@ class EventTests: XCTestCase {
             }
 
             return true
-        }
-
         // Bool
-        if let leftBool = left as? Bool, let rightBool = right as? Bool {
+        case let (leftBool as Bool, rightBool as Bool):
             return leftBool == rightBool
-        }
-
         // String
-        if let leftString = left as? String, let rightString = right as? String {
+        case let (leftString as String, rightString as String):
             return leftString == rightString
-        }
-
         // Number
-        if let leftNumber = left as? NSNumber, let rightNumber = right as? NSNumber {
+        case let (leftNumber as NSNumber, rightNumber as NSNumber):
             return leftNumber == rightNumber
+        // Otherwise
+        default:
+            return false
         }
-
-        return false
     }
 }
