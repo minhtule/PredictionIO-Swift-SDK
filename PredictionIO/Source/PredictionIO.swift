@@ -188,13 +188,13 @@ public class EventClient: BaseClient {
         }
     }
 
-    lazy var eventsURL: String = { "\(baseURL)/events.json" }()
-    lazy var batchEventsURL: String = { "\(baseURL)/batch/events.json" }()
-    lazy var queryParams: QueryParams = {
+    var eventsURL: String { return "\(baseURL)/events.json" }
+    var batchEventsURL: String { return "\(baseURL)/batch/events.json" }
+    var queryParams: QueryParams {
         var queryParams = ["accessKey": accessKey]
         queryParams["channel"] = channel
         return queryParams
-    }()
+    }
 
     func eventURL(for eventID: String) throws -> String {
         if let escapedEventID = eventID.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) {
@@ -322,5 +322,5 @@ public class EngineClient: BaseClient {
         }
     }
 
-    lazy var queriesURL: String = { "\(baseURL)/queries.json" }()
+    var queriesURL: String { return "\(baseURL)/queries.json" }
 }
