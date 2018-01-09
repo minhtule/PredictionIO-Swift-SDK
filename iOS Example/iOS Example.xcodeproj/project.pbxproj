@@ -7,17 +7,58 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		41836F8320048EDE0098B1C2 /* RatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41836F8220048EDE0098B1C2 /* RatingViewController.swift */; };
+		41836F8520048EFA0098B1C2 /* RecommendationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41836F8420048EFA0098B1C2 /* RecommendationViewController.swift */; };
 		418EAE4D200487060073DF34 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418EAE4C200487060073DF34 /* AppDelegate.swift */; };
-		418EAE4F200487060073DF34 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418EAE4E200487060073DF34 /* ViewController.swift */; };
 		418EAE52200487060073DF34 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 418EAE50200487060073DF34 /* Main.storyboard */; };
 		418EAE54200487060073DF34 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 418EAE53200487060073DF34 /* Assets.xcassets */; };
 		418EAE57200487060073DF34 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 418EAE55200487060073DF34 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		41836F7720048D970098B1C2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 41836F7020048D970098B1C2 /* PredictionIO.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 411904261FF9E02A0097434E;
+			remoteInfo = "PredictionIO iOS";
+		};
+		41836F7920048D970098B1C2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 41836F7020048D970098B1C2 /* PredictionIO.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4119042F1FF9E02A0097434E;
+			remoteInfo = "PredictionIO iOS Tests";
+		};
+		41836F7B20048D970098B1C2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 41836F7020048D970098B1C2 /* PredictionIO.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 41A66D132003B11100BFC1F3;
+			remoteInfo = "PredictionIO macOS";
+		};
+		41836F7D20048D970098B1C2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 41836F7020048D970098B1C2 /* PredictionIO.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 41A66D1F2003B26400BFC1F3;
+			remoteInfo = "PredictionIO macOS Tests";
+		};
+		41836F7F20048DCC0098B1C2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 41836F7020048D970098B1C2 /* PredictionIO.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 411904251FF9E02A0097434E;
+			remoteInfo = "PredictionIO iOS";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		41836F7020048D970098B1C2 /* PredictionIO.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PredictionIO.xcodeproj; path = ../PredictionIO/PredictionIO.xcodeproj; sourceTree = "<group>"; };
+		41836F8220048EDE0098B1C2 /* RatingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingViewController.swift; sourceTree = "<group>"; };
+		41836F8420048EFA0098B1C2 /* RecommendationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationViewController.swift; sourceTree = "<group>"; };
 		418EAE49200487060073DF34 /* iOS Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		418EAE4C200487060073DF34 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		418EAE4E200487060073DF34 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		418EAE51200487060073DF34 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		418EAE53200487060073DF34 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		418EAE56200487060073DF34 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -38,7 +79,6 @@
 		414B3763200487F400290B0F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				418EAE50200487060073DF34 /* Main.storyboard */,
 				418EAE53200487060073DF34 /* Assets.xcassets */,
 				418EAE55200487060073DF34 /* LaunchScreen.storyboard */,
 				418EAE58200487060073DF34 /* Info.plist */,
@@ -46,11 +86,23 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		41836F7120048D970098B1C2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				41836F7820048D970098B1C2 /* PredictionIO.framework */,
+				41836F7A20048D970098B1C2 /* PredictionIO iOS Tests.xctest */,
+				41836F7C20048D970098B1C2 /* PredictionIO.framework */,
+				41836F7E20048D970098B1C2 /* PredictionIO macOS Tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		418EAE40200487060073DF34 = {
 			isa = PBXGroup;
 			children = (
 				418EAE4B200487060073DF34 /* Source */,
 				418EAE4A200487060073DF34 /* Products */,
+				41836F7020048D970098B1C2 /* PredictionIO.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -66,7 +118,9 @@
 			isa = PBXGroup;
 			children = (
 				418EAE4C200487060073DF34 /* AppDelegate.swift */,
-				418EAE4E200487060073DF34 /* ViewController.swift */,
+				41836F8220048EDE0098B1C2 /* RatingViewController.swift */,
+				41836F8420048EFA0098B1C2 /* RecommendationViewController.swift */,
+				418EAE50200487060073DF34 /* Main.storyboard */,
 				414B3763200487F400290B0F /* Supporting Files */,
 			);
 			path = Source;
@@ -86,6 +140,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				41836F8020048DCC0098B1C2 /* PBXTargetDependency */,
 			);
 			name = "iOS Example";
 			productName = "iOS Example";
@@ -119,12 +174,49 @@
 			mainGroup = 418EAE40200487060073DF34;
 			productRefGroup = 418EAE4A200487060073DF34 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 41836F7120048D970098B1C2 /* Products */;
+					ProjectRef = 41836F7020048D970098B1C2 /* PredictionIO.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				418EAE48200487060073DF34 /* iOS Example */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		41836F7820048D970098B1C2 /* PredictionIO.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = PredictionIO.framework;
+			remoteRef = 41836F7720048D970098B1C2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		41836F7A20048D970098B1C2 /* PredictionIO iOS Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "PredictionIO iOS Tests.xctest";
+			remoteRef = 41836F7920048D970098B1C2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		41836F7C20048D970098B1C2 /* PredictionIO.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = PredictionIO.framework;
+			remoteRef = 41836F7B20048D970098B1C2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		41836F7E20048D970098B1C2 /* PredictionIO macOS Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "PredictionIO macOS Tests.xctest";
+			remoteRef = 41836F7D20048D970098B1C2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		418EAE47200487060073DF34 /* Resources */ = {
@@ -144,12 +236,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				418EAE4F200487060073DF34 /* ViewController.swift in Sources */,
+				41836F8520048EFA0098B1C2 /* RecommendationViewController.swift in Sources */,
 				418EAE4D200487060073DF34 /* AppDelegate.swift in Sources */,
+				41836F8320048EDE0098B1C2 /* RatingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		41836F8020048DCC0098B1C2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "PredictionIO iOS";
+			targetProxy = 41836F7F20048DCC0098B1C2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		418EAE50200487060073DF34 /* Main.storyboard */ = {

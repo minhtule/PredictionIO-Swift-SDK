@@ -68,7 +68,7 @@ private struct SimilarProductResponse: Decodable {
     struct ItemScore: Decodable {
         let itemID: String
         let score: Double
-        
+
         enum CodingKeys: String, CodingKey {
             case itemID = "item"
             case score
