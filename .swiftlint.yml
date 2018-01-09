@@ -1,7 +1,8 @@
 disabled_rules:
-  - line_length
-  - unused_optional_binding
   - cyclomatic_complexity
+  - line_length
+  - todo
+  - unused_optional_binding
 opt_in_rules:
   - array_init
   - attributes
@@ -20,10 +21,13 @@ opt_in_rules:
   - operator_usage_whitespace
   - overridden_super_call
   - pattern_matching_keywords
-  - private_outlet
   - prohibited_super_call
   - redundant_nil_coalescing
   - trailing_closure
   - unneeded_parentheses_in_closure_argument
   - vertical_parameter_alignment_on_call
-  
+
+# Rule configurations
+nesting:
+  type_level:
+    warning: 2
