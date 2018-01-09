@@ -18,11 +18,6 @@ env:
     # macOS
     - DESTINATION="arch=x86_64"                   SCHEME="$MACOS_FRAMEWORK_SCHEME"  BUILD_EXAMPLE="NO"   LINTING="NO"
 
-before_intall:
-  - if [ $LINTING == "YES" ]; then
-      brew install swiftlint;
-    fi
-
 before_script:
   # Set up mock API server
   - cd ..
@@ -38,7 +33,11 @@ script:
 
   # Linting with SwiftLint and CocoaPods
   - if [ $LINTING == "YES" ]; then
+      echo "SwiftLint version `swiftlint version`";
+      echo "SwiftLint linting...";
       swiftlint lint --strict;
+      echo "";
+      echo "CocoaPods linting...";
       pod lib lint;
     fi
 
