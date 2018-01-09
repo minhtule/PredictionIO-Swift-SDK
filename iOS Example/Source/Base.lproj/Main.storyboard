@@ -54,22 +54,42 @@
                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KLs-5x-Wvt">
                                         <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
                                         <state key="normal" image="star-empty"/>
+                                        <state key="selected" image="star"/>
+                                        <connections>
+                                            <action selector="starButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DUz-Ib-eps"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1pG-ZB-udz">
                                         <rect key="frame" x="37" y="0.0" width="32" height="32"/>
                                         <state key="normal" image="star-empty"/>
+                                        <state key="selected" image="star"/>
+                                        <connections>
+                                            <action selector="starButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7Ng-FW-xk3"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fun-AW-ced">
                                         <rect key="frame" x="74" y="0.0" width="32" height="32"/>
                                         <state key="normal" image="star-empty"/>
+                                        <state key="selected" image="star"/>
+                                        <connections>
+                                            <action selector="starButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bqV-XS-M5v"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1bK-E5-wCD">
                                         <rect key="frame" x="111" y="0.0" width="32" height="32"/>
                                         <state key="normal" image="star-empty"/>
+                                        <state key="selected" image="star"/>
+                                        <connections>
+                                            <action selector="starButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PmX-x9-Wxa"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JTn-ah-NJV">
                                         <rect key="frame" x="148" y="0.0" width="32" height="32"/>
                                         <state key="normal" image="star-empty"/>
+                                        <state key="selected" image="star"/>
+                                        <connections>
+                                            <action selector="starButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9m6-Lh-rIA"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -77,6 +97,9 @@
                                 <rect key="frame" x="161.5" y="299.5" width="52" height="39"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="22"/>
                                 <state key="normal" title="Rate!"/>
+                                <connections>
+                                    <action selector="rateButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MqY-yk-iqZ"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -99,6 +122,15 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Rating" image="edit" id="eo0-vh-qlb"/>
+                    <connections>
+                        <outlet property="movieIDTextField" destination="aRq-tz-PpJ" id="aly-9T-Tze"/>
+                        <outlet property="userIDTextField" destination="exM-P3-Qar" id="0OA-vC-11k"/>
+                        <outletCollection property="starButtons" destination="JTn-ah-NJV" collectionClass="NSMutableArray" id="1x3-je-D79"/>
+                        <outletCollection property="starButtons" destination="1bK-E5-wCD" collectionClass="NSMutableArray" id="CAP-9E-tue"/>
+                        <outletCollection property="starButtons" destination="Fun-AW-ced" collectionClass="NSMutableArray" id="VWa-Lp-ahf"/>
+                        <outletCollection property="starButtons" destination="1pG-ZB-udz" collectionClass="NSMutableArray" id="AUJ-FK-a38"/>
+                        <outletCollection property="starButtons" destination="KLs-5x-Wvt" collectionClass="NSMutableArray" id="ewh-aR-PVF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -223,6 +255,7 @@
     <resources>
         <image name="edit" width="32" height="32"/>
         <image name="list" width="32" height="32"/>
+        <image name="star" width="30" height="32"/>
         <image name="star-empty" width="32" height="32"/>
     </resources>
 </document>

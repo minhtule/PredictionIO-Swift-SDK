@@ -7,28 +7,47 @@
 //
 
 import UIKit
+import PredictionIO
+
+let accessKey = "Your app's access key"
 
 class RatingViewController: UIViewController {
+    @IBOutlet weak var userIDTextField: UITextField!
+    @IBOutlet weak var movieIDTextField: UITextField!
+    @IBOutlet var starButtons: [UIButton]!
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    let eventClient = EventClient(accessKey: accessKey)
+    var userID = ""
+    var movieID = ""
+    var rating = 0
 
-        // Do any additional setup after loading the view.
+    @IBAction func starButtonAction(_ sender: UIButton) {
+        if sender.tag == rating {
+            rating = 0
+        } else {
+            rating = sender.tag
+        }
+
+        starButtons.forEach { $0.isSelected = ($0.tag <= self.rating) }
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func rateButtonAction(_ sender: UIButton) {
+        userID = userIDTextField.text ?? ""
+        movieID = movieIDTextField.text ?? ""
+
+        eventClient.recordAction("rate", byUserID: userID, onItemID: movieID, properties: ["rating": rating]) { response, error in
+            let alertController: UIAlertController
+            if let response = response {
+                alertController = UIAlertController(title: "Successful", message: "EventID: \(response.eventID)", preferredStyle: .alert)
+            } else {
+                alertController = UIAlertController(title: "Failed", message: "\(error.debugDescription)", preferredStyle: .alert)
+            }
+            let okAction = UIAlertAction(title: "OK", style: .default)
+            alertController.addAction(okAction)
+
+            DispatchQueue.main.async {
+                self.present(alertController, animated: true)
+            }
+        }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

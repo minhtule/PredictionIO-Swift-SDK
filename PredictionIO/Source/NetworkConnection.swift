@@ -65,6 +65,7 @@ class NetworkConnection {
                 case 200...201:
                     completionHandler(data, nil)
                 default:
+                    // TODO: serialize payload to get the error message
                     completionHandler(nil, PIOError.RequestFailureReason.unknownStatusCodeError(statusCode: response.statusCode))
                 }
             }
