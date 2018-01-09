@@ -10,10 +10,15 @@ env:
     - MACOS_FRAMEWORK_SCHEME="PredictionIO macOS"
   matrix:
     # iOS
-    - DESTINATION="OS=11.2,name=iPhone X"         SCHEME="$IOS_FRAMEWORK_SCHEME"    BUILD_EXAMPLE="YES"  POD_LINT="YES"
-    - DESTINATION="OS=10.3.1,name=iPhone 7 Plus"  SCHEME="$IOS_FRAMEWORK_SCHEME"    BUILD_EXAMPLE="YES"  POD_LINT="NO"
+    - DESTINATION="OS=11.2,name=iPhone X"         SCHEME="$IOS_FRAMEWORK_SCHEME"    BUILD_EXAMPLE="YES"  LINTING="YES"
+    - DESTINATION="OS=10.3.1,name=iPhone 7 Plus"  SCHEME="$IOS_FRAMEWORK_SCHEME"    BUILD_EXAMPLE="YES"  LINTING="NO"
     # macOS
-    - DESTINATION="arch=x86_64"                   SCHEME="$MACOS_FRAMEWORK_SCHEME"  BUILD_EXAMPLE="NO"   POD_LINT="NO"
+    - DESTINATION="arch=x86_64"                   SCHEME="$MACOS_FRAMEWORK_SCHEME"  BUILD_EXAMPLE="NO"   LINTING="NO"
+
+before_intall:
+  - if [ $LINTING == "YES" ]; then
+      brew install swiftlint;
+    fi
 
 before_script:
   # Set up mock API server
@@ -28,12 +33,14 @@ before_script:
 script:
   - set -o pipefail
 
+  # Linting with SwiftLint and CocoaPods
+  - if [ $LINTING == "YES" ]; then
+      swiftlint lint --strict;
+      pod lib lint;
+    fi
+
   # Test in Release
   - xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" -destination "$DESTINATION" -configuration Release ONLY_ACTIVE_ARCH=NO ENABLE_TESTABILITY=YES test | xcpretty
 
   # Build the iOS demo app in Debug
   # - xcodebuild -workspace PredictionIO.xcworkspace -scheme "iOS Example" -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 6" ONLY_ACTIVE_ARCH=NO build | xcpretty
-
-  - if [ $POD_LINT == "YES" ]; then
-      pod lib lint;
-    fi
