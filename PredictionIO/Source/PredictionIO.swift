@@ -188,14 +188,8 @@ public class EventClient: BaseClient {
         }
     }
 
-    lazy var eventsURL: String = {
-        return "\(baseURL)/events.json"
-    }()
-
-    lazy var batchEventsURL: String = {
-        return "\(baseURL)/batch/events.json"
-    }()
-
+    lazy var eventsURL: String = { "\(baseURL)/events.json" }()
+    lazy var batchEventsURL: String = { "\(baseURL)/batch/events.json" }()
     lazy var queryParams: QueryParams = {
         var queryParams = ["accessKey": accessKey]
         queryParams["channel"] = channel
@@ -328,7 +322,5 @@ public class EngineClient: BaseClient {
         }
     }
 
-    lazy var queriesURL: String = {
-        return "\(baseURL)/queries.json"
-    }()
+    lazy var queriesURL: String = { "\(baseURL)/queries.json" }()
 }

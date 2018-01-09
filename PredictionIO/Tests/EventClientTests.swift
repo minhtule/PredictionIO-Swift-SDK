@@ -113,11 +113,11 @@ class EventClientTests: XCTestCase {
     func testSetUser() {
         let expectation = self.expectation(description: "Setting properties of a user")
 
-        eventClient.setUser(userID: "u1", properties: ["p1": "foo", "p2": "bar"], completionHandler: { response, error in
+        eventClient.setUser(userID: "u1", properties: ["p1": "foo", "p2": "bar"]) { response, error in
             XCTAssertNotNil(response, "Request should succeed, got \(error!)")
 
             expectation.fulfill()
-        })
+        }
 
         waitForExpectations(timeout: 5) { error in
             XCTAssertNil(error, "\(error!)")
@@ -127,11 +127,11 @@ class EventClientTests: XCTestCase {
     func testUnsetUser() {
         let expectation = self.expectation(description: "Unsetting properties of a user")
 
-        eventClient.unsetUser(userID: "u2", properties: ["p1": NSNull()], completionHandler: { response, error in
+        eventClient.unsetUser(userID: "u2", properties: ["p1": NSNull()]) { response, error in
             XCTAssertNotNil(response, "Request should succeed, got \(error!)")
 
             expectation.fulfill()
-        })
+        }
 
         waitForExpectations(timeout: 5) { error in
             XCTAssertNil(error, "\(error!)")
@@ -141,11 +141,11 @@ class EventClientTests: XCTestCase {
     func testDeleteUser() {
         let expectation = self.expectation(description: "Unsetting properties of a user")
 
-        eventClient.deleteUser(userID: "u4", completionHandler: { response, error in
+        eventClient.deleteUser(userID: "u4") { response, error in
             XCTAssertNotNil(response, "Request should succeed, got \(error!)")
 
             expectation.fulfill()
-        })
+        }
 
         waitForExpectations(timeout: 5) { error in
             XCTAssertNil(error, "\(error!)")
@@ -157,11 +157,11 @@ class EventClientTests: XCTestCase {
     func testSetItem() {
         let expectation = self.expectation(description: "Setting properties of an item")
 
-        eventClient.setItem(itemID: "i1", properties: ["p1": "foo", "p2": "bar"], completionHandler: { response, error in
+        eventClient.setItem(itemID: "i1", properties: ["p1": "foo", "p2": "bar"]) { response, error in
             XCTAssertNotNil(response, "Request should succeed, got \(error!)")
 
             expectation.fulfill()
-        })
+        }
 
         waitForExpectations(timeout: 5) { error in
             XCTAssertNil(error, "\(error!)")
@@ -171,11 +171,11 @@ class EventClientTests: XCTestCase {
     func testUnsetItem() {
         let expectation = self.expectation(description: "Unsetting properties of an item")
 
-        eventClient.unsetItem(itemID: "i2", properties: ["p1": NSNull()], completionHandler: { response, error in
+        eventClient.unsetItem(itemID: "i2", properties: ["p1": NSNull()]) { response, error in
             XCTAssertNotNil(response, "Request should succeed, got \(error!)")
 
             expectation.fulfill()
-        })
+        }
 
         waitForExpectations(timeout: 5) { error in
             XCTAssertNil(error, "\(error!)")
@@ -185,11 +185,11 @@ class EventClientTests: XCTestCase {
     func testDeleteItem() {
         let expectation = self.expectation(description: "Unsetting properties of an item")
 
-        eventClient.deleteItem(itemID: "i4", completionHandler: { response, error in
+        eventClient.deleteItem(itemID: "i4") { response, error in
             XCTAssertNotNil(response, "Request should succeed, got \(error!)")
 
             expectation.fulfill()
-        })
+        }
 
         waitForExpectations(timeout: 5) { error in
             XCTAssertNil(error, "\(error!)")
@@ -201,11 +201,11 @@ class EventClientTests: XCTestCase {
     func testRecordAction() {
         let expectation = self.expectation(description: "Record user action on item")
 
-        eventClient.recordAction("rate", byUserID: "u1", onItemID: "i1", properties: ["rating": 5], completionHandler: { response, error in
+        eventClient.recordAction("rate", byUserID: "u1", onItemID: "i1", properties: ["rating": 5]) { response, error in
             XCTAssertNotNil(response, "Request should succeed, got \(error!)")
 
             expectation.fulfill()
-        })
+        }
 
         waitForExpectations(timeout: 5) { error in
             XCTAssertNil(error, "\(error!)")
