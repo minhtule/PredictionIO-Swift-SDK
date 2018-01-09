@@ -8,14 +8,10 @@
 
 import Foundation
 
-// MARK: - Event
-
-/**
- An `Event` class that represents a PredictionIO's event  dictionary in
- its REST API.
- */
+/// The `Event` struct represents an event dictionary in the REST API
+/// to a PredictionIO's event server.
 public struct Event {
-    // MARK: Constants
+    // MARK: - Constants
 
     /// Reversed set event name.
     public static let setEvent = "$set"
@@ -32,7 +28,7 @@ public struct Event {
     /// Predefined item entity type.
     public static let itemEntityType = "item"
 
-    // MARK: Properties
+    // MARK: - Properties
 
     /// The event name e.g. "sign-up", "rate", "view".
     ///
@@ -61,7 +57,7 @@ public struct Event {
     /// The target entity ID.
     public let targetEntityID: String?
 
-    /// The event properties.
+    /// The event properties. It should be a valid JSON dictionary.
     ///
     /// **Note:** All properties names starting with "$" and "pio_" are reversed
     /// and shouldn't be used.
@@ -73,16 +69,18 @@ public struct Event {
     /// The event ID. This value should only be set by the server.
     public let eventID: String?
 
-    // MARK: Constructors
+    // MARK: - Initialization
 
-    /**
-     :param: event The event name
-     :param: entityType The entity type
-     :param: entityID The entity ID
-     :param: targetEntity The target entity (type, ID) tuple
-     :param: properties The event properties
-     :param: eventTime The event time
-     */
+    /// Creates an event struct.
+    ///
+    /// - parameter event: The event name.
+    /// - parameter entityType: The entity type.
+    /// - parameter entityID: The entity ID.
+    /// - parameter targetEntity: The target entity (type, ID) tuple.
+    /// - parameter properties: The event properties in JSON dictionary.
+    /// - parameter eventTime: The event time.
+    ///
+    /// - returns: The new Event instance.
     public init(event: String, entityType: String, entityID: String, targetEntity: (type: String, id: String)? = nil, properties: [String: Any]? = nil, eventTime: Date = Date()) {
         self.event = event
         self.entityType = entityType
@@ -101,6 +99,13 @@ public struct Event {
         self.eventID = nil
     }
 
+    // MARK: - Validation
+
+    /// Validates an event against the following rules:
+    ///   - `properties` must be a valid JSON dictionary.
+    ///   - An `$unset` event must not have an empty or nil `properties`.
+    ///
+    /// - returns: A `PIOError.invalidEvent` error if the validation fails. Otherwise, returns nil.
     public func validate() -> Error? {
         if let properties = properties, !JSONSerialization.isValidJSONObject(properties) {
             return PIOError.InvalidEventReason.invalidJSONPropertiesError()
@@ -114,8 +119,18 @@ public struct Event {
     }
 }
 
-extension Event {
+// MARK: -
 
+extension Event {
+    // MARK: - JSON Serialization and Deserialization
+
+    /// Creates an event from a JSON dictionary.
+    ///
+    /// - parameters json: The JSON dictionary.
+    ///
+    /// - throws: A `PIOError.failedDeserialization` error if deserialization fails.
+    ///
+    /// - returns: The new Event instance.
     public init(json: [String: Any]) throws {
         guard let event = json["event"] as? String else {
             throw PIOError.DeserializationFailureReason.missingFieldError(field: "event")
@@ -165,7 +180,10 @@ extension Event {
         self.eventID = eventID
     }
 
-    var json: [String: Any] {
+    /// Returns a JSON dictionary representing the event.
+    ///
+    /// - returns: The JSON dictionary.
+    public var json: [String: Any] {
         var json: [String: Any] = [
             "event": event,
             "entityType": entityType,
