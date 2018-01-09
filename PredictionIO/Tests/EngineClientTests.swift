@@ -34,16 +34,17 @@ class EngineClientTests: XCTestCase {
 
     func testSendQueryWithResponseType() {
         // This test expects the engine server to return a JSON response that
-        // has same response format as the similar product engine template e.g.
+        // has same response format as the recommendation/similar product engine
+        // template e.g.
         //
         // {
         //     "itemScores": [
         //         {
-        //             "item": 39,
+        //             "item": "39",
         //             "score": 6.177719297832409
         //         },
         //         {
-        //             "item": 79,
+        //             "item": "79",
         //             "score": 5.931687319083594
         //         }
         //     ]
@@ -65,8 +66,13 @@ class EngineClientTests: XCTestCase {
 
 private struct SimilarProductResponse: Decodable {
     struct ItemScore: Decodable {
-        let item: Int
+        let itemID: String
         let score: Double
+        
+        enum CodingKeys: String, CodingKey {
+            case itemID = "item"
+            case score
+        }
     }
 
     let itemScores: [ItemScore]
