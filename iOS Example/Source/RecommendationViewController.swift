@@ -37,7 +37,10 @@ class RecommendationViewController: UIViewController {
                 let alertController = UIAlertController(title: "Failed", message: "\(error.debugDescription)", preferredStyle: .alert)
                 let okAction = UIAlertAction(title: "OK", style: .default)
                 alertController.addAction(okAction)
-                self?.present(alertController, animated: true)
+
+                DispatchQueue.main.async {
+                    self?.present(alertController, animated: true)
+                }
             }
 
             DispatchQueue.main.async {
