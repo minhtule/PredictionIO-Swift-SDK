@@ -76,11 +76,11 @@ public struct Event {
     /// - parameter event: The event name.
     /// - parameter entityType: The entity type.
     /// - parameter entityID: The entity ID.
-    /// - parameter targetEntity: The target entity (type, ID) tuple.
-    /// - parameter properties: The event properties in JSON dictionary.
-    /// - parameter eventTime: The event time.
+    /// - parameter targetEntity: The target entity (type, ID) tuple. `nil` by default.
+    /// - parameter properties: The event properties in JSON dictionary. `nil` by default.
+    /// - parameter eventTime: The event time. Current local time by default.
     ///
-    /// - returns: The new Event instance.
+    /// - returns: The new `Event` instance.
     public init(event: String, entityType: String, entityID: String, targetEntity: (type: String, id: String)? = nil, properties: [String: Any]? = nil, eventTime: Date = Date()) {
         self.event = event
         self.entityType = entityType
