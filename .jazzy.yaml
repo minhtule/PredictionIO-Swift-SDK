@@ -1,7 +1,7 @@
 author: Minh-Tu Le
 author_url: https://github.com/minhtule
 github_url: https://github.com/minhtule/PredictionIO-Swift-SDK
-root_url: https://minhtule.github.io/PredictionIO-Swift-SDK
+root_url: https://minhtule.github.io/PredictionIO-Swift-SDK/
 module: PredictionIO
 output: docs
 theme: apple
