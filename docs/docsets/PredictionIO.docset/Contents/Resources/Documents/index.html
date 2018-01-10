@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>PredictionIO  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a title="PredictionIO  Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="index.html">PredictionIO Docs</a> (95% documented)</p>
+        <p class="header-right"><a href="https://github.com/minhtule/PredictionIO-Swift-SDK"><img src="img/gh.png"/>View on GitHub</a></p>
+        <p class="header-right"><a href="dash-feed://https%3A%2F%2Fminhtule%2Egithub%2Eio%2Fdocsets%2FPredictionIO%2Exml"><img src="img/dash.png"/>Install in Dash</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="index.html">PredictionIO Reference</a>
+        <img id="carat" src="img/carat.png" />
+        PredictionIO  Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Classes.html#/s:12PredictionIO10BaseClientC">BaseClient</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/EngineClient.html">EngineClient</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/EventClient.html">EventClient</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Enums/BatchEventStatus.html">BatchEventStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/PIOError.html">PIOError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/PIOError/InvalidEventReason.html">– InvalidEventReason</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/PIOError/RequestFailureReason.html">– RequestFailureReason</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/PIOError/SerializationFailureReason.html">– SerializationFailureReason</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/PIOError/DeserializationFailureReason.html">– DeserializationFailureReason</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Structs/Event.html">Event</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/EventResponse.html">EventResponse</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            
+            <h1 id='predictionio-swift-sdk' class='heading'>PredictionIO Swift SDK</h1>
+
+<p><a href="https://travis-ci.org/minhtule/PredictionIO-Swift-SDK"><img src="https://travis-ci.org/minhtule/PredictionIO-Swift-SDK.svg?branch=master" alt="Build Status"></a></p>
+
+<p>The Swift SDK provides a convenient API for your iOS and OS X application to record your users&rsquo; behaviors in the event server and retrieve predictions from PredictionIO engines.</p>
+<h2 id='requirements' class='heading'>Requirements</h2>
+
+<ul>
+<li>iOS 7.0+ or OS X 10.9+</li>
+<li>Xcode 6.1</li>
+</ul>
+<h2 id='installation' class='heading'>Installation</h2>
+<h3 id='cocoapods' class='heading'>Cocoapods</h3>
+
+<p>Only CocoaPods 0.36.0 beta (and rc1) supports Swift and embedded frameworks. So CocoaPods needs to be installed with the following command.</p>
+<pre class="highlight shell"><code><span class="gp">$ </span>gem install cocoapods --pre
+</code></pre>
+
+<p>Add the following lines to your <code>Podfile</code>.</p>
+<pre class="highlight ruby"><code><span class="c1"># platform must be at least iOS 8.0 to use dynamic frameworks</span>
+<span class="n">platform</span> <span class="ss">:ios</span><span class="p">,</span> <span class="s1">'8.0'</span>
+<span class="n">use_frameworks!</span>
+
+<span class="n">pod</span> <span class="s1">'PredictionIOSDK'</span><span class="p">,</span> <span class="ss">:git</span> <span class="o">=&gt;</span> <span class="s1">'https://github.com/minhtule/PredictionIO-Swift-SDK.git'</span>
+</code></pre>
+
+<p>Then run the following command.</p>
+<pre class="highlight shell"><code><span class="gp">$ </span>pod install 
+</code></pre>
+
+<p>Finally, import the SDK in your Swift files before using.</p>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">PredictionIOSDK</span>
+</code></pre>
+<h3 id='manually' class='heading'>Manually</h3>
+
+<p>You can just drag two files: <code>PredictionIOSDK.swift</code> and <code>Alamofire.swift</code> into your project. </p>
+
+<p><strong>Note</strong> that <code>Alamofire.swift</code> has been slightly modified from the original; however, if you have already integrated the original <code>Alamofire.swift</code> file to your project, you don&rsquo;t need to include <code>Alamofire.swift</code> from this repo again.</p>
+<h2 id='usage' class='heading'>Usage</h2>
+<h3 id='engineclient' class='heading'>EngineClient</h3>
+
+<p>Use <code><a href="Classes/EngineClient.html">EngineClient</a></code> to query predictions from the PredictionIO Engines.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">engineClient</span> <span class="o">=</span> <span class="kt">EngineClient</span><span class="p">(</span><span class="nv">baseURL</span><span class="p">:</span> <span class="s">"http://localhost:8000"</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">query</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s">"user"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s">"num"</span><span class="p">:</span> <span class="mi">2</span>
+<span class="p">]</span>
+
+<span class="n">engineClient</span><span class="o">.</span><span class="nf">sendQuery</span><span class="p">(</span><span class="n">query</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">,</span> <span class="kt">JSON</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span> <span class="k">in</span>
+    <span class="k">if</span> <span class="k">let</span> <span class="nv">data</span> <span class="o">=</span> <span class="kt">JSON</span> <span class="k">as?</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="p">[[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">AnyObject</span><span class="p">]]]</span> <span class="p">{</span>
+        <span class="o">...</span>
+    <span class="p">}</span>
+    <span class="o">...</span>
+<span class="p">}</span>
+</code></pre>
+<h3 id='eventclient' class='heading'>EventClient</h3>
+
+<p>Use <code><a href="Classes/EventClient.html">EventClient</a></code> to send information to the PredictionIO Event Server.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">eventClient</span> <span class="o">=</span> <span class="kt">EventClient</span><span class="p">(</span><span class="nv">accessKey</span><span class="p">:</span> <span class="n">accessKey</span><span class="p">,</span> <span class="nv">baseURL</span><span class="p">:</span> <span class="s">"http://localhost:7070"</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">event</span> <span class="o">=</span> <span class="kt">Event</span><span class="p">(</span>
+    <span class="nv">event</span><span class="p">:</span> <span class="s">"rate"</span><span class="p">,</span>
+    <span class="nv">entityType</span><span class="p">:</span> <span class="s">"user"</span><span class="p">,</span>
+    <span class="nv">entityID</span><span class="p">:</span> <span class="s">"1"</span><span class="p">,</span>
+    <span class="nv">targetEntityType</span><span class="p">:</span> <span class="s">"item"</span><span class="p">,</span>
+    <span class="nv">targetEntityID</span><span class="p">:</span> <span class="s">"9"</span><span class="p">,</span>
+    <span class="nv">properties</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s">"rating"</span><span class="p">:</span> <span class="mi">5</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">eventClient</span><span class="o">.</span><span class="nf">createEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">,</span> <span class="kt">JSON</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span> <span class="k">in</span>
+    <span class="o">...</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>There are other convenient methods to modify user&rsquo;s or item&rsquo;s properties. Please see the <a href="http://minhtule.github.io/PredictionIO-Swift-SDK/index.html">API documentation</a> for more details.</p>
+<h2 id='documentation' class='heading'>Documentation</h2>
+
+<p>The latest API documentation is available at <a href="http://minhtule.github.io/PredictionIO-Swift-SDK/index.html">http://minhtule.github.io/PredictionIO-Swift-SDK/index.html</a>.</p>
+<h2 id='ios-demo-app' class='heading'>iOS Demo App</h2>
+
+<p>Please follow this <a href="http://docs.prediction.io/templates/recommendation/quickstart/">quick guide</a> to start the Event Server and set up a Recommendation Engine on your local machine first.</p>
+
+<p>You also need to:</p>
+
+<ul>
+<li>Include your app&rsquo;s access key in <code>DataCollectorViewController.swift</code>.</li>
+<li>Import some data using the python script as instructed in step 4b. Alternatively, you can use the demo app to record new rating events; however, remember to re-train and deploy the engine before querying for recommendations.</li>
+<li>Run the iPhone or iPad simulator!</li>
+</ul>
+
+<p>There are 2 screens in the demo app:</p>
+
+<ul>
+<li><strong>Data Collector</strong>: corresponding to step <em>4a. Collecting Data</em> in the quick guide.</li>
+<li><strong>Item Recommendation</strong>: corresponding to step <em>6. Use the Engine</em> in the quick guide.</li>
+</ul>
+<h2 id='license' class='heading'>License</h2>
+
+<p>PredictionIO Swift SDK is released under the Apache License 2.0. Please see
+<a href="https://github.com/minhtule/PredictionIO-Swift-SDK/blob/master/LICENSE">LICENSE</a> for details.</p>
+
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2018 <a class="link" href="https://github.com/minhtule" target="_blank" rel="external">Minh-Tu Le</a>. All rights reserved. (Last updated: 2018-01-10)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

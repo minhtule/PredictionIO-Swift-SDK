@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Event Structure Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Struct/Event" class="dashAnchor"></a>
+    <a title="Event Structure Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">PredictionIO Docs</a> (95% documented)</p>
+        <p class="header-right"><a href="https://github.com/minhtule/PredictionIO-Swift-SDK"><img src="../img/gh.png"/>View on GitHub</a></p>
+        <p class="header-right"><a href="dash-feed://https%3A%2F%2Fminhtule%2Egithub%2Eio%2Fdocsets%2FPredictionIO%2Exml"><img src="../img/dash.png"/>Install in Dash</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">PredictionIO Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        Event Structure Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes.html#/s:12PredictionIO10BaseClientC">BaseClient</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/EngineClient.html">EngineClient</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/EventClient.html">EventClient</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/BatchEventStatus.html">BatchEventStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/PIOError.html">PIOError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/PIOError/InvalidEventReason.html">– InvalidEventReason</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/PIOError/RequestFailureReason.html">– RequestFailureReason</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/PIOError/SerializationFailureReason.html">– SerializationFailureReason</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/PIOError/DeserializationFailureReason.html">– DeserializationFailureReason</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/Event.html">Event</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/EventResponse.html">EventResponse</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>Event</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Event</span></code></pre>
+
+                </div>
+              </div>
+            <p>The <code>Event</code> struct represents an event dictionary in the REST API
+to a PredictionIO&rsquo;s event server.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Constants"></a>
+                <a name="//apple_ref/swift/Section/Constants" class="dashAnchor"></a>
+                <a href="#/Constants">
+                  <h3 class="section-name">Constants</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12PredictionIO5EventV03setC0SSvZ"></a>
+                    <a name="//apple_ref/swift/Variable/setEvent" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12PredictionIO5EventV03setC0SSvZ">setEvent</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Reversed set event name.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">setEvent</span> <span class="o">=</span> <span class="s">"$set"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12PredictionIO5EventV05unsetC0SSvZ"></a>
+                    <a name="//apple_ref/swift/Variable/unsetEvent" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12PredictionIO5EventV05unsetC0SSvZ">unsetEvent</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Reversed unset event name.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">unsetEvent</span> <span class="o">=</span> <span class="s">"$unset"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12PredictionIO5EventV06deleteC0SSvZ"></a>
+                    <a name="//apple_ref/swift/Variable/deleteEvent" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12PredictionIO5EventV06deleteC0SSvZ">deleteEvent</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Reversed delete event name.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">deleteEvent</span> <span class="o">=</span> <span class="s">"$delete"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12PredictionIO5EventV14userEntityTypeSSvZ"></a>
+                    <a name="//apple_ref/swift/Variable/userEntityType" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12PredictionIO5EventV14userEntityTypeSSvZ">userEntityType</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Predefined user entity type.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">userEntityType</span> <span class="o">=</span> <span class="s">"user"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12PredictionIO5EventV14itemEntityTypeSSvZ"></a>
+                    <a name="//apple_ref/swift/Variable/itemEntityType" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12PredictionIO5EventV14itemEntityTypeSSvZ">itemEntityType</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Predefined item entity type.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">itemEntityType</span> <span class="o">=</span> <span class="s">"item"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Properties"></a>
+                <a name="//apple_ref/swift/Section/Properties" class="dashAnchor"></a>
+                <a href="#/Properties">
+                  <h3 class="section-name">Properties</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12PredictionIO5EventV5eventSSv"></a>
+                    <a name="//apple_ref/swift/Property/event" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12PredictionIO5EventV5eventSSv">event</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The event name e.g. <q>sign-up</q>, <q>rate</q>, <q>view</q>.</p>
+
+<p><strong>Note:</strong> All event names starting with <q>$</q> and <q>pio_</q> are reversed
+and shouldn&rsquo;t be used as your custom event (e.g. <q>$set</q>).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">event</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12PredictionIO5EventV10entityTypeSSv"></a>
+                    <a name="//apple_ref/swift/Property/entityType" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12PredictionIO5EventV10entityTypeSSv">entityType</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The entity type. It is the namespace of the <code><a href="../Structs/Event.html#/s:12PredictionIO5EventV8entityIDSSv">entityID</a></code> and analogous
+to the table name of a relational database. The <code><a href="../Structs/Event.html#/s:12PredictionIO5EventV8entityIDSSv">entityID</a></code> must be
+unique within the same <code>entityType</code>.</p>
+
+<p><strong>Note:</strong> All entityType names starting with <q>$</q> and <q>pio_</q> are reversed
+and shouldn&rsquo;t be used.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">entityType</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12PredictionIO5EventV8entityIDSSv"></a>
+                    <a name="//apple_ref/swift/Property/entityID" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12PredictionIO5EventV8entityIDSSv">entityID</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The entity ID. <code>entityType-entityID</code> becomes the unique identifier
+of the entity.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">entityID</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12PredictionIO5EventV16targetEntityTypeSSSgv"></a>
+                    <a name="//apple_ref/swift/Property/targetEntityType" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12PredictionIO5EventV16targetEntityTypeSSSgv">targetEntityType</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The target entity type.</p>
+
+<p><strong>Note:</strong> All targetEntityType names starting with <q>$</q> and <q>pio_</q> are reversed
+and shouldn&rsquo;t be used.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">targetEntityType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12PredictionIO5EventV14targetEntityIDSSSgv"></a>
+                    <a name="//apple_ref/swift/Property/targetEntityID" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12PredictionIO5EventV14targetEntityIDSSSgv">targetEntityID</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The target entity ID.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">targetEntityID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12PredictionIO5EventV10propertiess10DictionaryVySSypGSgv"></a>
+                    <a name="//apple_ref/swift/Property/properties" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12PredictionIO5EventV10propertiess10DictionaryVySSypGSgv">properties</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The event properties. It should be a valid JSON dictionary.</p>
+
+<p><strong>Note:</strong> All properties names starting with <q>$</q> and <q>pio_</q> are reversed
+and shouldn&rsquo;t be used.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">properties</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">Any</span><span class="p">]?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12PredictionIO5EventV9eventTime10Foundation4DateVv"></a>
+                    <a name="//apple_ref/swift/Property/eventTime" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12PredictionIO5EventV9eventTime10Foundation4DateVv">eventTime</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The time of the event.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">eventTime</span><span class="p">:</span> <span class="kt">Date</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12PredictionIO5EventV7eventIDSSSgv"></a>
+                    <a name="//apple_ref/swift/Property/eventID" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12PredictionIO5EventV7eventIDSSSgv">eventID</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The event ID. This value should only be set by the server.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">eventID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Initialization"></a>
+                <a name="//apple_ref/swift/Section/Initialization" class="dashAnchor"></a>
+                <a href="#/Initialization">
+                  <h3 class="section-name">Initialization</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12PredictionIO5EventVACSS5event_SS10entityTypeSS0E2IDSS4type_SS2idtSg12targetEntitys10DictionaryVySSypGSg10properties10Foundation4DateV0D4Timetcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(event:entityType:entityID:targetEntity:properties:eventTime:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12PredictionIO5EventVACSS5event_SS10entityTypeSS0E2IDSS4type_SS2idtSg12targetEntitys10DictionaryVySSypGSg10properties10Foundation4DateV0D4Timetcfc">init(event:entityType:entityID:targetEntity:properties:eventTime:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates an event struct.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">event</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">entityType</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">entityID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">targetEntity</span><span class="p">:</span> <span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">id</span><span class="p">:</span> <span class="kt">String</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">properties</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">Any</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">eventTime</span><span class="p">:</span> <span class="kt">Date</span> <span class="o">=</span> <span class="kt">Date</span><span class="p">())</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>event</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The event name.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>entityType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The entity type.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>entityID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The entity ID.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>targetEntity</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The target entity (type, ID) tuple. <code>nil</code> by default.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>properties</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The event properties in JSON dictionary. <code>nil</code> by default.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>eventTime</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The event time. Current local time by default.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The new <code>Event</code> instance.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Validation"></a>
+                <a name="//apple_ref/swift/Section/Validation" class="dashAnchor"></a>
+                <a href="#/Validation">
+                  <h3 class="section-name">Validation</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12PredictionIO5EventV8validates5Error_pSgyF"></a>
+                    <a name="//apple_ref/swift/Method/validate()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12PredictionIO5EventV8validates5Error_pSgyF">validate()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Validates an event against the following rules:</p>
+
+<ul>
+<li><code><a href="../Structs/Event.html#/s:12PredictionIO5EventV10propertiess10DictionaryVySSypGSgv">properties</a></code> must be a valid JSON dictionary.</li>
+<li><p>An <code>$unset</code> event must not have an empty or nil <code><a href="../Structs/Event.html#/s:12PredictionIO5EventV10propertiess10DictionaryVySSypGSgv">properties</a></code>.</p></li>
+</ul>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">validate</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Error</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A <code><a href="../Enums/PIOError.html#/s:12PredictionIO8PIOErrorO12invalidEventA2C07InvalidE6ReasonO6reason_tcACmF">PIOError.invalidEvent</a></code> error if the validation fails. Otherwise, returns nil.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/JSON%20Serialization%20and%20Deserialization"></a>
+                <a name="//apple_ref/swift/Section/JSON Serialization and Deserialization" class="dashAnchor"></a>
+                <a href="#/JSON%20Serialization%20and%20Deserialization">
+                  <h3 class="section-name">JSON Serialization and Deserialization</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12PredictionIO5EventVACs10DictionaryVySSypG4json_tKcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(json:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12PredictionIO5EventVACs10DictionaryVySSypG4json_tKcfc">init(json:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates an event from a JSON dictionary.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <p>A <code><a href="../Enums/PIOError.html#/s:12PredictionIO8PIOErrorO21failedDeserializationA2C0E13FailureReasonO6reason_tcACmF">PIOError.failedDeserialization</a></code> error if deserialization fails.</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">json</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">Any</span><span class="p">])</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The new Event instance.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12PredictionIO5EventV4jsons10DictionaryVySSypGv"></a>
+                    <a name="//apple_ref/swift/Property/json" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12PredictionIO5EventV4jsons10DictionaryVySSypGv">json</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns a JSON dictionary representing the event.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">json</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">Any</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The JSON dictionary.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2018 <a class="link" href="https://github.com/minhtule" target="_blank" rel="external">Minh-Tu Le</a>. All rights reserved. (Last updated: 2018-01-10)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
