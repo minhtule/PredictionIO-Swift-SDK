@@ -2,9 +2,6 @@ language: objective-c
 osx_image: xcode9.2
 git:
   depth: 1
-branches:
-  except:
-    - gh-pages
 
 env:
   global:
@@ -12,6 +9,7 @@ env:
     - IOS_FRAMEWORK_SCHEME="PredictionIO iOS"
     - MACOS_FRAMEWORK_SCHEME="PredictionIO macOS"
     - EXAMPLE_SCHEME="iOS Example"
+    - MOCK_SERVER_DIR=mock_server
   matrix:
     # iOS
     - DESTINATION="OS=11.2,name=iPhone X"         SCHEME="$IOS_FRAMEWORK_SCHEME"    BUILD_EXAMPLE="YES"  LINTING="YES"
@@ -19,15 +17,20 @@ env:
     # macOS
     - DESTINATION="arch=x86_64"                   SCHEME="$MACOS_FRAMEWORK_SCHEME"  BUILD_EXAMPLE="NO"   LINTING="NO"
 
+# Skip the installation of `Gemfile`. Just use the default gemset
+# which already includes SwiftLint and CocoaPods.
+install: true
+
+# WARNING: Because of the existence of `.ruby-gemset`, we should not change
+# directory and go back into this repo directory. When we `cd` back into
+# this current working directory, `rvm` would use the `PredictionIO` gemset
+# which doesn't have any gem installed!!!
 before_script:
   # Set up mock API server
-  - cd ..
-  - git clone git://github.com/minhtule/PredictionIO-Mock-Server.git --depth 1
-  - cd PredictionIO-Mock-Server
-  - npm install
-  - node app.js &
+  - git clone git://github.com/minhtule/PredictionIO-Mock-Server.git ../$MOCK_SERVER_DIR --depth 1
+  - npm --prefix ../$MOCK_SERVER_DIR install ../$MOCK_SERVER_DIR
+  - node ../$MOCK_SERVER_DIR/app.js &
   - sleep 3  # Give mock server some time to bind to sockets, etc
-  - cd ../PredictionIO-Swift-SDK
 
 script:
   - set -o pipefail
