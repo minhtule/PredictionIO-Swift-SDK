@@ -1,30 +1,54 @@
 language: objective-c
-osx_image: xcode6.4
+osx_image: xcode9.2
+git:
+  depth: 1
 
-before_install:
-- gem install xcpretty -N
+env:
+  global:
+    - WORKSPACE=PredictionIO.xcworkspace
+    - IOS_FRAMEWORK_SCHEME="PredictionIO iOS"
+    - MACOS_FRAMEWORK_SCHEME="PredictionIO macOS"
+    - EXAMPLE_SCHEME="iOS Example"
+    - MOCK_SERVER_DIR=mock_server
+  matrix:
+    # iOS
+    - DESTINATION="OS=11.2,name=iPhone X"         SCHEME="$IOS_FRAMEWORK_SCHEME"    BUILD_EXAMPLE="YES"  LINTING="YES"
+    - DESTINATION="OS=10.3.1,name=iPhone 7 Plus"  SCHEME="$IOS_FRAMEWORK_SCHEME"    BUILD_EXAMPLE="YES"  LINTING="NO"
+    # macOS
+    - DESTINATION="arch=x86_64"                   SCHEME="$MACOS_FRAMEWORK_SCHEME"  BUILD_EXAMPLE="NO"   LINTING="NO"
 
+# Skip the installation of `Gemfile`. Just use the default gemset
+# which already includes SwiftLint and CocoaPods.
+install: true
+
+# WARNING: Because of the existence of `.ruby-gemset`, we should not change
+# directory and go back into this repo directory. When we `cd` back into
+# this current working directory, `rvm` would use the `PredictionIO` gemset
+# which doesn't have any gem installed!!!
 before_script:
-# Set up mock API server
-- cd ..
-- git clone git://github.com/minhtule/PredictionIO-Mock-Server.git
-- cd PredictionIO-Mock-Server
-- npm install
-- node app.js &
-- sleep 3  # Give mock server some time to bind to sockets, etc
-- cd ../PredictionIO-Swift-SDK
+  # Set up mock API server
+  - git clone git://github.com/minhtule/PredictionIO-Mock-Server.git ../$MOCK_SERVER_DIR --depth 1
+  - npm --prefix ../$MOCK_SERVER_DIR install ../$MOCK_SERVER_DIR
+  - node ../$MOCK_SERVER_DIR/app.js &
+  - sleep 3  # Give mock server some time to bind to sockets, etc
 
 script:
-# Check Podspec
-- pod lib lint --quick
+  - set -o pipefail
 
-- set -o pipefail
+  # Linting with SwiftLint and CocoaPods
+  - if [ $LINTING == "YES" ]; then
+      echo "SwiftLint version `swiftlint version`";
+      echo "SwiftLint linting...";
+      swiftlint lint --strict;
+      echo "";
+      echo "CocoaPods linting...";
+      pod lib lint;
+    fi
 
-# Test the SDK on iOS
-- xcodebuild -workspace PredictionIOSDK.xcworkspace -scheme "PredictionIO iOS SDK" -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 6" ONLY_ACTIVE_ARCH=NO test | xcpretty -c
+  # Test in Release
+  - xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" -destination "$DESTINATION" -configuration Release ONLY_ACTIVE_ARCH=NO ENABLE_TESTABILITY=YES test | xcpretty
 
-# Build the SDK on OS X
-- xcodebuild -workspace PredictionIOSDK.xcworkspace -scheme "PredictionIO OSX SDK" -sdk macosx -destination "platform=OS X,arch=x86_64" ONLY_ACTIVE_ARCH=NO build | xcpretty -c
-
-# Build the iOS demo app
-- xcodebuild -workspace PredictionIOSDK.xcworkspace -scheme "iOS Example" -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 6" ONLY_ACTIVE_ARCH=NO build | xcpretty -c
+  # Build the iOS demo app in Debug
+  - if [ $BUILD_EXAMPLE == "YES" ]; then
+      xcodebuild -workspace "$WORKSPACE" -scheme "$EXAMPLE_SCHEME" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO build | xcpretty;
+    fi

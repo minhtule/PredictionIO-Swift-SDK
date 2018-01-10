@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>EventClient Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/EventClient" class="dashAnchor"></a>
+    <a title="EventClient Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">PredictionIO Docs</a> (95% documented)</p>
+        <p class="header-right"><a href="https://github.com/minhtule/PredictionIO-Swift-SDK"><img src="../img/gh.png"/>View on GitHub</a></p>
+        <p class="header-right"><a href="dash-feed://https%3A%2F%2Fminhtule%2Egithub%2Eio%2Fdocsets%2FPredictionIO%2Exml"><img src="../img/dash.png"/>Install in Dash</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">PredictionIO Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        EventClient Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes.html#/s:12PredictionIO10BaseClientC">BaseClient</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/EngineClient.html">EngineClient</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/EventClient.html">EventClient</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/BatchEventStatus.html">BatchEventStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/PIOError.html">PIOError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/PIOError/InvalidEventReason.html">– InvalidEventReason</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/PIOError/RequestFailureReason.html">– RequestFailureReason</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/PIOError/SerializationFailureReason.html">– SerializationFailureReason</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/PIOError/DeserializationFailureReason.html">– DeserializationFailureReason</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/Event.html">Event</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/EventResponse.html">EventResponse</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>EventClient</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">EventClient</span><span class="p">:</span> <span class="kt"><a href="../Classes.html#/s:12PredictionIO10BaseClientC">BaseClient</a></span></code></pre>
+
+                </div>
+              </div>
+            <p>Responsible for sending data to a PredictionIO Event Server.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Initialization"></a>
+                <a name="//apple_ref/swift/Section/Initialization" class="dashAnchor"></a>
+                <a href="#/Initialization">
+                  <h3 class="section-name">Initialization</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12PredictionIO11EventClientCACSS9accessKey_SS7baseURLSSSg7channelSd6timouttcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(accessKey:baseURL:channel:timout:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12PredictionIO11EventClientCACSS9accessKey_SS7baseURLSSSg7channelSd6timouttcfc">init(accessKey:baseURL:channel:timout:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a client instance to connect to the Event Server.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">accessKey</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">baseURL</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">"http://localhost:7070"</span><span class="p">,</span> <span class="nv">channel</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">timout</span><span class="p">:</span> <span class="kt">TimeInterval</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>accessKey</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The access key to the Event Server&rsquo;s app.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>baseURL</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The base URL of the Event Server. <code>http://localhost:8000</code> by default.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>channel</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The channel name of the app. <code>nil</code> by default.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>timeout</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The request timeout. 5 seconds by default.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The <code>EventClient</code> instance.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Managing%20events"></a>
+                <a name="//apple_ref/swift/Section/Managing events" class="dashAnchor"></a>
+                <a href="#/Managing%20events">
+                  <h3 class="section-name">Managing events</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12PredictionIO11EventClientC06createC0yAA0C0V_yAA0C8ResponseVSg_s5Error_pSgtc17completionHandlertF"></a>
+                    <a name="//apple_ref/swift/Method/createEvent(_:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12PredictionIO11EventClientC06createC0yAA0C0V_yAA0C8ResponseVSg_s5Error_pSgtc17completionHandlertF">createEvent(_:completionHandler:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates an event in the Event Server.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createEvent</span><span class="p">(</span><span class="n">_</span> <span class="nv">event</span><span class="p">:</span> <span class="kt"><a href="../Structs/Event.html">Event</a></span><span class="p">,</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/EventResponse.html">EventResponse</a></span><span class="p">?,</span> <span class="kt">Error</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>event</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The <code><a href="../Structs/Event.html">Event</a></code> to be created.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The callback to be executed when the request has finished.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12PredictionIO11EventClientC17createBatchEventsySayAA0C0VG_ySayAA0fC6StatusOGSg_s5Error_pSgtc17completionHandlertF"></a>
+                    <a name="//apple_ref/swift/Method/createBatchEvents(_:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12PredictionIO11EventClientC17createBatchEventsySayAA0C0VG_ySayAA0fC6StatusOGSg_s5Error_pSgtc17completionHandlertF">createBatchEvents(_:completionHandler:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a batch of events in the Event Server.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createBatchEvents</span><span class="p">(</span><span class="n">_</span> <span class="nv">events</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Event.html">Event</a></span><span class="p">],</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">([</span><span class="kt"><a href="../Enums/BatchEventStatus.html">BatchEventStatus</a></span><span class="p">]?,</span> <span class="kt">Error</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>events</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The <code><a href="../Structs/Event.html">Event</a></code>s to be created.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The callback to be executed when the request has finished.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12PredictionIO11EventClientC03getC0ySS7eventID_yAA0C0VSg_s5Error_pSgtc17completionHandlertF"></a>
+                    <a name="//apple_ref/swift/Method/getEvent(eventID:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12PredictionIO11EventClientC03getC0ySS7eventID_yAA0C0VSg_s5Error_pSgtc17completionHandlertF">getEvent(eventID:completionHandler:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Retrieves an event from the Event Server.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getEvent</span><span class="p">(</span><span class="nv">eventID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Event.html">Event</a></span><span class="p">?,</span> <span class="kt">Error</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>eventID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The event ID.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The callback to be executed when the request has finished.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12PredictionIO11EventClientC9getEventsy10Foundation4DateVSg9startTime_AH03endJ0SSSg10entityTypeAK0L2IDSi5limitSb10isReversedySayAA0C0VGSg_s5Error_pSgtc17completionHandlertF"></a>
+                    <a name="//apple_ref/swift/Method/getEvents(startTime:endTime:entityType:entityID:limit:isReversed:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12PredictionIO11EventClientC9getEventsy10Foundation4DateVSg9startTime_AH03endJ0SSSg10entityTypeAK0L2IDSi5limitSb10isReversedySayAA0C0VGSg_s5Error_pSgtc17completionHandlertF">getEvents(startTime:endTime:entityType:entityID:limit:isReversed:completionHandler:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Retrieves events from the Event Server.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getEvents</span><span class="p">(</span><span class="nv">startTime</span><span class="p">:</span> <span class="kt">Date</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">endTime</span><span class="p">:</span> <span class="kt">Date</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">entityType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">entityID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">limit</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="nv">isReversed</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">([</span><span class="kt"><a href="../Structs/Event.html">Event</a></span><span class="p">]?,</span> <span class="kt">Error</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>startTime</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Find events with <code>eventTime &gt;= startTime</code>. <code>nil</code> by default.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>endTime</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Find events with <code>eventTime &lt; endTime</code>. <code>nil</code> by default.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>entityType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Find events with this <code>entityType</code> only. <code>nil</code> by default.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>entityID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Find events with this <code>entityID</code> only. <code>nil</code> by default.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>limit</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The number of record events returned. Set -1 to get all. 20 by default.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>reversed</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Returns events in reversed chronological order. Must be used with
+both <code>entityType</code> and <code>entityID</code> specified. <code>false</code> by default.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The callback to be executed when the request has finished.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12PredictionIO11EventClientC06deleteC0ySS7eventID_ys5Error_pSgc17completionHandlertF"></a>
+                    <a name="//apple_ref/swift/Method/deleteEvent(eventID:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12PredictionIO11EventClientC06deleteC0ySS7eventID_ys5Error_pSgc17completionHandlertF">deleteEvent(eventID:completionHandler:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Deletes an event from the Event Server.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteEvent</span><span class="p">(</span><span class="nv">eventID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Error</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>eventID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The event ID.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The callback to be executed when the request has finished.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Managing%20User%20entity%20type"></a>
+                <a name="//apple_ref/swift/Section/Managing User entity type" class="dashAnchor"></a>
+                <a href="#/Managing%20User%20entity%20type">
+                  <h3 class="section-name">Managing User entity type</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12PredictionIO11EventClientC7setUserySS6userID_s10DictionaryVySSypG10properties10Foundation4DateV9eventTimeyAA0C8ResponseVSg_s5Error_pSgtc17completionHandlertF"></a>
+                    <a name="//apple_ref/swift/Method/setUser(userID:properties:eventTime:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12PredictionIO11EventClientC7setUserySS6userID_s10DictionaryVySSypG10properties10Foundation4DateV9eventTimeyAA0C8ResponseVSg_s5Error_pSgtc17completionHandlertF">setUser(userID:properties:eventTime:completionHandler:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets properties of a user.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">setUser</span><span class="p">(</span><span class="nv">userID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">properties</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">Any</span><span class="p">],</span> <span class="nv">eventTime</span><span class="p">:</span> <span class="kt">Date</span> <span class="o">=</span> <span class="kt">Date</span><span class="p">(),</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/EventResponse.html">EventResponse</a></span><span class="p">?,</span> <span class="kt">Error</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>userID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The user ID.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>properties</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The properties to be set.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>eventTime</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The event time. Current local time by default.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The callback to be executed when the request has finished.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12PredictionIO11EventClientC9unsetUserySS6userID_s10DictionaryVySSypG10properties10Foundation4DateV9eventTimeyAA0C8ResponseVSg_s5Error_pSgtc17completionHandlertF"></a>
+                    <a name="//apple_ref/swift/Method/unsetUser(userID:properties:eventTime:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12PredictionIO11EventClientC9unsetUserySS6userID_s10DictionaryVySSypG10properties10Foundation4DateV9eventTimeyAA0C8ResponseVSg_s5Error_pSgtc17completionHandlertF">unsetUser(userID:properties:eventTime:completionHandler:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Unsets properties of a user.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">unsetUser</span><span class="p">(</span><span class="nv">userID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">properties</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">Any</span><span class="p">],</span> <span class="nv">eventTime</span><span class="p">:</span> <span class="kt">Date</span> <span class="o">=</span> <span class="kt">Date</span><span class="p">(),</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/EventResponse.html">EventResponse</a></span><span class="p">?,</span> <span class="kt">Error</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>userID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The user ID.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>properties</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The properties to be unset.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>eventTime</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The event time. Current local time by default.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The callback to be executed when the request has finished.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12PredictionIO11EventClientC10deleteUserySS6userID_10Foundation4DateV9eventTimeyAA0C8ResponseVSg_s5Error_pSgtc17completionHandlertF"></a>
+                    <a name="//apple_ref/swift/Method/deleteUser(userID:eventTime:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12PredictionIO11EventClientC10deleteUserySS6userID_10Foundation4DateV9eventTimeyAA0C8ResponseVSg_s5Error_pSgtc17completionHandlertF">deleteUser(userID:eventTime:completionHandler:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Deletes a user.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">deleteUser</span><span class="p">(</span><span class="nv">userID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">eventTime</span><span class="p">:</span> <span class="kt">Date</span> <span class="o">=</span> <span class="kt">Date</span><span class="p">(),</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/EventResponse.html">EventResponse</a></span><span class="p">?,</span> <span class="kt">Error</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>userID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The user ID.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>eventTime</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The event time. Current local time by default.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The callback to be executed when the request has finished.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Managing%20Item%20entity%20type"></a>
+                <a name="//apple_ref/swift/Section/Managing Item entity type" class="dashAnchor"></a>
+                <a href="#/Managing%20Item%20entity%20type">
+                  <h3 class="section-name">Managing Item entity type</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12PredictionIO11EventClientC7setItemySS6itemID_s10DictionaryVySSypG10properties10Foundation4DateV9eventTimeyAA0C8ResponseVSg_s5Error_pSgtc17completionHandlertF"></a>
+                    <a name="//apple_ref/swift/Method/setItem(itemID:properties:eventTime:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12PredictionIO11EventClientC7setItemySS6itemID_s10DictionaryVySSypG10properties10Foundation4DateV9eventTimeyAA0C8ResponseVSg_s5Error_pSgtc17completionHandlertF">setItem(itemID:properties:eventTime:completionHandler:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets properties of an item.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">setItem</span><span class="p">(</span><span class="nv">itemID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">properties</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">Any</span><span class="p">],</span> <span class="nv">eventTime</span><span class="p">:</span> <span class="kt">Date</span> <span class="o">=</span> <span class="kt">Date</span><span class="p">(),</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/EventResponse.html">EventResponse</a></span><span class="p">?,</span> <span class="kt">Error</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>itemID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The item ID.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>properties</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The properties to be set.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>eventTime</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The event time. Current local time by default.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The callback to be executed when the request has finished.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12PredictionIO11EventClientC9unsetItemySS6itemID_s10DictionaryVySSypG10properties10Foundation4DateV9eventTimeyAA0C8ResponseVSg_s5Error_pSgtc17completionHandlertF"></a>
+                    <a name="//apple_ref/swift/Method/unsetItem(itemID:properties:eventTime:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12PredictionIO11EventClientC9unsetItemySS6itemID_s10DictionaryVySSypG10properties10Foundation4DateV9eventTimeyAA0C8ResponseVSg_s5Error_pSgtc17completionHandlertF">unsetItem(itemID:properties:eventTime:completionHandler:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Unsets properties of an item.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">unsetItem</span><span class="p">(</span><span class="nv">itemID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">properties</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">Any</span><span class="p">],</span> <span class="nv">eventTime</span><span class="p">:</span> <span class="kt">Date</span> <span class="o">=</span> <span class="kt">Date</span><span class="p">(),</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/EventResponse.html">EventResponse</a></span><span class="p">?,</span> <span class="kt">Error</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>itemID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The item ID.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>properties</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The properties to be unset.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>eventTime</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The event time. Current local time by default.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The callback to be executed when the request has finished.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12PredictionIO11EventClientC10deleteItemySS6itemID_10Foundation4DateV9eventTimeyAA0C8ResponseVSg_s5Error_pSgtc17completionHandlertF"></a>
+                    <a name="//apple_ref/swift/Method/deleteItem(itemID:eventTime:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12PredictionIO11EventClientC10deleteItemySS6itemID_10Foundation4DateV9eventTimeyAA0C8ResponseVSg_s5Error_pSgtc17completionHandlertF">deleteItem(itemID:eventTime:completionHandler:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Deletes an item.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">deleteItem</span><span class="p">(</span><span class="nv">itemID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">eventTime</span><span class="p">:</span> <span class="kt">Date</span> <span class="o">=</span> <span class="kt">Date</span><span class="p">(),</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/EventResponse.html">EventResponse</a></span><span class="p">?,</span> <span class="kt">Error</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>itemID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The item ID.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>eventTime</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The event time. Current local time by default.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The callback to be executed when the request has finished.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Recording%20User-Item%20action"></a>
+                <a name="//apple_ref/swift/Section/Recording User-Item action" class="dashAnchor"></a>
+                <a href="#/Recording%20User-Item%20action">
+                  <h3 class="section-name">Recording User-Item action</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12PredictionIO11EventClientC12recordActionySS_SS8byUserIDSS06onItemI0s10DictionaryVySSypGSg10properties10Foundation4DateV9eventTimeyAA0C8ResponseVSg_s5Error_pSgtc17completionHandlertF"></a>
+                    <a name="//apple_ref/swift/Method/recordAction(_:byUserID:onItemID:properties:eventTime:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12PredictionIO11EventClientC12recordActionySS_SS8byUserIDSS06onItemI0s10DictionaryVySSypGSg10properties10Foundation4DateV9eventTimeyAA0C8ResponseVSg_s5Error_pSgtc17completionHandlertF">recordAction(_:byUserID:onItemID:properties:eventTime:completionHandler:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a user-to-item action.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">recordAction</span><span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">byUserID</span> <span class="nv">userID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">onItemID</span> <span class="nv">itemID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">properties</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">Any</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">eventTime</span><span class="p">:</span> <span class="kt">Date</span> <span class="o">=</span> <span class="kt">Date</span><span class="p">(),</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/EventResponse.html">EventResponse</a></span><span class="p">?,</span> <span class="kt">Error</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>action</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The action to be used as event name.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>userID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The userID.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>itemID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The item ID.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>properties</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The properties of the event. <code>nil</code> by default.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>eventTime</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The event time. Current local time by default.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The callback to be executed when the request has finished.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2018 <a class="link" href="https://github.com/minhtule" target="_blank" rel="external">Minh-Tu Le</a>. All rights reserved. (Last updated: 2018-01-10)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
