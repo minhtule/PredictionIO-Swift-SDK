@@ -59,17 +59,20 @@ class NetworkConnection {
                 }
 
                 switch response.statusCode {
-                case 400:
-                    completionHandler(.failure(PIOError.RequestFailureReason.badRequestError()))
-                case 401:
-                    completionHandler(.failure(PIOError.RequestFailureReason.unauthorizedError()))
-                case 404:
-                    completionHandler(.failure(PIOError.RequestFailureReason.notFoundError()))
                 case 200...201:
                     completionHandler(.success(data))
                 default:
-                    // TODO: serialize payload to get the error message
-                    completionHandler(.failure(PIOError.RequestFailureReason.unknownStatusCodeError(statusCode: response.statusCode)))
+                    let message: String
+                    if let data = try? JSONSerialization.jsonObject(with: data, options: []),
+                        let jsonData = data as? [String: Any],
+                        let messageValue = jsonData["message"] as? String
+                    {
+                        message = messageValue
+                    } else {
+                        message = "-- Cannot parse message from server --"
+                    }
+                    let error = PIOError.RequestFailureReason.serverFailureError(statusCode: response.statusCode, message: message)
+                    completionHandler(.failure(error))
                 }
             }
             task.resume()

@@ -22,7 +22,7 @@ class EngineClientTests: XCTestCase {
         let expectation = self.expectation(description: "Sending query")
 
         engineClient.sendQuery(["user": "1"]) { result in
-            XCTAssertTrue(result.isSuccess)
+            XCTAssertTrue(result.isSuccess, "Request should succeed, got \(result.error!)")
 
             expectation.fulfill()
         }
@@ -53,7 +53,7 @@ class EngineClientTests: XCTestCase {
         let expectation = self.expectation(description: "Sending query")
 
         engineClient.sendQuery(["user": "1"], responseType: SimilarProductResponse.self) { result in
-            XCTAssertTrue(result.isSuccess)
+            XCTAssertTrue(result.isSuccess, "Request should succeed, got \(result.error!)")
 
             expectation.fulfill()
         }

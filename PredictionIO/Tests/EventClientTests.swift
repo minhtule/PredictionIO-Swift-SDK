@@ -24,7 +24,7 @@ class EventClientTests: XCTestCase {
         let expectation = self.expectation(description: "Creating an event")
 
         eventClient.createEvent(event) { result in
-            XCTAssertTrue(result.isSuccess)
+            XCTAssertTrue(result.isSuccess, "Request should succeed, got \(result.error!)")
 
             expectation.fulfill()
         }
@@ -43,7 +43,7 @@ class EventClientTests: XCTestCase {
         let expectation = self.expectation(description: "Creating batch events")
 
         eventClient.createBatchEvents(events) { result in
-            XCTAssertTrue(result.isSuccess)
+            XCTAssertTrue(result.isSuccess, "Request should succeed, got \(result.error!)")
             let response = result.value!
             XCTAssertEqual(response.statuses.count, 3)
 
@@ -65,7 +65,7 @@ class EventClientTests: XCTestCase {
 
         let getEventExpectation = self.expectation(description: "Getting an event")
         eventClient.getEvent(eventID: eventID) { result in
-            XCTAssertTrue(result.isSuccess)
+            XCTAssertTrue(result.isSuccess, "Request should succeed, got \(result.error!)")
             let createdEvent = result.value!
             XCTAssertEqual(event.event, createdEvent.event)
 
@@ -87,7 +87,7 @@ class EventClientTests: XCTestCase {
 
         let getEventsExpectation = self.expectation(description: "Getting events in event server")
         eventClient.getEvents(entityType: randomType, entityID: randomId) { result in
-            XCTAssertTrue(result.isSuccess)
+            XCTAssertTrue(result.isSuccess, "Request should succeed, got \(result.error!)")
             let events = result.value!
             XCTAssertEqual(events.count, 2)
 
@@ -117,7 +117,7 @@ class EventClientTests: XCTestCase {
         let expectation = self.expectation(description: "Setting properties of a user")
 
         eventClient.setUser(userID: "u1", properties: ["p1": "foo", "p2": "bar"]) { result in
-            XCTAssertTrue(result.isSuccess)
+            XCTAssertTrue(result.isSuccess, "Request should succeed, got \(result.error!)")
 
             expectation.fulfill()
         }
@@ -131,7 +131,7 @@ class EventClientTests: XCTestCase {
         let expectation = self.expectation(description: "Unsetting properties of a user")
 
         eventClient.unsetUser(userID: "u2", properties: ["p1": NSNull()]) { result in
-            XCTAssertTrue(result.isSuccess)
+            XCTAssertTrue(result.isSuccess, "Request should succeed, got \(result.error!)")
 
             expectation.fulfill()
         }
@@ -145,7 +145,7 @@ class EventClientTests: XCTestCase {
         let expectation = self.expectation(description: "Unsetting properties of a user")
 
         eventClient.deleteUser(userID: "u4") { result in
-            XCTAssertTrue(result.isSuccess)
+            XCTAssertTrue(result.isSuccess, "Request should succeed, got \(result.error!)")
 
             expectation.fulfill()
         }
@@ -161,7 +161,7 @@ class EventClientTests: XCTestCase {
         let expectation = self.expectation(description: "Setting properties of an item")
 
         eventClient.setItem(itemID: "i1", properties: ["p1": "foo", "p2": "bar"]) { result in
-            XCTAssertTrue(result.isSuccess)
+            XCTAssertTrue(result.isSuccess, "Request should succeed, got \(result.error!)")
 
             expectation.fulfill()
         }
@@ -175,7 +175,7 @@ class EventClientTests: XCTestCase {
         let expectation = self.expectation(description: "Unsetting properties of an item")
 
         eventClient.unsetItem(itemID: "i2", properties: ["p1": NSNull()]) { result in
-            XCTAssertTrue(result.isSuccess)
+            XCTAssertTrue(result.isSuccess, "Request should succeed, got \(result.error!)")
 
             expectation.fulfill()
         }
@@ -189,7 +189,7 @@ class EventClientTests: XCTestCase {
         let expectation = self.expectation(description: "Unsetting properties of an item")
 
         eventClient.deleteItem(itemID: "i4") { result in
-            XCTAssertTrue(result.isSuccess)
+            XCTAssertTrue(result.isSuccess, "Request should succeed, got \(result.error!)")
 
             expectation.fulfill()
         }
@@ -205,7 +205,7 @@ class EventClientTests: XCTestCase {
         let expectation = self.expectation(description: "Record user action on item")
 
         eventClient.recordAction("rate", byUserID: "u1", onItemID: "i1", properties: ["rating": 5]) { result in
-            XCTAssertTrue(result.isSuccess)
+            XCTAssertTrue(result.isSuccess, "Request should succeed, got \(result.error!)")
 
             expectation.fulfill()
         }
