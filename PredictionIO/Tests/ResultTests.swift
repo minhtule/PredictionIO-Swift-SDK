@@ -11,7 +11,7 @@ import XCTest
 
 // swiftlint:disable force_cast
 class ResultTests: XCTestCase {
-    let error = PIOError.RequestFailureReason.unauthorizedError()
+    let error = PIOError.InvalidEventReason.invalidEventIDError()
 
     // MARK: - isSuccess
 
@@ -66,7 +66,7 @@ class ResultTests: XCTestCase {
     func testError_whenFailure_returnsError() {
         let result = Result<Int>.failure(error)
 
-        XCTAssertTrue((result.error as! PIOError).isUnauthorizedRequest())
+        XCTAssertTrue((result.error as! PIOError).isInvalidEventID())
     }
 
     // MARK: - map
@@ -82,7 +82,7 @@ class ResultTests: XCTestCase {
         let result = Result<Int>.failure(error)
         let newResult = result.map { $0 * 2 }
 
-        XCTAssertTrue((newResult.error as! PIOError).isUnauthorizedRequest())
+        XCTAssertTrue((newResult.error as! PIOError).isInvalidEventID())
     }
 
     // MARK: - flatMap
@@ -98,7 +98,7 @@ class ResultTests: XCTestCase {
         let result = Result<Int>.failure(error)
         let newResult = result.flatMap { Result.success($0 * 10) }
 
-        XCTAssertTrue((newResult.error as! PIOError).isUnauthorizedRequest())
+        XCTAssertTrue((newResult.error as! PIOError).isInvalidEventID())
     }
 
     // MARK: - debugDescription
