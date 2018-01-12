@@ -92,7 +92,7 @@ public extension Result {
     ///   of the instance.
     /// - returns: The result of the given closure. If this instance is a failure,
     ///   returns the failure.
-    func map<T>(transform: (Value) -> T) -> Result<T> {
+    func map<T>(_ transform: (Value) -> T) -> Result<T> {
         switch self {
         case let .success(value):
             return .success(transform(value))
@@ -121,7 +121,7 @@ public extension Result {
     ///   of the instance.
     /// - returns: The result of the given closure. If this instance is a failure,
     ///   returns the failure.
-    func flatMap<T>(transform: (Value) -> Result<T>) -> Result<T> {
+    func flatMap<T>(_ transform: (Value) -> Result<T>) -> Result<T> {
         switch self {
         case let .success(value):
             return transform(value)
