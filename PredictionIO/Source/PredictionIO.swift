@@ -30,7 +30,7 @@ public class BaseClient {
     }
 }
 
-// MARK: - EngineClient
+// MARK: -
 
 /// Responsible for retrieving prediction results from a PredictionIO Engine Server.
 public class EngineClient: BaseClient {
@@ -80,7 +80,7 @@ public class EngineClient: BaseClient {
     var queriesURL: String { return "\(baseURL)/queries.json" }
 }
 
-// MARK: - EventClient
+// MARK: -
 
 /// Responsible for sending data to a PredictionIO Event Server.
 public class EventClient: BaseClient {
@@ -393,8 +393,9 @@ public extension EventClient {
 
 // MARK: - Responses
 
-/// Response structure for an event-creation request.
+/// Represents the response of a creating event request.
 public struct CreateEventResponse: Decodable {
+    /// The event ID of the created event.
     public let eventID: String
 
     enum CodingKeys: String, CodingKey {
@@ -402,10 +403,19 @@ public struct CreateEventResponse: Decodable {
     }
 }
 
-///
+/// Represents the response of a creating batch events request.
 public struct CreateBatchEventsResponse: Decodable {
+    /// The statuses each of which presents whether an event was successfully
+    /// created by the server.
+    ///
+    /// If an event was successfuly created by the server, its status is a
+    /// `Result.success` which value contains its individual `CreateEventResponse`.
+    /// Otherwise, the event's status is a `Result.failure`. The statuses are
+    /// returned in the same order of their corresponding events sent in the
+    /// request.
     public let statuses: [Result<CreateEventResponse>]
 
+    /// :nodoc:
     public init(from decoder: Decoder) throws {
         var statuses: [Result<CreateEventResponse>] = []
         var container = try decoder.unkeyedContainer()

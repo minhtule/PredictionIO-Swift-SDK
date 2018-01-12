@@ -11,9 +11,9 @@ import Foundation
 /// Used to represent if a request including post-processsing is successful
 /// or encounters an error.
 public enum Result<Value> {
-    /// Success state with a value
+    /// Success state with a value.
     case success(Value)
-    /// Failure state with an error
+    /// Failure state with an error.
     case failure(Error)
 
     // MARK: - Inspecting a result
@@ -89,9 +89,9 @@ public extension Result {
     ///     // success(6)
     ///
     /// - parameter transform: A closure that takes the successful value
-    ///   of the instance.
+    ///     of the instance.
     /// - returns: The result of the given closure. If this instance is a failure,
-    ///   returns the failure.
+    ///     returns the failure.
     func map<T>(_ transform: (Value) -> T) -> Result<T> {
         switch self {
         case let .success(value):
@@ -118,9 +118,9 @@ public extension Result {
     ///     // success(16)
     ///
     /// - parameter transform: A closure that takes the successful value
-    ///   of the instance.
+    ///     of the instance.
     /// - returns: The result of the given closure. If this instance is a failure,
-    ///   returns the failure.
+    ///     returns the failure.
     func flatMap<T>(_ transform: (Value) -> Result<T>) -> Result<T> {
         switch self {
         case let .success(value):

@@ -14,7 +14,7 @@
     <a title="Result Enumeration Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">PredictionIO Docs</a> (96% documented)</p>
+        <p><a href="../index.html">PredictionIO Docs</a> (100% documented)</p>
         <p class="header-right"><a href="https://github.com/minhtule/PredictionIO-Swift-SDK"><img src="../img/gh.png"/>View on GitHub</a></p>
         <p class="header-right"><a href="dash-feed://https%3A%2F%2Fminhtule%2Egithub%2Eio%2FPredictionIO%2DSwift%2DSDK%2Fdocsets%2FPredictionIO%2Exml"><img src="../img/dash.png"/>Install in Dash</a></p>
       </div>
@@ -47,9 +47,6 @@
             <a href="../Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Enums/BatchEventStatus.html">BatchEventStatus</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Enums/PIOError.html">PIOError</a>
               </li>
               <li class="nav-group-task">
@@ -73,10 +70,13 @@
             <a href="../Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Structs/Event.html">Event</a>
+                <a href="../Structs/CreateBatchEventsResponse.html">CreateBatchEventsResponse</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/EventResponse.html">EventResponse</a>
+                <a href="../Structs/CreateEventResponse.html">CreateEventResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Event.html">Event</a>
               </li>
             </ul>
           </li>
@@ -112,7 +112,7 @@ or encounters an error.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Success state with a value</p>
+                        <p>Success state with a value.</p>
 
                       </div>
                       <div class="declaration">
@@ -143,7 +143,7 @@ or encounters an error.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Failure state with an error</p>
+                        <p>Failure state with an error.</p>
 
                       </div>
                       <div class="declaration">
@@ -321,9 +321,9 @@ or encounters an error.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12PredictionIO6ResultO3mapACyqd__Gqd__xc9transform_tlF"></a>
-                    <a name="//apple_ref/swift/Method/map(transform:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12PredictionIO6ResultO3mapACyqd__Gqd__xc9transform_tlF">map(transform:)</a>
+                    <a name="/s:12PredictionIO6ResultO3mapACyqd__Gqd__xclF"></a>
+                    <a name="//apple_ref/swift/Method/map(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12PredictionIO6ResultO3mapACyqd__Gqd__xclF">map(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -337,8 +337,8 @@ value as a parameter.</p>
 <p>Use the <code>map</code> method with a closure that returns a value. For example:</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">result</span> <span class="o">=</span> <span class="kt">Result</span><span class="o">.</span><span class="nf">success</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 <span class="n">result</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="nv">$0</span> <span class="o">*</span> <span class="nv">$0</span> <span class="p">}</span>
-<span class="nf">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
-<span class="c1">// .success(6)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="c1">// success(6)</span>
 </code></pre>
 
                       </div>
@@ -346,7 +346,7 @@ value as a parameter.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">map</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">transform</span><span class="p">:</span> <span class="p">(</span><span class="kt">Value</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">map</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">transform</span><span class="p">:</span> <span class="p">(</span><span class="kt">Value</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -381,9 +381,9 @@ returns the failure.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12PredictionIO6ResultO7flatMapACyqd__GAExc9transform_tlF"></a>
-                    <a name="//apple_ref/swift/Method/flatMap(transform:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12PredictionIO6ResultO7flatMapACyqd__GAExc9transform_tlF">flatMap(transform:)</a>
+                    <a name="/s:12PredictionIO6ResultO7flatMapACyqd__GAExclF"></a>
+                    <a name="//apple_ref/swift/Method/flatMap(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12PredictionIO6ResultO7flatMapACyqd__GAExclF">flatMap(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -403,8 +403,8 @@ value as a parameter.</p>
         <span class="k">return</span> <span class="o">.</span><span class="nf">failure</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
     <span class="p">}</span>
 <span class="p">}</span>
-<span class="nf">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
-<span class="c1">// 16</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="c1">// success(16)</span>
 </code></pre>
 
                       </div>
@@ -412,7 +412,7 @@ value as a parameter.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">flatMap</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">transform</span><span class="p">:</span> <span class="p">(</span><span class="kt">Value</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">flatMap</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">transform</span><span class="p">:</span> <span class="p">(</span><span class="kt">Value</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
