@@ -48,6 +48,8 @@ public enum PIOError: Error {
         case unknownResponse
         /// Unknown status code returned by the server.
         case unknownStatusCode(Int)
+        ///
+        case serverFailure(statusCode: Int, message: String)
         /// Failure due to network or any other error.
         case failed(error: Error)
     }
@@ -106,6 +108,10 @@ extension PIOError.RequestFailureReason {
 
     static func unknownStatusCodeError(statusCode: Int) -> PIOError {
         return PIOError.failedRequest(reason: .unknownStatusCode(statusCode))
+    }
+
+    static func serverFailureError(statusCode: Int, message: String) -> PIOError {
+        return PIOError.failedRequest(reason: .serverFailure(statusCode: statusCode, message: message))
     }
 
     static func failedError(_ error: Error) -> PIOError {
