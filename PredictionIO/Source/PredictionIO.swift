@@ -30,6 +30,56 @@ public class BaseClient {
     }
 }
 
+// MARK: - EngineClient
+
+/// Responsible for retrieving prediction results from a PredictionIO Engine Server.
+public class EngineClient: BaseClient {
+
+    // MARK: - Initialization
+
+    /// Creates a client instance to connect to the Engine Server.
+    ///
+    /// - parameter baseURL: The base URL of the Engine Server. `http://localhost:8000` by default.
+    /// - parameter timeout: The request timeout. 5 seconds by default.
+    ///
+    /// - returns: The `EngineClient` instance.
+    public override init(baseURL: String = "http://localhost:8000", timeout: TimeInterval = 5) {
+        super.init(baseURL: baseURL, timeout: timeout)
+    }
+
+    // MARK: - Querying
+
+    /// Queries the prediction engine.
+    ///
+    /// - parameter query: The query dictionary.
+    /// - parameter completionHandler: The callback to be executed when the request has finished.
+    public func sendQuery(_ query: [String: Any], completionHandler: @escaping (Result<Data>) -> Void) {
+        networkConnection.post(url: queriesURL, payload: query, completionHandler: completionHandler)
+    }
+
+    /// Queries the prediction engine and parses the response into the given response type.
+    ///
+    /// - parameter query: The query dictionary.
+    /// - parameter responseType: The type respresenting the response format. It must conform to `Decodable`.
+    /// - parameter completionHandler: The callback to be executed when the request has finished.
+    public func sendQuery<Response>(_ query: [String: Any], responseType: Response.Type, completionHandler: @escaping (Result<Response>) -> Void) where Response: Decodable {
+        networkConnection.post(url: queriesURL, payload: query) { result in
+            let result = result.flatMap { data -> Result<Response> in
+                do {
+                    let decoder = JSONDecoder()
+                    let response = try decoder.decode(Response.self, from: data)
+                    return .success(response)
+                } catch {
+                    return .failure(PIOError.DeserializationFailureReason.unknownFormatError())
+                }
+            }
+            completionHandler(result)
+        }
+    }
+
+    var queriesURL: String { return "\(baseURL)/queries.json" }
+}
+
 // MARK: - EventClient
 
 /// Responsible for sending data to a PredictionIO Event Server.
@@ -339,56 +389,6 @@ public extension EventClient {
 
         createEvent(event, completionHandler: completionHandler)
     }
-}
-
-// MARK: - EngineClient
-
-/// Responsible for retrieving prediction results from a PredictionIO Engine Server.
-public class EngineClient: BaseClient {
-
-    // MARK: - Initialization
-
-    /// Creates a client instance to connect to the Engine Server.
-    ///
-    /// - parameter baseURL: The base URL of the Engine Server. `http://localhost:8000` by default.
-    /// - parameter timeout: The request timeout. 5 seconds by default.
-    ///
-    /// - returns: The `EngineClient` instance.
-    public override init(baseURL: String = "http://localhost:8000", timeout: TimeInterval = 5) {
-        super.init(baseURL: baseURL, timeout: timeout)
-    }
-
-    // MARK: - Querying
-
-    /// Queries the prediction engine.
-    ///
-    /// - parameter query: The query dictionary.
-    /// - parameter completionHandler: The callback to be executed when the request has finished.
-    public func sendQuery(_ query: [String: Any], completionHandler: @escaping (Result<Data>) -> Void) {
-        networkConnection.post(url: queriesURL, payload: query, completionHandler: completionHandler)
-    }
-
-    /// Queries the prediction engine and parses the response into the given response type.
-    ///
-    /// - parameter query: The query dictionary.
-    /// - parameter responseType: The type respresenting the response format. It must conform to `Decodable`.
-    /// - parameter completionHandler: The callback to be executed when the request has finished.
-    public func sendQuery<Response>(_ query: [String: Any], responseType: Response.Type, completionHandler: @escaping (Result<Response>) -> Void) where Response: Decodable {
-        networkConnection.post(url: queriesURL, payload: query) { result in
-            let result = result.flatMap { data -> Result<Response> in
-                do {
-                    let decoder = JSONDecoder()
-                    let response = try decoder.decode(Response.self, from: data)
-                    return .success(response)
-                } catch {
-                    return .failure(PIOError.DeserializationFailureReason.unknownFormatError())
-                }
-            }
-            completionHandler(result)
-        }
-    }
-
-    var queriesURL: String { return "\(baseURL)/queries.json" }
 }
 
 // MARK: - Responses
