@@ -101,9 +101,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12PredictionIO8PIOErrorO20RequestFailureReasonO12unauthorizedA2EmF"></a>
-                    <a name="//apple_ref/swift/Element/unauthorized" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12PredictionIO8PIOErrorO20RequestFailureReasonO12unauthorizedA2EmF">unauthorized</a>
+                    <a name="/s:12PredictionIO8PIOErrorO20RequestFailureReasonO06serverE0AESi10statusCode_SS7messagetcAEmF"></a>
+                    <a name="//apple_ref/swift/Element/serverFailure" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12PredictionIO8PIOErrorO20RequestFailureReasonO06serverE0AESi10statusCode_SS7messagetcAEmF">serverFailure</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -111,77 +111,24 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Unauthorized. The server returns 401 status code.</p>
+                        <p>Server returns a non-successful status code.</p>
+
+<ul>
+<li>400: bad request e.g. invalid date format</li>
+<li>401: unauthorized</li>
+<li>404: resource not found</li>
+<li>500: internal error</li>
+</ul>
+
+<p>The server would also return a <q>message</q> field in the
+response&rsquo;s JSON data.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">unauthorized</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:12PredictionIO8PIOErrorO20RequestFailureReasonO8notFoundA2EmF"></a>
-                    <a name="//apple_ref/swift/Element/notFound" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12PredictionIO8PIOErrorO20RequestFailureReasonO8notFoundA2EmF">notFound</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Resource not found. The server returns 404 status code.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">notFound</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:12PredictionIO8PIOErrorO20RequestFailureReasonO03badD0A2EmF"></a>
-                    <a name="//apple_ref/swift/Element/badRequest" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12PredictionIO8PIOErrorO20RequestFailureReasonO03badD0A2EmF">badRequest</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Bad request e.g. invalid JSON or invalid date format.
-The server returns 400 status code.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">badRequest</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">serverFailure</span><span class="p">(</span><span class="nv">statusCode</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">message</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -213,67 +160,6 @@ The server returns 400 status code.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="k">case</span> <span class="n">unknownResponse</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:12PredictionIO8PIOErrorO20RequestFailureReasonO17unknownStatusCodeAESicAEmF"></a>
-                    <a name="//apple_ref/swift/Element/unknownStatusCode" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12PredictionIO8PIOErrorO20RequestFailureReasonO17unknownStatusCodeAESicAEmF">unknownStatusCode</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Unknown status code returned by the server.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">unknownStatusCode</span><span class="p">(</span><span class="kt">Int</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:12PredictionIO8PIOErrorO20RequestFailureReasonO06serverE0AESi10statusCode_SS7messagetcAEmF"></a>
-                    <a name="//apple_ref/swift/Element/serverFailure" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12PredictionIO8PIOErrorO20RequestFailureReasonO06serverE0AESi10statusCode_SS7messagetcAEmF">serverFailure</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">serverFailure</span><span class="p">(</span><span class="nv">statusCode</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">message</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>

@@ -42,6 +42,7 @@ public enum PIOError: Error {
         ///   - 401: unauthorized
         ///   - 404: resource not found
         ///   - 500: internal error
+        ///
         /// The server would also return a "message" field in the
         /// response's JSON data.
         case serverFailure(statusCode: Int, message: String)
