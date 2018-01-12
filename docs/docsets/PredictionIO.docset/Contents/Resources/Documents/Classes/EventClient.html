@@ -14,7 +14,7 @@
     <a title="EventClient Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">PredictionIO Docs</a> (95% documented)</p>
+        <p><a href="../index.html">PredictionIO Docs</a> (100% documented)</p>
         <p class="header-right"><a href="https://github.com/minhtule/PredictionIO-Swift-SDK"><img src="../img/gh.png"/>View on GitHub</a></p>
         <p class="header-right"><a href="dash-feed://https%3A%2F%2Fminhtule%2Egithub%2Eio%2FPredictionIO%2DSwift%2DSDK%2Fdocsets%2FPredictionIO%2Exml"><img src="../img/dash.png"/>Install in Dash</a></p>
       </div>
@@ -47,9 +47,6 @@
             <a href="../Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Enums/BatchEventStatus.html">BatchEventStatus</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Enums/PIOError.html">PIOError</a>
               </li>
               <li class="nav-group-task">
@@ -64,16 +61,22 @@
               <li class="nav-group-task">
                 <a href="../Enums/PIOError/DeserializationFailureReason.html">– DeserializationFailureReason</a>
               </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Result.html">Result</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
             <a href="../Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Structs/Event.html">Event</a>
+                <a href="../Structs/CreateBatchEventsResponse.html">CreateBatchEventsResponse</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/EventResponse.html">EventResponse</a>
+                <a href="../Structs/CreateEventResponse.html">CreateEventResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Event.html">Event</a>
               </li>
             </ul>
           </li>
@@ -202,9 +205,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12PredictionIO11EventClientC06createC0yAA0C0V_yAA0C8ResponseVSg_s5Error_pSgtc17completionHandlertF"></a>
+                    <a name="/s:12PredictionIO11EventClientC06createC0yAA0C0V_yAA6ResultOyAA06CreateC8ResponseVGc17completionHandlertF"></a>
                     <a name="//apple_ref/swift/Method/createEvent(_:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12PredictionIO11EventClientC06createC0yAA0C0V_yAA0C8ResponseVSg_s5Error_pSgtc17completionHandlertF">createEvent(_:completionHandler:)</a>
+                    <a class="token" href="#/s:12PredictionIO11EventClientC06createC0yAA0C0V_yAA6ResultOyAA06CreateC8ResponseVGc17completionHandlertF">createEvent(_:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -219,7 +222,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createEvent</span><span class="p">(</span><span class="n">_</span> <span class="nv">event</span><span class="p">:</span> <span class="kt"><a href="../Structs/Event.html">Event</a></span><span class="p">,</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/EventResponse.html">EventResponse</a></span><span class="p">?,</span> <span class="kt">Error</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createEvent</span><span class="p">(</span><span class="n">_</span> <span class="nv">event</span><span class="p">:</span> <span class="kt"><a href="../Structs/Event.html">Event</a></span><span class="p">,</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Enums/Result.html">Result</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/CreateEventResponse.html">CreateEventResponse</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -260,9 +263,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12PredictionIO11EventClientC17createBatchEventsySayAA0C0VG_ySayAA0fC6StatusOGSg_s5Error_pSgtc17completionHandlertF"></a>
+                    <a name="/s:12PredictionIO11EventClientC17createBatchEventsySayAA0C0VG_yAA6ResultOyAA06CreatefG8ResponseVGc17completionHandlertF"></a>
                     <a name="//apple_ref/swift/Method/createBatchEvents(_:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12PredictionIO11EventClientC17createBatchEventsySayAA0C0VG_ySayAA0fC6StatusOGSg_s5Error_pSgtc17completionHandlertF">createBatchEvents(_:completionHandler:)</a>
+                    <a class="token" href="#/s:12PredictionIO11EventClientC17createBatchEventsySayAA0C0VG_yAA6ResultOyAA06CreatefG8ResponseVGc17completionHandlertF">createBatchEvents(_:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -277,7 +280,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createBatchEvents</span><span class="p">(</span><span class="n">_</span> <span class="nv">events</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Event.html">Event</a></span><span class="p">],</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">([</span><span class="kt"><a href="../Enums/BatchEventStatus.html">BatchEventStatus</a></span><span class="p">]?,</span> <span class="kt">Error</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createBatchEvents</span><span class="p">(</span><span class="n">_</span> <span class="nv">events</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Event.html">Event</a></span><span class="p">],</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Enums/Result.html">Result</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/CreateBatchEventsResponse.html">CreateBatchEventsResponse</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -318,9 +321,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12PredictionIO11EventClientC03getC0ySS7eventID_yAA0C0VSg_s5Error_pSgtc17completionHandlertF"></a>
+                    <a name="/s:12PredictionIO11EventClientC03getC0ySS7eventID_yAA6ResultOyAA0C0VGc17completionHandlertF"></a>
                     <a name="//apple_ref/swift/Method/getEvent(eventID:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12PredictionIO11EventClientC03getC0ySS7eventID_yAA0C0VSg_s5Error_pSgtc17completionHandlertF">getEvent(eventID:completionHandler:)</a>
+                    <a class="token" href="#/s:12PredictionIO11EventClientC03getC0ySS7eventID_yAA6ResultOyAA0C0VGc17completionHandlertF">getEvent(eventID:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -335,7 +338,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getEvent</span><span class="p">(</span><span class="nv">eventID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Event.html">Event</a></span><span class="p">?,</span> <span class="kt">Error</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getEvent</span><span class="p">(</span><span class="nv">eventID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Enums/Result.html">Result</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Event.html">Event</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -376,9 +379,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12PredictionIO11EventClientC9getEventsy10Foundation4DateVSg9startTime_AH03endJ0SSSg10entityTypeAK0L2IDSi5limitSb10isReversedySayAA0C0VGSg_s5Error_pSgtc17completionHandlertF"></a>
+                    <a name="/s:12PredictionIO11EventClientC9getEventsy10Foundation4DateVSg9startTime_AH03endJ0SSSg10entityTypeAK0L2IDSi5limitSb10isReversedyAA6ResultOySayAA0C0VGGc17completionHandlertF"></a>
                     <a name="//apple_ref/swift/Method/getEvents(startTime:endTime:entityType:entityID:limit:isReversed:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12PredictionIO11EventClientC9getEventsy10Foundation4DateVSg9startTime_AH03endJ0SSSg10entityTypeAK0L2IDSi5limitSb10isReversedySayAA0C0VGSg_s5Error_pSgtc17completionHandlertF">getEvents(startTime:endTime:entityType:entityID:limit:isReversed:completionHandler:)</a>
+                    <a class="token" href="#/s:12PredictionIO11EventClientC9getEventsy10Foundation4DateVSg9startTime_AH03endJ0SSSg10entityTypeAK0L2IDSi5limitSb10isReversedyAA6ResultOySayAA0C0VGGc17completionHandlertF">getEvents(startTime:endTime:entityType:entityID:limit:isReversed:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -393,7 +396,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getEvents</span><span class="p">(</span><span class="nv">startTime</span><span class="p">:</span> <span class="kt">Date</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">endTime</span><span class="p">:</span> <span class="kt">Date</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">entityType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">entityID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">limit</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="nv">isReversed</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">([</span><span class="kt"><a href="../Structs/Event.html">Event</a></span><span class="p">]?,</span> <span class="kt">Error</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getEvents</span><span class="p">(</span><span class="nv">startTime</span><span class="p">:</span> <span class="kt">Date</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">endTime</span><span class="p">:</span> <span class="kt">Date</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">entityType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">entityID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">limit</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="nv">isReversed</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Enums/Result.html">Result</a></span><span class="o">&lt;</span><span class="p">[</span><span class="kt"><a href="../Structs/Event.html">Event</a></span><span class="p">]</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -564,9 +567,9 @@ both <code>entityType</code> and <code>entityID</code> specified. <code>false</c
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12PredictionIO11EventClientC7setUserySS6userID_s10DictionaryVySSypG10properties10Foundation4DateV9eventTimeyAA0C8ResponseVSg_s5Error_pSgtc17completionHandlertF"></a>
+                    <a name="/s:12PredictionIO11EventClientC7setUserySS6userID_s10DictionaryVySSypG10properties10Foundation4DateV9eventTimeyAA6ResultOyAA06CreateC8ResponseVGc17completionHandlertF"></a>
                     <a name="//apple_ref/swift/Method/setUser(userID:properties:eventTime:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12PredictionIO11EventClientC7setUserySS6userID_s10DictionaryVySSypG10properties10Foundation4DateV9eventTimeyAA0C8ResponseVSg_s5Error_pSgtc17completionHandlertF">setUser(userID:properties:eventTime:completionHandler:)</a>
+                    <a class="token" href="#/s:12PredictionIO11EventClientC7setUserySS6userID_s10DictionaryVySSypG10properties10Foundation4DateV9eventTimeyAA6ResultOyAA06CreateC8ResponseVGc17completionHandlertF">setUser(userID:properties:eventTime:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -581,7 +584,7 @@ both <code>entityType</code> and <code>entityID</code> specified. <code>false</c
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">setUser</span><span class="p">(</span><span class="nv">userID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">properties</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">Any</span><span class="p">],</span> <span class="nv">eventTime</span><span class="p">:</span> <span class="kt">Date</span> <span class="o">=</span> <span class="kt">Date</span><span class="p">(),</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/EventResponse.html">EventResponse</a></span><span class="p">?,</span> <span class="kt">Error</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">setUser</span><span class="p">(</span><span class="nv">userID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">properties</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">Any</span><span class="p">],</span> <span class="nv">eventTime</span><span class="p">:</span> <span class="kt">Date</span> <span class="o">=</span> <span class="kt">Date</span><span class="p">(),</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Enums/Result.html">Result</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/CreateEventResponse.html">CreateEventResponse</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -646,9 +649,9 @@ both <code>entityType</code> and <code>entityID</code> specified. <code>false</c
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12PredictionIO11EventClientC9unsetUserySS6userID_s10DictionaryVySSypG10properties10Foundation4DateV9eventTimeyAA0C8ResponseVSg_s5Error_pSgtc17completionHandlertF"></a>
+                    <a name="/s:12PredictionIO11EventClientC9unsetUserySS6userID_s10DictionaryVySSypG10properties10Foundation4DateV9eventTimeyAA6ResultOyAA06CreateC8ResponseVGc17completionHandlertF"></a>
                     <a name="//apple_ref/swift/Method/unsetUser(userID:properties:eventTime:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12PredictionIO11EventClientC9unsetUserySS6userID_s10DictionaryVySSypG10properties10Foundation4DateV9eventTimeyAA0C8ResponseVSg_s5Error_pSgtc17completionHandlertF">unsetUser(userID:properties:eventTime:completionHandler:)</a>
+                    <a class="token" href="#/s:12PredictionIO11EventClientC9unsetUserySS6userID_s10DictionaryVySSypG10properties10Foundation4DateV9eventTimeyAA6ResultOyAA06CreateC8ResponseVGc17completionHandlertF">unsetUser(userID:properties:eventTime:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -663,7 +666,7 @@ both <code>entityType</code> and <code>entityID</code> specified. <code>false</c
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">unsetUser</span><span class="p">(</span><span class="nv">userID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">properties</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">Any</span><span class="p">],</span> <span class="nv">eventTime</span><span class="p">:</span> <span class="kt">Date</span> <span class="o">=</span> <span class="kt">Date</span><span class="p">(),</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/EventResponse.html">EventResponse</a></span><span class="p">?,</span> <span class="kt">Error</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">unsetUser</span><span class="p">(</span><span class="nv">userID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">properties</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">Any</span><span class="p">],</span> <span class="nv">eventTime</span><span class="p">:</span> <span class="kt">Date</span> <span class="o">=</span> <span class="kt">Date</span><span class="p">(),</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Enums/Result.html">Result</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/CreateEventResponse.html">CreateEventResponse</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -728,9 +731,9 @@ both <code>entityType</code> and <code>entityID</code> specified. <code>false</c
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12PredictionIO11EventClientC10deleteUserySS6userID_10Foundation4DateV9eventTimeyAA0C8ResponseVSg_s5Error_pSgtc17completionHandlertF"></a>
+                    <a name="/s:12PredictionIO11EventClientC10deleteUserySS6userID_10Foundation4DateV9eventTimeyAA6ResultOyAA06CreateC8ResponseVGc17completionHandlertF"></a>
                     <a name="//apple_ref/swift/Method/deleteUser(userID:eventTime:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12PredictionIO11EventClientC10deleteUserySS6userID_10Foundation4DateV9eventTimeyAA0C8ResponseVSg_s5Error_pSgtc17completionHandlertF">deleteUser(userID:eventTime:completionHandler:)</a>
+                    <a class="token" href="#/s:12PredictionIO11EventClientC10deleteUserySS6userID_10Foundation4DateV9eventTimeyAA6ResultOyAA06CreateC8ResponseVGc17completionHandlertF">deleteUser(userID:eventTime:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -745,7 +748,7 @@ both <code>entityType</code> and <code>entityID</code> specified. <code>false</c
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">deleteUser</span><span class="p">(</span><span class="nv">userID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">eventTime</span><span class="p">:</span> <span class="kt">Date</span> <span class="o">=</span> <span class="kt">Date</span><span class="p">(),</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/EventResponse.html">EventResponse</a></span><span class="p">?,</span> <span class="kt">Error</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">deleteUser</span><span class="p">(</span><span class="nv">userID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">eventTime</span><span class="p">:</span> <span class="kt">Date</span> <span class="o">=</span> <span class="kt">Date</span><span class="p">(),</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Enums/Result.html">Result</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/CreateEventResponse.html">CreateEventResponse</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -809,9 +812,9 @@ both <code>entityType</code> and <code>entityID</code> specified. <code>false</c
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12PredictionIO11EventClientC7setItemySS6itemID_s10DictionaryVySSypG10properties10Foundation4DateV9eventTimeyAA0C8ResponseVSg_s5Error_pSgtc17completionHandlertF"></a>
+                    <a name="/s:12PredictionIO11EventClientC7setItemySS6itemID_s10DictionaryVySSypG10properties10Foundation4DateV9eventTimeyAA6ResultOyAA06CreateC8ResponseVGc17completionHandlertF"></a>
                     <a name="//apple_ref/swift/Method/setItem(itemID:properties:eventTime:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12PredictionIO11EventClientC7setItemySS6itemID_s10DictionaryVySSypG10properties10Foundation4DateV9eventTimeyAA0C8ResponseVSg_s5Error_pSgtc17completionHandlertF">setItem(itemID:properties:eventTime:completionHandler:)</a>
+                    <a class="token" href="#/s:12PredictionIO11EventClientC7setItemySS6itemID_s10DictionaryVySSypG10properties10Foundation4DateV9eventTimeyAA6ResultOyAA06CreateC8ResponseVGc17completionHandlertF">setItem(itemID:properties:eventTime:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -826,7 +829,7 @@ both <code>entityType</code> and <code>entityID</code> specified. <code>false</c
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">setItem</span><span class="p">(</span><span class="nv">itemID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">properties</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">Any</span><span class="p">],</span> <span class="nv">eventTime</span><span class="p">:</span> <span class="kt">Date</span> <span class="o">=</span> <span class="kt">Date</span><span class="p">(),</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/EventResponse.html">EventResponse</a></span><span class="p">?,</span> <span class="kt">Error</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">setItem</span><span class="p">(</span><span class="nv">itemID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">properties</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">Any</span><span class="p">],</span> <span class="nv">eventTime</span><span class="p">:</span> <span class="kt">Date</span> <span class="o">=</span> <span class="kt">Date</span><span class="p">(),</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Enums/Result.html">Result</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/CreateEventResponse.html">CreateEventResponse</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -891,9 +894,9 @@ both <code>entityType</code> and <code>entityID</code> specified. <code>false</c
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12PredictionIO11EventClientC9unsetItemySS6itemID_s10DictionaryVySSypG10properties10Foundation4DateV9eventTimeyAA0C8ResponseVSg_s5Error_pSgtc17completionHandlertF"></a>
+                    <a name="/s:12PredictionIO11EventClientC9unsetItemySS6itemID_s10DictionaryVySSypG10properties10Foundation4DateV9eventTimeyAA6ResultOyAA06CreateC8ResponseVGc17completionHandlertF"></a>
                     <a name="//apple_ref/swift/Method/unsetItem(itemID:properties:eventTime:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12PredictionIO11EventClientC9unsetItemySS6itemID_s10DictionaryVySSypG10properties10Foundation4DateV9eventTimeyAA0C8ResponseVSg_s5Error_pSgtc17completionHandlertF">unsetItem(itemID:properties:eventTime:completionHandler:)</a>
+                    <a class="token" href="#/s:12PredictionIO11EventClientC9unsetItemySS6itemID_s10DictionaryVySSypG10properties10Foundation4DateV9eventTimeyAA6ResultOyAA06CreateC8ResponseVGc17completionHandlertF">unsetItem(itemID:properties:eventTime:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -908,7 +911,7 @@ both <code>entityType</code> and <code>entityID</code> specified. <code>false</c
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">unsetItem</span><span class="p">(</span><span class="nv">itemID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">properties</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">Any</span><span class="p">],</span> <span class="nv">eventTime</span><span class="p">:</span> <span class="kt">Date</span> <span class="o">=</span> <span class="kt">Date</span><span class="p">(),</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/EventResponse.html">EventResponse</a></span><span class="p">?,</span> <span class="kt">Error</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">unsetItem</span><span class="p">(</span><span class="nv">itemID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">properties</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">Any</span><span class="p">],</span> <span class="nv">eventTime</span><span class="p">:</span> <span class="kt">Date</span> <span class="o">=</span> <span class="kt">Date</span><span class="p">(),</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Enums/Result.html">Result</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/CreateEventResponse.html">CreateEventResponse</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -973,9 +976,9 @@ both <code>entityType</code> and <code>entityID</code> specified. <code>false</c
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12PredictionIO11EventClientC10deleteItemySS6itemID_10Foundation4DateV9eventTimeyAA0C8ResponseVSg_s5Error_pSgtc17completionHandlertF"></a>
+                    <a name="/s:12PredictionIO11EventClientC10deleteItemySS6itemID_10Foundation4DateV9eventTimeyAA6ResultOyAA06CreateC8ResponseVGc17completionHandlertF"></a>
                     <a name="//apple_ref/swift/Method/deleteItem(itemID:eventTime:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12PredictionIO11EventClientC10deleteItemySS6itemID_10Foundation4DateV9eventTimeyAA0C8ResponseVSg_s5Error_pSgtc17completionHandlertF">deleteItem(itemID:eventTime:completionHandler:)</a>
+                    <a class="token" href="#/s:12PredictionIO11EventClientC10deleteItemySS6itemID_10Foundation4DateV9eventTimeyAA6ResultOyAA06CreateC8ResponseVGc17completionHandlertF">deleteItem(itemID:eventTime:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -990,7 +993,7 @@ both <code>entityType</code> and <code>entityID</code> specified. <code>false</c
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">deleteItem</span><span class="p">(</span><span class="nv">itemID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">eventTime</span><span class="p">:</span> <span class="kt">Date</span> <span class="o">=</span> <span class="kt">Date</span><span class="p">(),</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/EventResponse.html">EventResponse</a></span><span class="p">?,</span> <span class="kt">Error</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">deleteItem</span><span class="p">(</span><span class="nv">itemID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">eventTime</span><span class="p">:</span> <span class="kt">Date</span> <span class="o">=</span> <span class="kt">Date</span><span class="p">(),</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Enums/Result.html">Result</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/CreateEventResponse.html">CreateEventResponse</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1054,9 +1057,9 @@ both <code>entityType</code> and <code>entityID</code> specified. <code>false</c
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12PredictionIO11EventClientC12recordActionySS_SS8byUserIDSS06onItemI0s10DictionaryVySSypGSg10properties10Foundation4DateV9eventTimeyAA0C8ResponseVSg_s5Error_pSgtc17completionHandlertF"></a>
+                    <a name="/s:12PredictionIO11EventClientC12recordActionySS_SS8byUserIDSS06onItemI0s10DictionaryVySSypGSg10properties10Foundation4DateV9eventTimeyAA6ResultOyAA06CreateC8ResponseVGc17completionHandlertF"></a>
                     <a name="//apple_ref/swift/Method/recordAction(_:byUserID:onItemID:properties:eventTime:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12PredictionIO11EventClientC12recordActionySS_SS8byUserIDSS06onItemI0s10DictionaryVySSypGSg10properties10Foundation4DateV9eventTimeyAA0C8ResponseVSg_s5Error_pSgtc17completionHandlertF">recordAction(_:byUserID:onItemID:properties:eventTime:completionHandler:)</a>
+                    <a class="token" href="#/s:12PredictionIO11EventClientC12recordActionySS_SS8byUserIDSS06onItemI0s10DictionaryVySSypGSg10properties10Foundation4DateV9eventTimeyAA6ResultOyAA06CreateC8ResponseVGc17completionHandlertF">recordAction(_:byUserID:onItemID:properties:eventTime:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1071,7 +1074,7 @@ both <code>entityType</code> and <code>entityID</code> specified. <code>false</c
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">recordAction</span><span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">byUserID</span> <span class="nv">userID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">onItemID</span> <span class="nv">itemID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">properties</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">Any</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">eventTime</span><span class="p">:</span> <span class="kt">Date</span> <span class="o">=</span> <span class="kt">Date</span><span class="p">(),</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/EventResponse.html">EventResponse</a></span><span class="p">?,</span> <span class="kt">Error</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">recordAction</span><span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">byUserID</span> <span class="nv">userID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">onItemID</span> <span class="nv">itemID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">properties</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">Any</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">eventTime</span><span class="p">:</span> <span class="kt">Date</span> <span class="o">=</span> <span class="kt">Date</span><span class="p">(),</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Enums/Result.html">Result</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/CreateEventResponse.html">CreateEventResponse</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1162,7 +1165,7 @@ both <code>entityType</code> and <code>entityID</code> specified. <code>false</c
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://github.com/minhtule" target="_blank" rel="external">Minh-Tu Le</a>. All rights reserved. (Last updated: 2018-01-10)</p>
+          <p>&copy; 2018 <a class="link" href="https://github.com/minhtule" target="_blank" rel="external">Minh-Tu Le</a>. All rights reserved. (Last updated: 2018-01-12)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

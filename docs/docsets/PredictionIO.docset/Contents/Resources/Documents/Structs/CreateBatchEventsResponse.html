@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>EventResponse Structure Reference</title>
+    <title>CreateBatchEventsResponse Structure Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -10,11 +10,11 @@
     
   </head>
   <body>
-    <a name="//apple_ref/swift/Struct/EventResponse" class="dashAnchor"></a>
-    <a title="EventResponse Structure Reference"></a>
+    <a name="//apple_ref/swift/Struct/CreateBatchEventsResponse" class="dashAnchor"></a>
+    <a title="CreateBatchEventsResponse Structure Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">PredictionIO Docs</a> (96% documented)</p>
+        <p><a href="../index.html">PredictionIO Docs</a> (100% documented)</p>
         <p class="header-right"><a href="https://github.com/minhtule/PredictionIO-Swift-SDK"><img src="../img/gh.png"/>View on GitHub</a></p>
         <p class="header-right"><a href="dash-feed://https%3A%2F%2Fminhtule%2Egithub%2Eio%2FPredictionIO%2DSwift%2DSDK%2Fdocsets%2FPredictionIO%2Exml"><img src="../img/dash.png"/>Install in Dash</a></p>
       </div>
@@ -23,7 +23,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">PredictionIO Reference</a>
         <img id="carat" src="../img/carat.png" />
-        EventResponse Structure Reference
+        CreateBatchEventsResponse Structure Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -46,9 +46,6 @@
           <li class="nav-group-name">
             <a href="../Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a href="../Enums/BatchEventStatus.html">BatchEventStatus</a>
-              </li>
               <li class="nav-group-task">
                 <a href="../Enums/PIOError.html">PIOError</a>
               </li>
@@ -73,10 +70,13 @@
             <a href="../Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Structs/Event.html">Event</a>
+                <a href="../Structs/CreateBatchEventsResponse.html">CreateBatchEventsResponse</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/EventResponse.html">EventResponse</a>
+                <a href="../Structs/CreateEventResponse.html">CreateEventResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Event.html">Event</a>
               </li>
             </ul>
           </li>
@@ -85,14 +85,14 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>EventResponse</h1>
+            <h1>CreateBatchEventsResponse</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">EventResponse</span><span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CreateBatchEventsResponse</span><span class="p">:</span> <span class="kt">Decodable</span></code></pre>
 
                 </div>
               </div>
-            <p>Response structure for an event-creation request.</p>
+            <p>Represents the response of a creating batch events request.</p>
 
           </section>
           <section class="section task-group-section">
@@ -101,9 +101,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12PredictionIO13EventResponseV7eventIDSSv"></a>
-                    <a name="//apple_ref/swift/Property/eventID" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12PredictionIO13EventResponseV7eventIDSSv">eventID</a>
+                    <a name="/s:12PredictionIO25CreateBatchEventsResponseV8statusesSayAA6ResultOyAA0c5EventF0VGGv"></a>
+                    <a name="//apple_ref/swift/Property/statuses" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12PredictionIO25CreateBatchEventsResponseV8statusesSayAA6ResultOyAA0c5EventF0VGGv">statuses</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -111,14 +111,21 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The statuses each of which presents whether an event was successfully
+created by the server.</p>
+
+<p>If an event was successfuly created by the server, its status is a
+<code><a href="../Enums/Result.html#/s:12PredictionIO6ResultO7successACyxGxcAEmlF">Result.success</a></code> which value contains its individual <code><a href="../Structs/CreateEventResponse.html">CreateEventResponse</a></code>.
+Otherwise, the event&rsquo;s status is a <code><a href="../Enums/Result.html#/s:12PredictionIO6ResultO7failureACyxGs5Error_pcAEmlF">Result.failure</a></code>. The statuses are
+returned in the same order of their corresponding events sent in the
+request.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">eventID</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">statuses</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Enums/Result.html">Result</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/CreateEventResponse.html">CreateEventResponse</a></span><span class="o">&gt;</span><span class="p">]</span></code></pre>
 
                         </div>
                       </div>

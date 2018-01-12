@@ -35,13 +35,15 @@ class RatingViewController: UIViewController {
         userID = userIDTextField.text ?? ""
         movieID = movieIDTextField.text ?? ""
 
-        eventClient.recordAction("rate", byUserID: userID, onItemID: movieID, properties: ["rating": rating]) { response, error in
-            let alertController: UIAlertController
-            if let response = response {
+        eventClient.recordAction("rate", byUserID: userID, onItemID: movieID, properties: ["rating": rating]) { result in
+            var alertController: UIAlertController
+            switch result {
+            case let .success(response):
                 alertController = UIAlertController(title: "Successful", message: "EventID: \(response.eventID)", preferredStyle: .alert)
-            } else {
-                alertController = UIAlertController(title: "Failed", message: "\(error.debugDescription)", preferredStyle: .alert)
+            case let .failure(error):
+                alertController = UIAlertController(title: "Failed", message: "\(error)", preferredStyle: .alert)
             }
+            
             let okAction = UIAlertAction(title: "OK", style: .default)
             alertController.addAction(okAction)
 

@@ -28,13 +28,14 @@ class RecommendationViewController: UIViewController {
             "num": numberOfItems
         ]
 
-        engineClient.sendQuery(query, responseType: RecommendationResponse.self) { [weak self] response, error in
-            if let response = response {
+        engineClient.sendQuery(query, responseType: RecommendationResponse.self) { [weak self] result in
+            switch result {
+            case let .success(response):
                 self?.recommendation = response.itemScores
-            } else {
+            case let .failure(error):
                 self?.recommendation = []
 
-                let alertController = UIAlertController(title: "Failed", message: "\(error.debugDescription)", preferredStyle: .alert)
+                let alertController = UIAlertController(title: "Failed", message: "\(error)", preferredStyle: .alert)
                 let okAction = UIAlertAction(title: "OK", style: .default)
                 alertController.addAction(okAction)
 

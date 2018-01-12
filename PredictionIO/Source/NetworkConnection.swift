@@ -25,54 +25,60 @@ class NetworkConnection {
     }
 
     @discardableResult
-    func get(url: String, queryParams: QueryParams? = nil, headers: HTTPHeaders? = nil, completionHandler: @escaping (Data?, Error?) -> Void) -> URLSessionDataTask? {
+    func get(url: String, queryParams: QueryParams? = nil, headers: HTTPHeaders? = nil, completionHandler: @escaping (Result<Data>) -> Void) -> URLSessionDataTask? {
         return request(url, method: .get, queryParams: queryParams, payload: nil, headers: headers, completionHandler: completionHandler)
     }
 
     @discardableResult
-    func post(url: String, payload: Any?, queryParams: QueryParams? = nil, headers: HTTPHeaders? = nil, completionHandler: @escaping (Data?, Error?) -> Void) -> URLSessionDataTask? {
+    func post(url: String, payload: Any?, queryParams: QueryParams? = nil, headers: HTTPHeaders? = nil, completionHandler: @escaping (Result<Data>) -> Void) -> URLSessionDataTask? {
         return request(url, method: .post, queryParams: queryParams, payload: payload, headers: headers, completionHandler: completionHandler)
     }
 
     @discardableResult
-    func delete(url: String, queryParams: QueryParams? = nil, headers: HTTPHeaders? = nil, completionHandler: @escaping (Data?, Error?) -> Void) -> URLSessionDataTask? {
+    func delete(url: String, queryParams: QueryParams? = nil, headers: HTTPHeaders? = nil, completionHandler: @escaping (Result<Data>) -> Void) -> URLSessionDataTask? {
         return request(url, method: .delete, queryParams: queryParams, payload: nil, headers: headers, completionHandler: completionHandler)
     }
 
-    private func request(_ url: String, method: HTTPMethod, queryParams: QueryParams? = nil, payload: Any?, headers: HTTPHeaders? = nil, completionHandler: @escaping (Data?, Error?) -> Void) -> URLSessionDataTask? {
+    private func request(_ url: String, method: HTTPMethod, queryParams: QueryParams? = nil, payload: Any?, headers: HTTPHeaders? = nil, completionHandler: @escaping (Result<Data>) -> Void) -> URLSessionDataTask? {
         do {
             var request = try URLRequest(url: url, method: method, queryParams: queryParams, headers: headers)
             try request.attachJSONPayload(payload: payload)
 
             let task = session.dataTask(with: request) { data, response, error in
                 if let error = error {
-                    completionHandler(nil, PIOError.RequestFailureReason.failedError(error))
+                    completionHandler(.failure(PIOError.RequestFailureReason.failedError(error)))
                     return
                 }
 
-                guard let response = response as? HTTPURLResponse else {
-                    completionHandler(nil, PIOError.RequestFailureReason.unknownResponseError())
+                guard let response = response as? HTTPURLResponse,
+                    let data = data
+                else {
+                    // We should never be here!
+                    completionHandler(.failure(PIOError.RequestFailureReason.unknownResponseError()))
                     return
                 }
 
                 switch response.statusCode {
-                case 400:
-                    completionHandler(nil, PIOError.RequestFailureReason.badRequestError())
-                case 401:
-                    completionHandler(nil, PIOError.RequestFailureReason.unauthorizedError())
-                case 404:
-                    completionHandler(nil, PIOError.RequestFailureReason.notFoundError())
                 case 200...201:
-                    completionHandler(data, nil)
+                    completionHandler(.success(data))
                 default:
-                    // TODO: serialize payload to get the error message
-                    completionHandler(nil, PIOError.RequestFailureReason.unknownStatusCodeError(statusCode: response.statusCode))
+                    let message: String
+                    if let data = try? JSONSerialization.jsonObject(with: data, options: []),
+                        let jsonData = data as? [String: Any],
+                        let messageValue = jsonData["message"] as? String
+                    {
+                        message = messageValue
+                    } else {
+                        message = "-- Cannot parse message from server --"
+                    }
+                    let error = PIOError.RequestFailureReason.serverFailureError(statusCode: response.statusCode, message: message)
+                    completionHandler(.failure(error))
                 }
             }
             task.resume()
             return task
         } catch {
-            completionHandler(nil, error)
+            completionHandler(.failure(error))
             return nil
         }
     }

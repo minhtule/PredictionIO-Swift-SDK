@@ -30,41 +30,54 @@ public class BaseClient {
     }
 }
 
-/// Response structure for an event-creation request.
-public struct EventResponse: Decodable {
-    public let eventID: String
+// MARK: -
 
-    enum CodingKeys: String, CodingKey {
-        case eventID = "eventId"
-    }
-}
+/// Responsible for retrieving prediction results from a PredictionIO Engine Server.
+public class EngineClient: BaseClient {
 
-/// Response structure for a batch-event-creation request.
-public enum BatchEventStatus: Decodable {
-    case success(eventID: String)
-    case failed(message: String)
+    // MARK: - Initialization
 
-    enum CodingKeys: String, CodingKey {
-        case status
-        case eventID = "eventId"
-        case message
+    /// Creates a client instance to connect to the Engine Server.
+    ///
+    /// - parameter baseURL: The base URL of the Engine Server. `http://localhost:8000` by default.
+    /// - parameter timeout: The request timeout. 5 seconds by default.
+    ///
+    /// - returns: The `EngineClient` instance.
+    public override init(baseURL: String = "http://localhost:8000", timeout: TimeInterval = 5) {
+        super.init(baseURL: baseURL, timeout: timeout)
     }
 
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        let status = try container.decode(Int.self, forKey: .status)
+    // MARK: - Querying
 
-        switch status {
-        case 201:
-            let eventID = try container.decode(String.self, forKey: .eventID)
-            self = .success(eventID: eventID)
-        case 400:
-            let message = try container.decode(String.self, forKey: .message)
-            self = .failed(message: message)
-        default:
-            throw DecodingError.dataCorruptedError(forKey: .status, in: container, debugDescription: "Status code is not supported: \(status).")
+    /// Queries the prediction engine.
+    ///
+    /// - parameter query: The query dictionary.
+    /// - parameter completionHandler: The callback to be executed when the request has finished.
+    public func sendQuery(_ query: [String: Any], completionHandler: @escaping (Result<Data>) -> Void) {
+        networkConnection.post(url: queriesURL, payload: query, completionHandler: completionHandler)
+    }
+
+    /// Queries the prediction engine and parses the response into the given response type.
+    ///
+    /// - parameter query: The query dictionary.
+    /// - parameter responseType: The type respresenting the response format. It must conform to `Decodable`.
+    /// - parameter completionHandler: The callback to be executed when the request has finished.
+    public func sendQuery<Response>(_ query: [String: Any], responseType: Response.Type, completionHandler: @escaping (Result<Response>) -> Void) where Response: Decodable {
+        networkConnection.post(url: queriesURL, payload: query) { result in
+            let result = result.flatMap { data -> Result<Response> in
+                do {
+                    let decoder = JSONDecoder()
+                    let response = try decoder.decode(Response.self, from: data)
+                    return .success(response)
+                } catch {
+                    return .failure(PIOError.DeserializationFailureReason.unknownFormatError())
+                }
+            }
+            completionHandler(result)
         }
     }
+
+    var queriesURL: String { return "\(baseURL)/queries.json" }
 }
 
 // MARK: -
@@ -96,20 +109,18 @@ public class EventClient: BaseClient {
     ///
     /// - parameter event: The `Event` to be created.
     /// - parameter completionHandler: The callback to be executed when the request has finished.
-    public func createEvent(_ event: Event, completionHandler: @escaping (EventResponse?, Error?) -> Void) {
-        networkConnection.post(url: eventsURL, payload: event.json, queryParams: queryParams) { data, error in
-            guard let data = data else {
-                completionHandler(nil, error)
-                return
+    public func createEvent(_ event: Event, completionHandler: @escaping (Result<CreateEventResponse>) -> Void) {
+        networkConnection.post(url: eventsURL, payload: event.json, queryParams: queryParams) { result in
+            let result = result.flatMap { data -> Result<CreateEventResponse> in
+                do {
+                    let decoder = JSONDecoder()
+                    let response = try decoder.decode(CreateEventResponse.self, from: data)
+                    return .success(response)
+                } catch {
+                    return .failure(PIOError.DeserializationFailureReason.failedError(error))
+                }
             }
-
-            do {
-                let decoder = JSONDecoder()
-                let event = try decoder.decode(EventResponse.self, from: data)
-                completionHandler(event, nil)
-            } catch {
-                completionHandler(nil, PIOError.DeserializationFailureReason.failedError(error))
-            }
+            completionHandler(result)
         }
     }
 
@@ -117,21 +128,19 @@ public class EventClient: BaseClient {
     ///
     /// - parameter events: The `Event`s to be created.
     /// - parameter completionHandler: The callback to be executed when the request has finished.
-    public func createBatchEvents(_ events: [Event], completionHandler: @escaping ([BatchEventStatus]?, Error?) -> Void) {
+    public func createBatchEvents(_ events: [Event], completionHandler: @escaping (Result<CreateBatchEventsResponse>) -> Void) {
         let eventsJSON = events.map { $0.json }
-        networkConnection.post(url: batchEventsURL, payload: eventsJSON, queryParams: queryParams) { data, error in
-            guard let data = data else {
-                completionHandler(nil, error)
-                return
+        networkConnection.post(url: batchEventsURL, payload: eventsJSON, queryParams: queryParams) { result in
+            let result = result.flatMap { data -> Result<CreateBatchEventsResponse> in
+                do {
+                    let decoder = JSONDecoder()
+                    let response = try decoder.decode(CreateBatchEventsResponse.self, from: data)
+                    return .success(response)
+                } catch {
+                    return .failure(PIOError.DeserializationFailureReason.failedError(error))
+                }
             }
-
-            do {
-                let decoder = JSONDecoder()
-                let eventStatuses = try decoder.decode([BatchEventStatus].self, from: data)
-                completionHandler(eventStatuses, nil)
-            } catch {
-                completionHandler(nil, PIOError.DeserializationFailureReason.failedError(error))
-            }
+            completionHandler(result)
         }
     }
 
@@ -139,32 +148,26 @@ public class EventClient: BaseClient {
     ///
     /// - parameter eventID: The event ID.
     /// - parameter completionHandler: The callback to be executed when the request has finished.
-    public func getEvent(eventID: String, completionHandler: @escaping (Event?, Error?) -> Void) {
+    public func getEvent(eventID: String, completionHandler: @escaping (Result<Event>) -> Void) {
         do {
             let url = try eventURL(for: eventID)
-            networkConnection.get(url: url, queryParams: queryParams) { data, error in
-                guard let data = data else {
-                    completionHandler(nil, error)
-                    return
-                }
-
-                do {
-                    if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-                        let event = try Event(json: json)
-                        completionHandler(event, nil)
-                    } else {
-                        throw PIOError.DeserializationFailureReason.unknownFormatError()
-                    }
-                } catch {
-                    if !(error is PIOError) {
-                        completionHandler(nil, error)
-                    } else {
-                        completionHandler(nil, PIOError.DeserializationFailureReason.failedError(error))
+            networkConnection.get(url: url, queryParams: queryParams) { result in
+                let result = result.flatMap { data -> Result<Event> in
+                    do {
+                        if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                            let event = try Event(json: json)
+                            return .success(event)
+                        } else {
+                            return .failure(PIOError.DeserializationFailureReason.unknownFormatError())
+                        }
+                    } catch {
+                        return .failure(PIOError.DeserializationFailureReason.failedError(error))
                     }
                 }
+                completionHandler(result)
             }
         } catch {
-            completionHandler(nil, error)
+            completionHandler(.failure(error))
         }
     }
 
@@ -178,7 +181,7 @@ public class EventClient: BaseClient {
     /// - parameter reversed: Returns events in reversed chronological order. Must be used with
     ///     both `entityType` and `entityID` specified. `false` by default.
     /// - parameter completionHandler: The callback to be executed when the request has finished.
-    public func getEvents(startTime: Date? = nil, endTime: Date? = nil, entityType: String? = nil, entityID: String? = nil, limit: Int = 20, isReversed: Bool = false, completionHandler: @escaping ([Event]?, Error?) -> Void) {
+    public func getEvents(startTime: Date? = nil, endTime: Date? = nil, entityType: String? = nil, entityID: String? = nil, limit: Int = 20, isReversed: Bool = false, completionHandler: @escaping (Result<[Event]>) -> Void) {
         var queryParams = self.queryParams
 
         if let startTime = startTime {
@@ -194,26 +197,20 @@ public class EventClient: BaseClient {
         queryParams["limit"] = String(limit)
         queryParams["reversed"] = String(isReversed)
 
-        networkConnection.get(url: eventsURL, queryParams: queryParams) { data, error in
-            guard let data = data else {
-                completionHandler(nil, error)
-                return
-            }
-
-            do {
-                if let jsonArray = try JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]] {
-                    let events = try jsonArray.map { try Event(json: $0) }
-                    completionHandler(events, nil)
-                } else {
-                    throw PIOError.DeserializationFailureReason.unknownFormatError()
-                }
-            } catch {
-                if !(error is PIOError) {
-                    completionHandler(nil, error)
-                } else {
-                    completionHandler(nil, PIOError.DeserializationFailureReason.failedError(error))
+        networkConnection.get(url: eventsURL, queryParams: queryParams) { result in
+            let result = result.flatMap { data -> Result<[Event]> in
+                do {
+                    if let jsonArray = try JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]] {
+                        let events = try jsonArray.map { try Event(json: $0) }
+                        return .success(events)
+                    } else {
+                        return .failure(PIOError.DeserializationFailureReason.unknownFormatError())
+                    }
+                } catch {
+                    return .failure(PIOError.DeserializationFailureReason.failedError(error))
                 }
             }
+            completionHandler(result)
         }
     }
 
@@ -224,14 +221,13 @@ public class EventClient: BaseClient {
     public func deleteEvent(eventID: String, completionHandler: @escaping (Error?) -> Void) {
         do {
             let url = try eventURL(for: eventID)
-            networkConnection.get(url: url, queryParams: queryParams) { data, error in
-                guard let _ = data else {
+            networkConnection.get(url: url, queryParams: queryParams) { result in
+                if let error = result.error {
                     completionHandler(error)
-                    return
+                } else {
+                    // Event server would return a message in payload but not useful.
+                    completionHandler(nil)
                 }
-
-                // Event server would return a message in payload but not useful.
-                completionHandler(nil)
             }
         } catch {
             completionHandler(error)
@@ -266,7 +262,7 @@ public extension EventClient {
     /// - parameter properties: The properties to be set.
     /// - parameter eventTime: The event time. Current local time by default.
     /// - parameter completionHandler: The callback to be executed when the request has finished.
-    func setUser(userID: String, properties: [String: Any], eventTime: Date = Date(), completionHandler: @escaping (EventResponse?, Error?) -> Void) {
+    func setUser(userID: String, properties: [String: Any], eventTime: Date = Date(), completionHandler: @escaping (Result<CreateEventResponse>) -> Void) {
 
         let userEvent = Event(
             event: Event.setEvent,
@@ -285,7 +281,7 @@ public extension EventClient {
     /// - parameter properties: The properties to be unset.
     /// - parameter eventTime: The event time. Current local time by default.
     /// - parameter completionHandler: The callback to be executed when the request has finished.
-    func unsetUser(userID: String, properties: [String: Any], eventTime: Date = Date(), completionHandler: @escaping (EventResponse?, Error?) -> Void) {
+    func unsetUser(userID: String, properties: [String: Any], eventTime: Date = Date(), completionHandler: @escaping (Result<CreateEventResponse>) -> Void) {
         let userEvent = Event(
             event: Event.unsetEvent,
             entityType: Event.userEntityType,
@@ -302,7 +298,7 @@ public extension EventClient {
     /// - parameter userID: The user ID.
     /// - parameter eventTime: The event time. Current local time by default.
     /// - parameter completionHandler: The callback to be executed when the request has finished.
-    func deleteUser(userID: String, eventTime: Date = Date(), completionHandler: @escaping (EventResponse?, Error?) -> Void) {
+    func deleteUser(userID: String, eventTime: Date = Date(), completionHandler: @escaping (Result<CreateEventResponse>) -> Void) {
         let userEvent = Event(
             event: Event.deleteEvent,
             entityType: Event.userEntityType,
@@ -323,7 +319,7 @@ public extension EventClient {
     /// - parameter properties: The properties to be set.
     /// - parameter eventTime: The event time. Current local time by default.
     /// - parameter completionHandler: The callback to be executed when the request has finished.
-    func setItem(itemID: String, properties: [String: Any], eventTime: Date = Date(), completionHandler: @escaping (EventResponse?, Error?) -> Void) {
+    func setItem(itemID: String, properties: [String: Any], eventTime: Date = Date(), completionHandler: @escaping (Result<CreateEventResponse>) -> Void) {
         let itemEvent = Event(
             event: Event.setEvent,
             entityType: Event.itemEntityType,
@@ -341,7 +337,7 @@ public extension EventClient {
     /// - parameter properties: The properties to be unset.
     /// - parameter eventTime: The event time. Current local time by default.
     /// - parameter completionHandler: The callback to be executed when the request has finished.
-    func unsetItem(itemID: String, properties: [String: Any], eventTime: Date = Date(), completionHandler: @escaping (EventResponse?, Error?) -> Void) {
+    func unsetItem(itemID: String, properties: [String: Any], eventTime: Date = Date(), completionHandler: @escaping (Result<CreateEventResponse>) -> Void) {
         let itemEvent = Event(
             event: Event.unsetEvent,
             entityType: Event.itemEntityType,
@@ -358,7 +354,7 @@ public extension EventClient {
     /// - parameter itemID: The item ID.
     /// - parameter eventTime: The event time. Current local time by default.
     /// - parameter completionHandler: The callback to be executed when the request has finished.
-    func deleteItem(itemID: String, eventTime: Date = Date(), completionHandler: @escaping (EventResponse?, Error?) -> Void) {
+    func deleteItem(itemID: String, eventTime: Date = Date(), completionHandler: @escaping (Result<CreateEventResponse>) -> Void) {
         let itemEvent = Event(
             event: Event.deleteEvent,
             entityType: Event.itemEntityType,
@@ -381,7 +377,7 @@ public extension EventClient {
     /// - parameter properties: The properties of the event. `nil` by default.
     /// - parameter eventTime: The event time. Current local time by default.
     /// - parameter completionHandler: The callback to be executed when the request has finished.
-    func recordAction(_ action: String, byUserID userID: String, onItemID itemID: String, properties: [String: Any]? = nil, eventTime: Date = Date(), completionHandler: @escaping (EventResponse?, Error?) -> Void) {
+    func recordAction(_ action: String, byUserID userID: String, onItemID itemID: String, properties: [String: Any]? = nil, eventTime: Date = Date(), completionHandler: @escaping (Result<CreateEventResponse>) -> Void) {
         let event = Event(
             event: action,
             entityType: Event.userEntityType,
@@ -395,54 +391,74 @@ public extension EventClient {
     }
 }
 
-// MARK: -
+// MARK: - Responses
 
-/// Responsible for retrieving prediction results from a PredictionIO Engine Server.
-public class EngineClient: BaseClient {
+/// Represents the response of a creating event request.
+public struct CreateEventResponse: Decodable {
+    /// The event ID of the created event.
+    public let eventID: String
 
-    // MARK: - Initialization
+    enum CodingKeys: String, CodingKey {
+        case eventID = "eventId"
+    }
+}
 
-    /// Creates a client instance to connect to the Engine Server.
+/// Represents the response of a creating batch events request.
+public struct CreateBatchEventsResponse: Decodable {
+    /// The statuses each of which presents whether an event was successfully
+    /// created by the server.
     ///
-    /// - parameter baseURL: The base URL of the Engine Server. `http://localhost:8000` by default.
-    /// - parameter timeout: The request timeout. 5 seconds by default.
-    ///
-    /// - returns: The `EngineClient` instance.
-    public override init(baseURL: String = "http://localhost:8000", timeout: TimeInterval = 5) {
-        super.init(baseURL: baseURL, timeout: timeout)
+    /// If an event was successfuly created by the server, its status is a
+    /// `Result.success` which value contains its individual `CreateEventResponse`.
+    /// Otherwise, the event's status is a `Result.failure`. The statuses are
+    /// returned in the same order of their corresponding events sent in the
+    /// request.
+    public let statuses: [Result<CreateEventResponse>]
+
+    /// :nodoc:
+    public init(from decoder: Decoder) throws {
+        var statuses: [Result<CreateEventResponse>] = []
+        var container = try decoder.unkeyedContainer()
+
+        while !container.isAtEnd {
+            let status = try container.decode(Status.self)
+            statuses.append(status.asResult)
+        }
+
+        self.statuses = statuses
     }
 
-    // MARK: - Querying
+    // Helper enum to facilitate decoding proccess.
+    private enum Status: Decodable {
+        case success(CreateEventResponse)
+        case failure(Int, String)
 
-    /// Queries the prediction engine.
-    ///
-    /// - parameter query: The query dictionary.
-    /// - parameter completionHandler: The callback to be executed when the request has finished.
-    public func sendQuery(_ query: [String: Any], completionHandler: @escaping (Data?, Error?) -> Void) {
-        networkConnection.post(url: queriesURL, payload: query, completionHandler: completionHandler)
-    }
+        enum CodingKeys: String, CodingKey {
+            case status
+            case message
+        }
 
-    /// Queries the prediction engine and parses the response into the specified type.
-    ///
-    /// - parameter query: The query dictionary.
-    /// - parameter responseType: The type respresenting the response format. It must conform to `Decodable`.
-    /// - parameter completionHandler: The callback to be executed when the request has finished.
-    public func sendQuery<Response>(_ query: [String: Any], responseType: Response.Type, completionHandler: @escaping (Response?, Error?) -> Void) where Response: Decodable {
-        networkConnection.post(url: queriesURL, payload: query) { data, error in
-            guard let data = data else {
-                completionHandler(nil, error)
-                return
+        init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            let statusCode = try container.decode(Int.self, forKey: .status)
+
+            switch statusCode {
+            case 201:
+                let createEventResponse = try CreateEventResponse(from: decoder)
+                self = .success(createEventResponse)
+            default:
+                let message = try container.decode(String.self, forKey: .message)
+                self = .failure(statusCode, message)
             }
+        }
 
-            do {
-                let decoder = JSONDecoder()
-                let response = try decoder.decode(Response.self, from: data)
-                completionHandler(response, nil)
-            } catch {
-                completionHandler(nil, PIOError.DeserializationFailureReason.unknownFormatError())
+        var asResult: Result<CreateEventResponse> {
+            switch self {
+            case let .success(response):
+                return .success(response)
+            case let .failure(statusCode, message):
+                return .failure(PIOError.RequestFailureReason.serverFailureError(statusCode: statusCode, message: message))
             }
         }
     }
-
-    var queriesURL: String { return "\(baseURL)/queries.json" }
 }

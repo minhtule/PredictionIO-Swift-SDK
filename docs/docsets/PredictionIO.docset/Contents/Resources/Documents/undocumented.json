@@ -1,26 +1,6 @@
 {
   "warnings": [
-    {
-      "file": "/Users/minhtule/projects/personal/predictionio/PredictionIO-Swift-SDK/PredictionIO/Source/PredictionIO.swift",
-      "line": 35,
-      "symbol": "EventResponse.eventID",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/minhtule/projects/personal/predictionio/PredictionIO-Swift-SDK/PredictionIO/Source/PredictionIO.swift",
-      "line": 44,
-      "symbol": "BatchEventStatus.success",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/minhtule/projects/personal/predictionio/PredictionIO-Swift-SDK/PredictionIO/Source/PredictionIO.swift",
-      "line": 45,
-      "symbol": "BatchEventStatus.failed",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    }
+
   ],
   "source_directory": "/Users/minhtule/projects/personal/predictionio/PredictionIO-Swift-SDK"
 }

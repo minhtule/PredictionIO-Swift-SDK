@@ -37,17 +37,17 @@ public enum PIOError: Error {
 
     /// The underlying reason the request fails.
     public enum RequestFailureReason {
-        /// Unauthorized. The server returns 401 status code.
-        case unauthorized
-        /// Resource not found. The server returns 404 status code.
-        case notFound
-        /// Bad request e.g. invalid JSON or invalid date format.
-        /// The server returns 400 status code.
-        case badRequest
+        /// Server returns a non-successful status code.
+        ///   - 400: bad request e.g. invalid date format
+        ///   - 401: unauthorized
+        ///   - 404: resource not found
+        ///   - 500: internal error
+        ///
+        /// The server would also return a "message" field in the
+        /// response's JSON data.
+        case serverFailure(statusCode: Int, message: String)
         /// Unknown response format returned by the server.
         case unknownResponse
-        /// Unknown status code returned by the server.
-        case unknownStatusCode(Int)
         /// Failure due to network or any other error.
         case failed(error: Error)
     }
@@ -88,24 +88,12 @@ extension PIOError.InvalidEventReason {
 }
 
 extension PIOError.RequestFailureReason {
-    static func unauthorizedError() -> PIOError {
-        return PIOError.failedRequest(reason: .unauthorized)
-    }
-
-    static func notFoundError() -> PIOError {
-        return PIOError.failedRequest(reason: .notFound)
-    }
-
-    static func badRequestError() -> PIOError {
-        return PIOError.failedRequest(reason: .badRequest)
+    static func serverFailureError(statusCode: Int, message: String) -> PIOError {
+        return PIOError.failedRequest(reason: .serverFailure(statusCode: statusCode, message: message))
     }
 
     static func unknownResponseError() -> PIOError {
         return PIOError.failedRequest(reason: .unknownResponse)
-    }
-
-    static func unknownStatusCodeError(statusCode: Int) -> PIOError {
-        return PIOError.failedRequest(reason: .unknownStatusCode(statusCode))
     }
 
     static func failedError(_ error: Error) -> PIOError {

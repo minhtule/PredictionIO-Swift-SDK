@@ -21,8 +21,8 @@ class EngineClientTests: XCTestCase {
     func testSendQuery() {
         let expectation = self.expectation(description: "Sending query")
 
-        engineClient.sendQuery(["user": "1"]) { data, error in
-            XCTAssertNotNil(data, "Request should succeed, got \(error!)")
+        engineClient.sendQuery(["user": "1"]) { result in
+            XCTAssertTrue(result.isSuccess, "Request should succeed, got \(result.error!)")
 
             expectation.fulfill()
         }
@@ -52,8 +52,8 @@ class EngineClientTests: XCTestCase {
         //
         let expectation = self.expectation(description: "Sending query")
 
-        engineClient.sendQuery(["user": "1"], responseType: SimilarProductResponse.self) { response, error in
-            XCTAssertNotNil(response, "Request should succeed, got \(error!)")
+        engineClient.sendQuery(["user": "1"], responseType: SimilarProductResponse.self) { result in
+            XCTAssertTrue(result.isSuccess, "Request should succeed, got \(result.error!)")
 
             expectation.fulfill()
         }

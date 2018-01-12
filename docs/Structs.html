@@ -13,7 +13,7 @@
     <a title="Structures  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">PredictionIO Docs</a> (95% documented)</p>
+        <p><a href="index.html">PredictionIO Docs</a> (100% documented)</p>
         <p class="header-right"><a href="https://github.com/minhtule/PredictionIO-Swift-SDK"><img src="img/gh.png"/>View on GitHub</a></p>
         <p class="header-right"><a href="dash-feed://https%3A%2F%2Fminhtule%2Egithub%2Eio%2FPredictionIO%2DSwift%2DSDK%2Fdocsets%2FPredictionIO%2Exml"><img src="img/dash.png"/>Install in Dash</a></p>
       </div>
@@ -46,9 +46,6 @@
             <a href="Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Enums/BatchEventStatus.html">BatchEventStatus</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="Enums/PIOError.html">PIOError</a>
               </li>
               <li class="nav-group-task">
@@ -63,16 +60,22 @@
               <li class="nav-group-task">
                 <a href="Enums/PIOError/DeserializationFailureReason.html">– DeserializationFailureReason</a>
               </li>
+              <li class="nav-group-task">
+                <a href="Enums/Result.html">Result</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
             <a href="Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Structs/Event.html">Event</a>
+                <a href="Structs/CreateBatchEventsResponse.html">CreateBatchEventsResponse</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/EventResponse.html">EventResponse</a>
+                <a href="Structs/CreateEventResponse.html">CreateEventResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Event.html">Event</a>
               </li>
             </ul>
           </li>
@@ -120,13 +123,20 @@ to a PredictionIO&rsquo;s event server.</p>
               </ul>
             </div>
             <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Responses"></a>
+                <a name="//apple_ref/swift/Section/Responses" class="dashAnchor"></a>
+                <a href="#/Responses">
+                  <h3 class="section-name">Responses</h3>
+                </a>
+              </div>
               <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12PredictionIO13EventResponseV"></a>
-                    <a name="//apple_ref/swift/Struct/EventResponse" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12PredictionIO13EventResponseV">EventResponse</a>
+                    <a name="/s:12PredictionIO19CreateEventResponseV"></a>
+                    <a name="//apple_ref/swift/Struct/CreateEventResponse" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12PredictionIO19CreateEventResponseV">CreateEventResponse</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -134,15 +144,43 @@ to a PredictionIO&rsquo;s event server.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Response structure for an event-creation request.</p>
+                        <p>Represents the response of a creating event request.</p>
 
-                        <a href="Structs/EventResponse.html" class="slightly-smaller">See more</a>
+                        <a href="Structs/CreateEventResponse.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">EventResponse</span><span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CreateEventResponse</span><span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12PredictionIO25CreateBatchEventsResponseV"></a>
+                    <a name="//apple_ref/swift/Struct/CreateBatchEventsResponse" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12PredictionIO25CreateBatchEventsResponseV">CreateBatchEventsResponse</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Represents the response of a creating batch events request.</p>
+
+                        <a href="Structs/CreateBatchEventsResponse.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CreateBatchEventsResponse</span><span class="p">:</span> <span class="kt">Decodable</span></code></pre>
 
                         </div>
                       </div>
@@ -154,7 +192,7 @@ to a PredictionIO&rsquo;s event server.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://github.com/minhtule" target="_blank" rel="external">Minh-Tu Le</a>. All rights reserved. (Last updated: 2018-01-10)</p>
+          <p>&copy; 2018 <a class="link" href="https://github.com/minhtule" target="_blank" rel="external">Minh-Tu Le</a>. All rights reserved. (Last updated: 2018-01-12)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

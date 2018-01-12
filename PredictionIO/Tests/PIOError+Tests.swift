@@ -55,26 +55,10 @@ extension PIOError {
 
     // Failed Request
 
-    func isUnauthorizedRequest() -> Bool {
+    func isServerFailureRequest(statusCode: Int) -> Bool {
         if case let .failedRequest(reason) = self,
-            case PIOError.RequestFailureReason.unauthorized = reason {
-            return true
-        }
-        return false
-    }
-
-    func isNotFoundRequest() -> Bool {
-        if case let .failedRequest(reason) = self,
-            case PIOError.RequestFailureReason.notFound = reason {
-            return true
-        }
-        return false
-    }
-
-    func isBadRequest() -> Bool {
-        if case let .failedRequest(reason) = self,
-            case PIOError.RequestFailureReason.badRequest = reason {
-            return true
+            case let PIOError.RequestFailureReason.serverFailure(statusCode: actualStatusCode, message: _) = reason {
+            return statusCode == actualStatusCode
         }
         return false
     }
@@ -82,17 +66,6 @@ extension PIOError {
     func isUnknownResponseRequest() -> Bool {
         if case let .failedRequest(reason) = self,
             case PIOError.RequestFailureReason.unknownResponse = reason {
-            return true
-        }
-        return false
-    }
-
-    func isUnknownStatusCodeRequest(statusCode: Int? = nil) -> Bool {
-        if case let .failedRequest(reason) = self,
-            case let PIOError.RequestFailureReason.unknownStatusCode(myStatusCode) = reason {
-            if let statusCode = statusCode {
-                return statusCode == myStatusCode
-            }
             return true
         }
         return false
