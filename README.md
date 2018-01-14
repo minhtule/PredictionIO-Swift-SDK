@@ -62,8 +62,8 @@ let query = [
     "num": 2
 ]
 
-engineClient.sendQuery(query, responseType: RecommendationResponse.self) { response, error in
-    guard let response = response else { return }
+engineClient.sendQuery(query, responseType: RecommendationResponse.self) { result in
+    guard let response = result.value else { return }
 
     print(response.itemScores)
 }
@@ -84,8 +84,8 @@ let event = Event(
     ]
 )
 
-eventClient.createEvent(event) { response, error in
-    guard let response = response else { return }
+eventClient.createEvent(event) { result in
+    guard let response = result.value else { return }
 
     print(response.eventID)
 }
