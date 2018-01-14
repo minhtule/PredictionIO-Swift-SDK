@@ -22,11 +22,12 @@ $ gem install cocoapods
 
 To integrate PredictionIO, add the following lines to your `Podfile`.
 ```ruby
+source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '10.0'
 use_frameworks!
 
 target '<Your target name>' do
-    pod 'PredictionIO', :git => 'https://github.com/minhtule/PredictionIO-Swift-SDK.git'
+    pod 'PredictionIO', '~> 2.0'
 end
 ```
 
