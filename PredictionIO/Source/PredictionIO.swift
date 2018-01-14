@@ -221,7 +221,7 @@ public class EventClient: BaseClient {
     public func deleteEvent(eventID: String, completionHandler: @escaping (Error?) -> Void) {
         do {
             let url = try eventURL(for: eventID)
-            networkConnection.get(url: url, queryParams: queryParams) { result in
+            networkConnection.delete(url: url, queryParams: queryParams) { result in
                 if let error = result.error {
                     completionHandler(error)
                 } else {
