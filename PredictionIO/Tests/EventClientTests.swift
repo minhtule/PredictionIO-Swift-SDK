@@ -101,11 +101,16 @@ class EventClientTests: XCTestCase {
         let event = Event(event: "register", entityType: "user", entityID: "foo")
         let eventID = createEvent(event)
 
-        let deleteEventExpectation = self.expectation(description: "Deleting an event")
+        let testDoneExpectation = self.expectation(description: "Deleting an event")
         eventClient.deleteEvent(eventID: eventID) { error in
             XCTAssertNil(error, "Request should succeed, got \(error!)")
 
-            deleteEventExpectation.fulfill()
+            // Verify that the event no longer exists.
+            self.eventClient.getEvent(eventID: eventID) { result in
+                XCTAssertTrue(result.isFailure)
+
+                testDoneExpectation.fulfill()
+            }
         }
 
         waitForExpectations(timeout: 5)
