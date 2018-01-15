@@ -27,7 +27,7 @@ platform :ios, '10.0'
 use_frameworks!
 
 target '<Your target name>' do
-    pod 'PredictionIO', '~> 2.0'
+    pod 'PredictionIO', '~> 2.1'
 end
 ```
 
