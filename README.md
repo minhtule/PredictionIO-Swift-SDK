@@ -118,7 +118,7 @@ There are 2 screens in the demo app:
 
 ### Tapster iOS Demo
 
-Checkout [Tapster iOS](https://github.com/minhtule/Tapster-iOS-Demo), a recommender for comics, to see a more extensive intergration of the SDK.
+Also check out [Tapster iOS](https://github.com/minhtule/Tapster-iOS-Demo), a recommender for comics, to see a more extensive intergration of the SDK.
 
 ## License
 PredictionIO Swift SDK is released under the Apache License 2.0. Please see
