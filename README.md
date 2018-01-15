@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/minhtule/PredictionIO-Swift-SDK.svg?branch=master)](https://travis-ci.org/minhtule/PredictionIO-Swift-SDK)
 
-The Swift SDK provides a convenient API for your iOS and macOS application to record your users' behaviors in the event server and retrieve predictions from PredictionIO engines.
+The Swift SDK provides a convenient API for your iOS and macOS application to record your users' behaviors in the [PredictionIO](https://github.com/apache/predictionio) event server and retrieve predictions from PredictionIO engines.
 
 ## Requirements
 - iOS 9.0+ or macOS 10.10+
@@ -115,6 +115,10 @@ You also need to:
 There are 2 screens in the demo app:
 - **Rating**: corresponding to step *4. Collecting Data* in the quick guide.
 - **Recommendation**: corresponding to step *6. Use the Engine* in the quick guide.
+
+### Tapster iOS Demo
+
+Checkout [Tapster iOS](https://github.com/minhtule/Tapster-iOS-Demo), a recommender for comics, to see a more extensive intergration of the SDK.
 
 ## License
 PredictionIO Swift SDK is released under the Apache License 2.0. Please see
