@@ -5,6 +5,7 @@ git:
 branches:
   only:
     - master
+cache: bundler
 
 env:
   global:
@@ -22,9 +23,8 @@ env:
     # macOS
     - DESTINATION="arch=x86_64"                   SCHEME="$MACOS_FRAMEWORK_SCHEME"  BUILD_EXAMPLE="NO"   LINTING="NO"
 
-# Skip the installation of `Gemfile`. Just use the default gemset
-# which already includes SwiftLint and CocoaPods.
-install: true
+install:
+  - bundle install
 
 # WARNING: Because of the existence of `.ruby-gemset`, we should not change
 # directory and go back into this repo directory. When we `cd` back into
