@@ -53,7 +53,7 @@ public class EngineClient: BaseClient {
     ///
     /// - parameter query: The query dictionary.
     /// - parameter completionHandler: The callback to be executed when the request has finished.
-    public func sendQuery(_ query: [String: Any], completionHandler: @escaping (Result<Data>) -> Void) {
+    public func sendQuery(_ query: [String: Any], completionHandler: @escaping (Result<Data, PIOError>) -> Void) {
         networkConnection.post(url: queriesURL, payload: query, completionHandler: completionHandler)
     }
 
@@ -62,9 +62,9 @@ public class EngineClient: BaseClient {
     /// - parameter query: The query dictionary.
     /// - parameter responseType: The type respresenting the response format. It must conform to `Decodable`.
     /// - parameter completionHandler: The callback to be executed when the request has finished.
-    public func sendQuery<Response>(_ query: [String: Any], responseType: Response.Type, completionHandler: @escaping (Result<Response>) -> Void) where Response: Decodable {
+    public func sendQuery<Response>(_ query: [String: Any], responseType: Response.Type, completionHandler: @escaping (Result<Response, PIOError>) -> Void) where Response: Decodable {
         networkConnection.post(url: queriesURL, payload: query) { result in
-            let result = result.flatMap { data -> Result<Response> in
+            let result = result.flatMap { data -> Result<Response, PIOError> in
                 do {
                     let decoder = JSONDecoder()
                     let response = try decoder.decode(Response.self, from: data)
@@ -109,9 +109,9 @@ public class EventClient: BaseClient {
     ///
     /// - parameter event: The `Event` to be created.
     /// - parameter completionHandler: The callback to be executed when the request has finished.
-    public func createEvent(_ event: Event, completionHandler: @escaping (Result<CreateEventResponse>) -> Void) {
+    public func createEvent(_ event: Event, completionHandler: @escaping (Result<CreateEventResponse, PIOError>) -> Void) {
         networkConnection.post(url: eventsURL, payload: event.json, queryParams: queryParams) { result in
-            let result = result.flatMap { data -> Result<CreateEventResponse> in
+            let result = result.flatMap { data -> Result<CreateEventResponse, PIOError> in
                 do {
                     let decoder = JSONDecoder()
                     let response = try decoder.decode(CreateEventResponse.self, from: data)
@@ -128,10 +128,10 @@ public class EventClient: BaseClient {
     ///
     /// - parameter events: The `Event`s to be created.
     /// - parameter completionHandler: The callback to be executed when the request has finished.
-    public func createBatchEvents(_ events: [Event], completionHandler: @escaping (Result<CreateBatchEventsResponse>) -> Void) {
+    public func createBatchEvents(_ events: [Event], completionHandler: @escaping (Result<CreateBatchEventsResponse, PIOError>) -> Void) {
         let eventsJSON = events.map { $0.json }
         networkConnection.post(url: batchEventsURL, payload: eventsJSON, queryParams: queryParams) { result in
-            let result = result.flatMap { data -> Result<CreateBatchEventsResponse> in
+            let result = result.flatMap { data -> Result<CreateBatchEventsResponse, PIOError> in
                 do {
                     let decoder = JSONDecoder()
                     let response = try decoder.decode(CreateBatchEventsResponse.self, from: data)
@@ -148,11 +148,11 @@ public class EventClient: BaseClient {
     ///
     /// - parameter eventID: The event ID.
     /// - parameter completionHandler: The callback to be executed when the request has finished.
-    public func getEvent(eventID: String, completionHandler: @escaping (Result<Event>) -> Void) {
+    public func getEvent(eventID: String, completionHandler: @escaping (Result<Event, PIOError>) -> Void) {
         do {
             let url = try eventURL(for: eventID)
             networkConnection.get(url: url, queryParams: queryParams) { result in
-                let result = result.flatMap { data -> Result<Event> in
+                let result = result.flatMap { data -> Result<Event, PIOError> in
                     do {
                         if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
                             let event = try Event(json: json)
@@ -167,7 +167,7 @@ public class EventClient: BaseClient {
                 completionHandler(result)
             }
         } catch {
-            completionHandler(.failure(error))
+            completionHandler(.failure(error as! PIOError))
         }
     }
 
@@ -181,7 +181,7 @@ public class EventClient: BaseClient {
     /// - parameter reversed: Returns events in reversed chronological order. Must be used with
     ///     both `entityType` and `entityID` specified. `false` by default.
     /// - parameter completionHandler: The callback to be executed when the request has finished.
-    public func getEvents(startTime: Date? = nil, endTime: Date? = nil, entityType: String? = nil, entityID: String? = nil, limit: Int = 20, isReversed: Bool = false, completionHandler: @escaping (Result<[Event]>) -> Void) {
+    public func getEvents(startTime: Date? = nil, endTime: Date? = nil, entityType: String? = nil, entityID: String? = nil, limit: Int = 20, isReversed: Bool = false, completionHandler: @escaping (Result<[Event], PIOError>) -> Void) {
         var queryParams = self.queryParams
 
         if let startTime = startTime {
@@ -198,7 +198,7 @@ public class EventClient: BaseClient {
         queryParams["reversed"] = String(isReversed)
 
         networkConnection.get(url: eventsURL, queryParams: queryParams) { result in
-            let result = result.flatMap { data -> Result<[Event]> in
+            let result = result.flatMap { data -> Result<[Event], PIOError> in
                 do {
                     if let jsonArray = try JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]] {
                         let events = try jsonArray.map { try Event(json: $0) }
@@ -218,19 +218,20 @@ public class EventClient: BaseClient {
     ///
     /// - parameter eventID: The event ID.
     /// - parameter completionHandler: The callback to be executed when the request has finished.
-    public func deleteEvent(eventID: String, completionHandler: @escaping (Error?) -> Void) {
+    public func deleteEvent(eventID: String, completionHandler: @escaping (PIOError?) -> Void) {
         do {
             let url = try eventURL(for: eventID)
             networkConnection.delete(url: url, queryParams: queryParams) { result in
-                if let error = result.error {
-                    completionHandler(error)
-                } else {
+                switch result {
+                case .success:
                     // Event server would return a message in payload but not useful.
                     completionHandler(nil)
+                case .failure(let error):
+                    completionHandler(error)
                 }
             }
         } catch {
-            completionHandler(error)
+            completionHandler(error as? PIOError)
         }
     }
 
@@ -262,7 +263,7 @@ public extension EventClient {
     /// - parameter properties: The properties to be set.
     /// - parameter eventTime: The event time. Current local time by default.
     /// - parameter completionHandler: The callback to be executed when the request has finished.
-    func setUser(userID: String, properties: [String: Any], eventTime: Date = Date(), completionHandler: @escaping (Result<CreateEventResponse>) -> Void) {
+    func setUser(userID: String, properties: [String: Any], eventTime: Date = Date(), completionHandler: @escaping (Result<CreateEventResponse, PIOError>) -> Void) {
 
         let userEvent = Event(
             event: Event.setEvent,
@@ -281,7 +282,7 @@ public extension EventClient {
     /// - parameter properties: The properties to be unset.
     /// - parameter eventTime: The event time. Current local time by default.
     /// - parameter completionHandler: The callback to be executed when the request has finished.
-    func unsetUser(userID: String, properties: [String: Any], eventTime: Date = Date(), completionHandler: @escaping (Result<CreateEventResponse>) -> Void) {
+    func unsetUser(userID: String, properties: [String: Any], eventTime: Date = Date(), completionHandler: @escaping (Result<CreateEventResponse, PIOError>) -> Void) {
         let userEvent = Event(
             event: Event.unsetEvent,
             entityType: Event.userEntityType,
@@ -298,7 +299,7 @@ public extension EventClient {
     /// - parameter userID: The user ID.
     /// - parameter eventTime: The event time. Current local time by default.
     /// - parameter completionHandler: The callback to be executed when the request has finished.
-    func deleteUser(userID: String, eventTime: Date = Date(), completionHandler: @escaping (Result<CreateEventResponse>) -> Void) {
+    func deleteUser(userID: String, eventTime: Date = Date(), completionHandler: @escaping (Result<CreateEventResponse, PIOError>) -> Void) {
         let userEvent = Event(
             event: Event.deleteEvent,
             entityType: Event.userEntityType,
@@ -319,7 +320,7 @@ public extension EventClient {
     /// - parameter properties: The properties to be set.
     /// - parameter eventTime: The event time. Current local time by default.
     /// - parameter completionHandler: The callback to be executed when the request has finished.
-    func setItem(itemID: String, properties: [String: Any], eventTime: Date = Date(), completionHandler: @escaping (Result<CreateEventResponse>) -> Void) {
+    func setItem(itemID: String, properties: [String: Any], eventTime: Date = Date(), completionHandler: @escaping (Result<CreateEventResponse, PIOError>) -> Void) {
         let itemEvent = Event(
             event: Event.setEvent,
             entityType: Event.itemEntityType,
@@ -337,7 +338,7 @@ public extension EventClient {
     /// - parameter properties: The properties to be unset.
     /// - parameter eventTime: The event time. Current local time by default.
     /// - parameter completionHandler: The callback to be executed when the request has finished.
-    func unsetItem(itemID: String, properties: [String: Any], eventTime: Date = Date(), completionHandler: @escaping (Result<CreateEventResponse>) -> Void) {
+    func unsetItem(itemID: String, properties: [String: Any], eventTime: Date = Date(), completionHandler: @escaping (Result<CreateEventResponse, PIOError>) -> Void) {
         let itemEvent = Event(
             event: Event.unsetEvent,
             entityType: Event.itemEntityType,
@@ -354,7 +355,7 @@ public extension EventClient {
     /// - parameter itemID: The item ID.
     /// - parameter eventTime: The event time. Current local time by default.
     /// - parameter completionHandler: The callback to be executed when the request has finished.
-    func deleteItem(itemID: String, eventTime: Date = Date(), completionHandler: @escaping (Result<CreateEventResponse>) -> Void) {
+    func deleteItem(itemID: String, eventTime: Date = Date(), completionHandler: @escaping (Result<CreateEventResponse, PIOError>) -> Void) {
         let itemEvent = Event(
             event: Event.deleteEvent,
             entityType: Event.itemEntityType,
@@ -377,7 +378,7 @@ public extension EventClient {
     /// - parameter properties: The properties of the event. `nil` by default.
     /// - parameter eventTime: The event time. Current local time by default.
     /// - parameter completionHandler: The callback to be executed when the request has finished.
-    func recordAction(_ action: String, byUserID userID: String, onItemID itemID: String, properties: [String: Any]? = nil, eventTime: Date = Date(), completionHandler: @escaping (Result<CreateEventResponse>) -> Void) {
+    func recordAction(_ action: String, byUserID userID: String, onItemID itemID: String, properties: [String: Any]? = nil, eventTime: Date = Date(), completionHandler: @escaping (Result<CreateEventResponse, PIOError>) -> Void) {
         let event = Event(
             event: action,
             entityType: Event.userEntityType,
@@ -413,11 +414,11 @@ public struct CreateBatchEventsResponse: Decodable {
     /// Otherwise, the event's status is a `Result.failure`. The statuses are
     /// returned in the same order of their corresponding events sent in the
     /// request.
-    public let statuses: [Result<CreateEventResponse>]
+    public let statuses: [Result<CreateEventResponse, PIOError>]
 
     /// :nodoc:
     public init(from decoder: Decoder) throws {
-        var statuses: [Result<CreateEventResponse>] = []
+        var statuses: [Result<CreateEventResponse, PIOError>] = []
         var container = try decoder.unkeyedContainer()
 
         while !container.isAtEnd {
@@ -452,7 +453,7 @@ public struct CreateBatchEventsResponse: Decodable {
             }
         }
 
-        var asResult: Result<CreateEventResponse> {
+        var asResult: Result<CreateEventResponse, PIOError> {
             switch self {
             case let .success(response):
                 return .success(response)

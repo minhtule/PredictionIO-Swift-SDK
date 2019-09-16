@@ -71,7 +71,7 @@ public enum PIOError: Error {
     }
 }
 
-// MARK: - Convenience factory methods to creates a PIOError
+// MARK: - Convenience factory methods to create a PIOError
 
 extension PIOError.InvalidEventReason {
     static func invalidEventIDError() -> PIOError {

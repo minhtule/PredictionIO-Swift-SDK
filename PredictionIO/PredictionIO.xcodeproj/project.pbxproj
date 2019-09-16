@@ -13,7 +13,6 @@
 		411904461FF9E3C50097434E /* NetworkConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411904451FF9E3C50097434E /* NetworkConnection.swift */; };
 		414638D81FFB3CD30017253C /* PIOError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414638D71FFB3CD30017253C /* PIOError.swift */; };
 		414638DA1FFB792A0017253C /* EventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414638D91FFB792A0017253C /* EventTests.swift */; };
-		4162406D2009072F00590FB2 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DE0288200845F800E0C9DE /* Result.swift */; };
 		41A12E4D20007B810054A91E /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A12E4C20007B810054A91E /* Event.swift */; };
 		41A12E532001EB0D0054A91E /* PIOError+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A12E522001EB0D0054A91E /* PIOError+Tests.swift */; };
 		41A66CFA20031B1D00BFC1F3 /* EngineClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A66CF920031B1D00BFC1F3 /* EngineClientTests.swift */; };
@@ -28,8 +27,6 @@
 		41A66D312003B42700BFC1F3 /* EngineClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A66CF920031B1D00BFC1F3 /* EngineClientTests.swift */; };
 		41A66D322003B42700BFC1F3 /* PIOError+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A12E522001EB0D0054A91E /* PIOError+Tests.swift */; };
 		41BB25581FFF5D7400E67252 /* EventClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BB25571FFF5D7400E67252 /* EventClientTests.swift */; };
-		41DE0289200845F800E0C9DE /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DE0288200845F800E0C9DE /* Result.swift */; };
-		41DE028B20084FB500E0C9DE /* ResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DE028A20084FB500E0C9DE /* ResultTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,8 +62,6 @@
 		41A66D132003B11100BFC1F3 /* PredictionIO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PredictionIO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		41A66D1F2003B26400BFC1F3 /* PredictionIO macOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PredictionIO macOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		41BB25571FFF5D7400E67252 /* EventClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventClientTests.swift; sourceTree = "<group>"; };
-		41DE0288200845F800E0C9DE /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
-		41DE028A20084FB500E0C9DE /* ResultTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,7 +123,6 @@
 			children = (
 				414638D71FFB3CD30017253C /* PIOError.swift */,
 				41A12E4C20007B810054A91E /* Event.swift */,
-				41DE0288200845F800E0C9DE /* Result.swift */,
 				411904451FF9E3C50097434E /* NetworkConnection.swift */,
 				411904431FF9E3B40097434E /* PredictionIO.swift */,
 				411904411FF9E32D0097434E /* Supporting Files */,
@@ -142,7 +136,6 @@
 				414638D91FFB792A0017253C /* EventTests.swift */,
 				41BB25571FFF5D7400E67252 /* EventClientTests.swift */,
 				41A66CF920031B1D00BFC1F3 /* EngineClientTests.swift */,
-				41DE028A20084FB500E0C9DE /* ResultTests.swift */,
 				41A12E522001EB0D0054A91E /* PIOError+Tests.swift */,
 				411904421FF9E35D0097434E /* Supporting Files */,
 			);
@@ -340,7 +333,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				41A12E4D20007B810054A91E /* Event.swift in Sources */,
-				41DE0289200845F800E0C9DE /* Result.swift in Sources */,
 				411904461FF9E3C50097434E /* NetworkConnection.swift in Sources */,
 				414638D81FFB3CD30017253C /* PIOError.swift in Sources */,
 				411904441FF9E3B40097434E /* PredictionIO.swift in Sources */,
@@ -354,7 +346,6 @@
 				414638DA1FFB792A0017253C /* EventTests.swift in Sources */,
 				41BB25581FFF5D7400E67252 /* EventClientTests.swift in Sources */,
 				41A66CFA20031B1D00BFC1F3 /* EngineClientTests.swift in Sources */,
-				41DE028B20084FB500E0C9DE /* ResultTests.swift in Sources */,
 				41A12E532001EB0D0054A91E /* PIOError+Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -364,7 +355,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				41A66D2B2003B41800BFC1F3 /* Event.swift in Sources */,
-				4162406D2009072F00590FB2 /* Result.swift in Sources */,
 				41A66D2A2003B41800BFC1F3 /* PIOError.swift in Sources */,
 				41A66D2D2003B41800BFC1F3 /* PredictionIO.swift in Sources */,
 				41A66D2C2003B41800BFC1F3 /* NetworkConnection.swift in Sources */,
