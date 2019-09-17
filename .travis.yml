@@ -41,14 +41,13 @@ before_script:
   - sleep 3  # Give mock server some time to bind to sockets, etc
 
 script:
-  - set -o pipefail
+  - set -exo pipefail
 
   # Linting with SwiftLint and CocoaPods
   - if [ $LINTING == "YES" ]; then
       echo "SwiftLint version `swiftlint version`";
       echo "SwiftLint linting...";
       swiftlint lint --strict;
-      echo "";
       echo "CocoaPods linting...";
       pod lib lint;
     fi
