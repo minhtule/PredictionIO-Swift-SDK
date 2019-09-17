@@ -1,10 +1,11 @@
-language: objective-c
-osx_image: xcode9.2
+os: osx
+osx_image: xcode11
 git:
   depth: 1
 branches:
   only:
     - master
+cache: bundler
 
 env:
   global:
@@ -15,14 +16,12 @@ env:
     - MOCK_SERVER_DIR=mock_server
   matrix:
     # iOS
-    - DESTINATION="OS=11.2,name=iPhone X"         SCHEME="$IOS_FRAMEWORK_SCHEME"    BUILD_EXAMPLE="YES"  LINTING="YES"
+    - DESTINATION="OS=13.0,name=iPhone XS Max"    SCHEME="$IOS_FRAMEWORK_SCHEME"    BUILD_EXAMPLE="YES"  LINTING="YES"
+    - DESTINATION="OS=12.2,name=iPhone XS"        SCHEME="$IOS_FRAMEWORK_SCHEME"    BUILD_EXAMPLE="YES"  LINTING="NO"
+    - DESTINATION="OS=11.4,name=iPhone X"         SCHEME="$IOS_FRAMEWORK_SCHEME"    BUILD_EXAMPLE="YES"  LINTING="NO"
     - DESTINATION="OS=10.3.1,name=iPhone 7 Plus"  SCHEME="$IOS_FRAMEWORK_SCHEME"    BUILD_EXAMPLE="YES"  LINTING="NO"
     # macOS
     - DESTINATION="arch=x86_64"                   SCHEME="$MACOS_FRAMEWORK_SCHEME"  BUILD_EXAMPLE="NO"   LINTING="NO"
-
-# Skip the installation of `Gemfile`. Just use the default gemset
-# which already includes SwiftLint and CocoaPods.
-install: true
 
 # WARNING: Because of the existence of `.ruby-gemset`, we should not change
 # directory and go back into this repo directory. When we `cd` back into
@@ -30,20 +29,22 @@ install: true
 # which doesn't have any gem installed!!!
 before_script:
   # Set up mock API server
+  - node --version
+  - npm --version
+  - echo "Setting up PredictionIO mock server..."
   - git clone git://github.com/minhtule/PredictionIO-Mock-Server.git ../$MOCK_SERVER_DIR --depth 1
   - npm --prefix ../$MOCK_SERVER_DIR install ../$MOCK_SERVER_DIR
   - node ../$MOCK_SERVER_DIR/app.js &
   - sleep 3  # Give mock server some time to bind to sockets, etc
 
 script:
-  - set -o pipefail
+  - set -eo pipefail
 
   # Linting with SwiftLint and CocoaPods
   - if [ $LINTING == "YES" ]; then
       echo "SwiftLint version `swiftlint version`";
       echo "SwiftLint linting...";
       swiftlint lint --strict;
-      echo "";
       echo "CocoaPods linting...";
       pod lib lint;
     fi

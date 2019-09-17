@@ -13,7 +13,8 @@
 		411904461FF9E3C50097434E /* NetworkConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411904451FF9E3C50097434E /* NetworkConnection.swift */; };
 		414638D81FFB3CD30017253C /* PIOError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414638D71FFB3CD30017253C /* PIOError.swift */; };
 		414638DA1FFB792A0017253C /* EventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414638D91FFB792A0017253C /* EventTests.swift */; };
-		4162406D2009072F00590FB2 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DE0288200845F800E0C9DE /* Result.swift */; };
+		419E3BE9232F658F0062EE26 /* Result+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419E3BE6232F65150062EE26 /* Result+Extension.swift */; };
+		419E3BEA232F658F0062EE26 /* Result+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419E3BE6232F65150062EE26 /* Result+Extension.swift */; };
 		41A12E4D20007B810054A91E /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A12E4C20007B810054A91E /* Event.swift */; };
 		41A12E532001EB0D0054A91E /* PIOError+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A12E522001EB0D0054A91E /* PIOError+Tests.swift */; };
 		41A66CFA20031B1D00BFC1F3 /* EngineClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A66CF920031B1D00BFC1F3 /* EngineClientTests.swift */; };
@@ -28,8 +29,6 @@
 		41A66D312003B42700BFC1F3 /* EngineClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A66CF920031B1D00BFC1F3 /* EngineClientTests.swift */; };
 		41A66D322003B42700BFC1F3 /* PIOError+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A12E522001EB0D0054A91E /* PIOError+Tests.swift */; };
 		41BB25581FFF5D7400E67252 /* EventClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BB25571FFF5D7400E67252 /* EventClientTests.swift */; };
-		41DE0289200845F800E0C9DE /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DE0288200845F800E0C9DE /* Result.swift */; };
-		41DE028B20084FB500E0C9DE /* ResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DE028A20084FB500E0C9DE /* ResultTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,14 +58,13 @@
 		411904451FF9E3C50097434E /* NetworkConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConnection.swift; sourceTree = "<group>"; };
 		414638D71FFB3CD30017253C /* PIOError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIOError.swift; sourceTree = "<group>"; };
 		414638D91FFB792A0017253C /* EventTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTests.swift; sourceTree = "<group>"; };
+		419E3BE6232F65150062EE26 /* Result+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Result+Extension.swift"; sourceTree = "<group>"; };
 		41A12E4C20007B810054A91E /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		41A12E522001EB0D0054A91E /* PIOError+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PIOError+Tests.swift"; sourceTree = "<group>"; };
 		41A66CF920031B1D00BFC1F3 /* EngineClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngineClientTests.swift; sourceTree = "<group>"; };
 		41A66D132003B11100BFC1F3 /* PredictionIO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PredictionIO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		41A66D1F2003B26400BFC1F3 /* PredictionIO macOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PredictionIO macOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		41BB25571FFF5D7400E67252 /* EventClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventClientTests.swift; sourceTree = "<group>"; };
-		41DE0288200845F800E0C9DE /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
-		41DE028A20084FB500E0C9DE /* ResultTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,7 +126,6 @@
 			children = (
 				414638D71FFB3CD30017253C /* PIOError.swift */,
 				41A12E4C20007B810054A91E /* Event.swift */,
-				41DE0288200845F800E0C9DE /* Result.swift */,
 				411904451FF9E3C50097434E /* NetworkConnection.swift */,
 				411904431FF9E3B40097434E /* PredictionIO.swift */,
 				411904411FF9E32D0097434E /* Supporting Files */,
@@ -142,8 +139,8 @@
 				414638D91FFB792A0017253C /* EventTests.swift */,
 				41BB25571FFF5D7400E67252 /* EventClientTests.swift */,
 				41A66CF920031B1D00BFC1F3 /* EngineClientTests.swift */,
-				41DE028A20084FB500E0C9DE /* ResultTests.swift */,
 				41A12E522001EB0D0054A91E /* PIOError+Tests.swift */,
+				419E3BE3232F64F10062EE26 /* Helpers */,
 				411904421FF9E35D0097434E /* Supporting Files */,
 			);
 			path = Tests;
@@ -164,6 +161,14 @@
 				411904361FF9E02A0097434E /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		419E3BE3232F64F10062EE26 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				419E3BE6232F65150062EE26 /* Result+Extension.swift */,
+			);
+			name = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -266,17 +271,17 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 1100;
 				ORGANIZATIONNAME = PredictionIO;
 				TargetAttributes = {
 					411904251FF9E02A0097434E = {
 						CreatedOnToolsVersion = 9.2;
-						LastSwiftMigration = 0920;
+						LastSwiftMigration = 1100;
 						ProvisioningStyle = Automatic;
 					};
 					4119042E1FF9E02A0097434E = {
 						CreatedOnToolsVersion = 9.2;
-						LastSwiftMigration = 0920;
+						LastSwiftMigration = 1100;
 						ProvisioningStyle = Automatic;
 					};
 					41A66D122003B11100BFC1F3 = {
@@ -295,6 +300,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 4119041C1FF9E02A0097434E;
 			productRefGroup = 411904271FF9E02A0097434E /* Products */;
@@ -339,7 +345,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				41A12E4D20007B810054A91E /* Event.swift in Sources */,
-				41DE0289200845F800E0C9DE /* Result.swift in Sources */,
 				411904461FF9E3C50097434E /* NetworkConnection.swift in Sources */,
 				414638D81FFB3CD30017253C /* PIOError.swift in Sources */,
 				411904441FF9E3B40097434E /* PredictionIO.swift in Sources */,
@@ -351,9 +356,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				414638DA1FFB792A0017253C /* EventTests.swift in Sources */,
+				419E3BE9232F658F0062EE26 /* Result+Extension.swift in Sources */,
 				41BB25581FFF5D7400E67252 /* EventClientTests.swift in Sources */,
 				41A66CFA20031B1D00BFC1F3 /* EngineClientTests.swift in Sources */,
-				41DE028B20084FB500E0C9DE /* ResultTests.swift in Sources */,
 				41A12E532001EB0D0054A91E /* PIOError+Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -363,7 +368,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				41A66D2B2003B41800BFC1F3 /* Event.swift in Sources */,
-				4162406D2009072F00590FB2 /* Result.swift in Sources */,
 				41A66D2A2003B41800BFC1F3 /* PIOError.swift in Sources */,
 				41A66D2D2003B41800BFC1F3 /* PredictionIO.swift in Sources */,
 				41A66D2C2003B41800BFC1F3 /* NetworkConnection.swift in Sources */,
@@ -375,6 +379,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				41A66D312003B42700BFC1F3 /* EngineClientTests.swift in Sources */,
+				419E3BEA232F658F0062EE26 /* Result+Extension.swift in Sources */,
 				41A66D2F2003B42700BFC1F3 /* EventTests.swift in Sources */,
 				41A66D302003B42700BFC1F3 /* EventClientTests.swift in Sources */,
 				41A66D322003B42700BFC1F3 /* PIOError+Tests.swift in Sources */,
@@ -411,6 +416,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -418,6 +424,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -472,6 +479,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -479,6 +487,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -530,7 +539,7 @@
 				PRODUCT_NAME = PredictionIO;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -552,7 +561,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.prediction.PredictionIO;
 				PRODUCT_NAME = PredictionIO;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -571,7 +580,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -589,7 +598,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.prediction.PredictionIOTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -597,7 +606,7 @@
 		41A66D192003B11100BFC1F3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -621,7 +630,7 @@
 		41A66D1A2003B11100BFC1F3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;

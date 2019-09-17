@@ -25,21 +25,21 @@ class NetworkConnection {
     }
 
     @discardableResult
-    func get(url: String, queryParams: QueryParams? = nil, headers: HTTPHeaders? = nil, completionHandler: @escaping (Result<Data>) -> Void) -> URLSessionDataTask? {
+    func get(url: String, queryParams: QueryParams? = nil, headers: HTTPHeaders? = nil, completionHandler: @escaping (Result<Data, PIOError>) -> Void) -> URLSessionDataTask? {
         return request(url, method: .get, queryParams: queryParams, payload: nil, headers: headers, completionHandler: completionHandler)
     }
 
     @discardableResult
-    func post(url: String, payload: Any?, queryParams: QueryParams? = nil, headers: HTTPHeaders? = nil, completionHandler: @escaping (Result<Data>) -> Void) -> URLSessionDataTask? {
+    func post(url: String, payload: Any?, queryParams: QueryParams? = nil, headers: HTTPHeaders? = nil, completionHandler: @escaping (Result<Data, PIOError>) -> Void) -> URLSessionDataTask? {
         return request(url, method: .post, queryParams: queryParams, payload: payload, headers: headers, completionHandler: completionHandler)
     }
 
     @discardableResult
-    func delete(url: String, queryParams: QueryParams? = nil, headers: HTTPHeaders? = nil, completionHandler: @escaping (Result<Data>) -> Void) -> URLSessionDataTask? {
+    func delete(url: String, queryParams: QueryParams? = nil, headers: HTTPHeaders? = nil, completionHandler: @escaping (Result<Data, PIOError>) -> Void) -> URLSessionDataTask? {
         return request(url, method: .delete, queryParams: queryParams, payload: nil, headers: headers, completionHandler: completionHandler)
     }
 
-    private func request(_ url: String, method: HTTPMethod, queryParams: QueryParams? = nil, payload: Any?, headers: HTTPHeaders? = nil, completionHandler: @escaping (Result<Data>) -> Void) -> URLSessionDataTask? {
+    private func request(_ url: String, method: HTTPMethod, queryParams: QueryParams? = nil, payload: Any?, headers: HTTPHeaders? = nil, completionHandler: @escaping (Result<Data, PIOError>) -> Void) -> URLSessionDataTask? {
         do {
             var request = try URLRequest(url: url, method: method, queryParams: queryParams, headers: headers)
             try request.attachJSONPayload(payload: payload)
@@ -63,7 +63,8 @@ class NetworkConnection {
                     completionHandler(.success(data))
                 default:
                     let message: String
-                    if let data = try? JSONSerialization.jsonObject(with: data, options: []),
+                    if
+                        let data = try? JSONSerialization.jsonObject(with: data, options: []),
                         let jsonData = data as? [String: Any],
                         let messageValue = jsonData["message"] as? String
                     {
@@ -78,7 +79,7 @@ class NetworkConnection {
             task.resume()
             return task
         } catch {
-            completionHandler(.failure(error))
+            completionHandler(.failure(error as! PIOError)) // swiftlint:disable:this force_cast
             return nil
         }
     }

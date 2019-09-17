@@ -81,7 +81,14 @@ public struct Event {
     /// - parameter eventTime: The event time. Current local time by default.
     ///
     /// - returns: The new `Event` instance.
-    public init(event: String, entityType: String, entityID: String, targetEntity: (type: String, id: String)? = nil, properties: [String: Any]? = nil, eventTime: Date = Date()) {
+    public init(
+        event: String,
+        entityType: String,
+        entityID: String,
+        targetEntity: (type: String, id: String)? = nil,
+        properties: [String: Any]? = nil,
+        eventTime: Date = Date()
+    ) {
         self.event = event
         self.entityType = entityType
         self.entityID = entityID
@@ -148,11 +155,11 @@ extension Event {
             throw PIOError.DeserializationFailureReason.missingFieldError(field: "entityId")
         }
 
-        guard let et = json["eventTime"] as? String else {
+        guard let eventTimeString = json["eventTime"] as? String else {
             throw PIOError.DeserializationFailureReason.missingFieldError(field: "eventTime")
         }
 
-        guard let eventTime = Event.dateTimeFormatter.date(from: et) else {
+        guard let eventTime = Event.dateTimeFormatter.date(from: eventTimeString) else {
             throw PIOError.DeserializationFailureReason.missingFieldError(field: "eventTime")
         }
 
