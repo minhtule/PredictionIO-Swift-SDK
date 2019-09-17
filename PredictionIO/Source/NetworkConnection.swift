@@ -63,7 +63,8 @@ class NetworkConnection {
                     completionHandler(.success(data))
                 default:
                     let message: String
-                    if let data = try? JSONSerialization.jsonObject(with: data, options: []),
+                    if
+                        let data = try? JSONSerialization.jsonObject(with: data, options: []),
                         let jsonData = data as? [String: Any],
                         let messageValue = jsonData["message"] as? String
                     {
@@ -78,7 +79,7 @@ class NetworkConnection {
             task.resume()
             return task
         } catch {
-            completionHandler(.failure(error as! PIOError))
+            completionHandler(.failure(error as! PIOError)) // swiftlint:disable:this force_cast
             return nil
         }
     }

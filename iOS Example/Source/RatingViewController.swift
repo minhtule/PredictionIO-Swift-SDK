@@ -43,7 +43,7 @@ class RatingViewController: UIViewController {
             case let .failure(error):
                 alertController = UIAlertController(title: "Failed", message: "\(error)", preferredStyle: .alert)
             }
-            
+
             let okAction = UIAlertAction(title: "OK", style: .default)
             alertController.addAction(okAction)
 

@@ -167,7 +167,7 @@ public class EventClient: BaseClient {
                 completionHandler(result)
             }
         } catch {
-            completionHandler(.failure(error as! PIOError))
+            completionHandler(.failure(error as! PIOError)) // swiftlint:disable:this force_cast
         }
     }
 
