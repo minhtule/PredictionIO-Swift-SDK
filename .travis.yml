@@ -32,6 +32,9 @@ install:
 # which doesn't have any gem installed!!!
 before_script:
   # Set up mock API server
+  - node --version
+  - npm --version
+  - echo "Setting up PredictionIO mock server..."
   - git clone git://github.com/minhtule/PredictionIO-Mock-Server.git ../$MOCK_SERVER_DIR --depth 1
   - npm --prefix ../$MOCK_SERVER_DIR install ../$MOCK_SERVER_DIR
   - node ../$MOCK_SERVER_DIR/app.js &
