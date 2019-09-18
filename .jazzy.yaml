@@ -5,4 +5,6 @@ root_url: https://minhtule.github.io/PredictionIO-Swift-SDK/
 module: PredictionIO
 output: docs
 theme: apple
-xcodebuild_arguments: [-workspace, 'PredictionIO.xcworkspace', -scheme, 'PredictionIO iOS']
+swift_version: '5.1'
+swift_build_tool: xcodebuild
+build_tool_arguments: [-workspace, 'PredictionIO.xcworkspace', -scheme, 'PredictionIO iOS']

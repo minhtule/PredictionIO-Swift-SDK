@@ -61,9 +61,6 @@
               <li class="nav-group-task">
                 <a href="../Enums/PIOError/DeserializationFailureReason.html">– DeserializationFailureReason</a>
               </li>
-              <li class="nav-group-task">
-                <a href="../Enums/Result.html">Result</a>
-              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -88,7 +85,7 @@
             <h1>PIOError</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">PIOError</span><span class="p">:</span> <span class="kt">Error</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">PIOError</span> <span class="p">:</span> <span class="kt">Error</span></code></pre>
 
                 </div>
               </div>
@@ -101,9 +98,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12PredictionIO8PIOErrorO10invalidURLACSS6string_s10DictionaryVyS2SGSg11queryParamstcACmF"></a>
-                    <a name="//apple_ref/swift/Element/invalidURL" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12PredictionIO8PIOErrorO10invalidURLACSS6string_s10DictionaryVyS2SGSg11queryParamstcACmF">invalidURL</a>
+                    <a name="/s:12PredictionIO8PIOErrorO10invalidURLyACSS_SDyS2SGSgtcACmF"></a>
+                    <a name="//apple_ref/swift/Element/invalidURL(string:queryParams:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12PredictionIO8PIOErrorO10invalidURLyACSS_SDyS2SGSgtcACmF">invalidURL(string:queryParams:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -119,23 +116,19 @@ dictionary to a valid <code>URL</code>.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">invalidURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">queryParams</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">invalidURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">queryParams</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">String</span><span class="p">]?)</span></code></pre>
 
                         </div>
                       </div>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12PredictionIO8PIOErrorO12invalidEventA2C07InvalidE6ReasonO6reason_tcACmF"></a>
-                    <a name="//apple_ref/swift/Element/invalidEvent" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12PredictionIO8PIOErrorO12invalidEventA2C07InvalidE6ReasonO6reason_tcACmF">invalidEvent</a>
+                    <a name="/s:12PredictionIO8PIOErrorO12invalidEventyA2C07InvalidE6ReasonO_tcACmF"></a>
+                    <a name="//apple_ref/swift/Element/invalidEvent(reason:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12PredictionIO8PIOErrorO12invalidEventyA2C07InvalidE6ReasonO_tcACmF">invalidEvent(reason:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -157,16 +150,12 @@ dictionary to a valid <code>URL</code>.</p>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12PredictionIO8PIOErrorO13failedRequestA2C0E13FailureReasonO6reason_tcACmF"></a>
-                    <a name="//apple_ref/swift/Element/failedRequest" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12PredictionIO8PIOErrorO13failedRequestA2C0E13FailureReasonO6reason_tcACmF">failedRequest</a>
+                    <a name="/s:12PredictionIO8PIOErrorO13failedRequestyA2C0E13FailureReasonO_tcACmF"></a>
+                    <a name="//apple_ref/swift/Element/failedRequest(reason:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12PredictionIO8PIOErrorO13failedRequestyA2C0E13FailureReasonO_tcACmF">failedRequest(reason:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -189,16 +178,12 @@ or unknown response format.</p>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12PredictionIO8PIOErrorO19failedSerializationA2C0E13FailureReasonO6reason_tcACmF"></a>
-                    <a name="//apple_ref/swift/Element/failedSerialization" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12PredictionIO8PIOErrorO19failedSerializationA2C0E13FailureReasonO6reason_tcACmF">failedSerialization</a>
+                    <a name="/s:12PredictionIO8PIOErrorO19failedSerializationyA2C0E13FailureReasonO_tcACmF"></a>
+                    <a name="//apple_ref/swift/Element/failedSerialization(reason:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12PredictionIO8PIOErrorO19failedSerializationyA2C0E13FailureReasonO_tcACmF">failedSerialization(reason:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -220,16 +205,12 @@ or unknown response format.</p>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12PredictionIO8PIOErrorO21failedDeserializationA2C0E13FailureReasonO6reason_tcACmF"></a>
-                    <a name="//apple_ref/swift/Element/failedDeserialization" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12PredictionIO8PIOErrorO21failedDeserializationA2C0E13FailureReasonO6reason_tcACmF">failedDeserialization</a>
+                    <a name="/s:12PredictionIO8PIOErrorO21failedDeserializationyA2C0E13FailureReasonO_tcACmF"></a>
+                    <a name="//apple_ref/swift/Element/failedDeserialization(reason:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12PredictionIO8PIOErrorO21failedDeserializationyA2C0E13FailureReasonO_tcACmF">failedDeserialization(reason:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -379,8 +360,8 @@ or unknown response format.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://github.com/minhtule" target="_blank" rel="external">Minh-Tu Le</a>. All rights reserved. (Last updated: 2018-01-12)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2019 <a class="link" href="https://github.com/minhtule" target="_blank" rel="external">Minh-Tu Le</a>. All rights reserved. (Last updated: 2019-09-18)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.11.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>
