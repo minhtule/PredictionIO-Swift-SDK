@@ -5,9 +5,9 @@
 The Swift SDK provides a convenient API for your iOS and macOS application to record your users' behaviors in the [PredictionIO](https://github.com/apache/predictionio) event server and retrieve predictions from PredictionIO engines.
 
 ## Requirements
-- iOS 9.0+ or macOS 10.10+
-- Xcode 9.0+
-- Swift 4.0+
+- iOS 10+ or macOS 10.10+
+- Xcode 11+
+- Swift 5+
 - PredictionIO 0.12.0+
 
 ## Installation
@@ -17,8 +17,6 @@ Install [CocoaPods](https://cocoapods.org/), the dependency manager for Cocoa pr
 ```bash
 $ gem install cocoapods
 ```
-
-**Note** that the installation was tested with `1.3.1` version but `1.1+` should work fine as long as CocoaPods supports embedded frameworks.
 
 To integrate PredictionIO, add the following lines to your `Podfile`.
 ```ruby
@@ -33,7 +31,7 @@ end
 
 Then run the following command.
 ```bash
-$ pod install 
+$ pod install
 ```
 
 Finally, import the SDK in your Swift files before using.
@@ -123,4 +121,3 @@ Also check out [Tapster iOS](https://github.com/minhtule/Tapster-iOS-Demo), a re
 ## License
 PredictionIO Swift SDK is released under the Apache License 2.0. Please see
 [LICENSE](https://github.com/minhtule/PredictionIO-Swift-SDK/blob/master/LICENSE) for details.
-
